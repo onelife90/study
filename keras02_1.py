@@ -26,3 +26,11 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=1)
 # 예측
 print("loss : ", loss)
 print("acc : ", acc)
+
+                   
+#하이퍼파라미터
+                   
+#epochs=100, batch_size=1, Dense=5,3,1
+#loss : 14(1) / 105(2) / 18634(3)
+#acc : 0.1(1) / 0.0(2) / 0.0(3)
+#안깊어서?

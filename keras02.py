@@ -16,6 +16,21 @@ model.add(Dense(3))
 model.add(Dense(1, activation='relu'))
 
 model.summary()
+'''
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+dense_1 (Dense)              (None, 5)                 10
+_________________________________________________________________
+dense_2 (Dense)              (None, 3)                 18
+_________________________________________________________________
+dense_3 (Dense)              (None, 2)                 8
+_________________________________________________________________
+dense_4 (Dense)              (None, 1)                 3
+=================================================================
+Total params: 39
+Trainable params: 39
+Non-trainable params: 0
 
 # 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
@@ -27,8 +42,9 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=1)
 # 예측
 print("loss : ", loss)
 print("acc : ", acc)
+'''
 
-#하이퍼파라미터 
+#하이퍼파라미터 튜닝
 
 #epochs=100, batch_size=1, Dense=5,3,1
 #loss : 11138(1) / 1.11(2)

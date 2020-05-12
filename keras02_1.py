@@ -28,7 +28,7 @@ print("loss : ", loss)
 print("acc : ", acc)
 
                    
-#하이퍼파라미터 
+#하이퍼파라미터 튜닝
                    
 #epochs=100, batch_size=1, Dense=5,3,1
 #loss : 14(1) / 105(2) / 18634(3)

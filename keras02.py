@@ -31,6 +31,7 @@ dense_4 (Dense)              (None, 1)                 3
 Total params: 39
 Trainable params: 39
 Non-trainable params: 0
+'''
 
 # 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
@@ -42,7 +43,6 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=1)
 # 예측
 print("loss : ", loss)
 print("acc : ", acc)
-'''
 
 #하이퍼파라미터 튜닝
 

@@ -10,7 +10,7 @@ x_train = np.array([1,2,3,4,5,6,7,8,9,10])
 y_train = np.array([1,2,3,4,5,6,7,8,9,10])
 x_test = np.array([11,12,13,14,15])
 y_test = np.array([11,12,13,14,15])
-x_pred = np.array([16,17,18]) # pred = predict
+x_pred = np.array([16,17,18]) 
 
 #2. 모델구성
 from keras.models import Sequential
@@ -39,14 +39,14 @@ print(y_predict)
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
 
-def RMSE(y_test, y_predict): # def = 함수를 호출하겠다 () = 입력값
-    return np.sqrt(mean_squared_error(y_test, y_predict)) # 반환 = 출력값
+def RMSE(y_test, y_predict):
+    return np.sqrt(mean_squared_error(y_test, y_predict))
            
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기
 from sklearn.metrics import r2_score
-r2 = r2_score(y_test, y_predict) #RMSE와 같이 비교하는 것이기에 r2_score에 입력값 같게
+r2 = r2_score(y_test, y_predict) 
 print("R2 : ", r2)
 
 #하이퍼파라미터튜닝

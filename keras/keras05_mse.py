@@ -24,7 +24,7 @@ model.add(Dense(500))
 model.add(Dense(1))
 
 #3. 훈련
-model.compile(loss='mse', optimizer='adam', metrics=['acc']) #metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
+model.compile(loss='mse', optimizer='adam', metrics=['mse']) #metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
 model.fit(x, y, epochs=30, batch_size=1)
 
 #4. 평가, 예측

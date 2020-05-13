@@ -2,7 +2,7 @@
 import numpy as np
 x = np.array([1,2,3,4,5,6,7,8,9,10])
 y = np.array([1,2,3,4,5,6,7,8,9,10])
-# 라인 복사 : ctrl+c / 라인 삭제 : shift+del
+# 라인 복사 : 커서 올려둔 채로 ctrl+c / 라인 삭제 : shift+del
 
 #2. 모델구성
 from keras.models import Sequential

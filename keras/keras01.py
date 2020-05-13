@@ -8,14 +8,15 @@ y = np.array([1,2,3,4,5,6,7,8,9,10])
 from keras.models import Sequential
 from keras.layers import Dense
 
-model = Sequential()
+model = Sequential() #순차적인 모델
 model.add(Dense(1, input_dim=1, activation='relu')) #히든 레이어가 없다
 
 # 훈련
 model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
-model.fit(x, y, epochs=500, batch_size=1)
+#컴파일은 머신에게 어떤 방식으로 모델을 돌릴 것인지 지정해주는 것
+model.fit(x, y, epochs=500, batch_size=1) #모델 실행
 
-loss, acc = model.evaluate(x, y, batch_size=1)
+loss, acc = model.evaluate(x, y, batch_size=1) #모델 평가
 
 # 예측
 print("loss : ", loss)

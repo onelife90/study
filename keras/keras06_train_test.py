@@ -30,7 +30,9 @@ model.compile(loss='mse', optimizer='adam', metrics=['acc']) #metrics에는 대�
 model.fit(x_train, y_train, epochs=30, batch_size=1)
 
 #4. 평가, 예측
-loss, mse = model.evaluate(x_test, y_test) #평가 반환 값을 loss, mse(변수)에 넣겠다 #metrics<mse<evaluate #loss와 metrics가 동일하기에 반환되는 값이 똑같다
+loss, mse = model.evaluate(x_test, y_test) #평가 반환 값을 loss, mse(변수)에 넣겠다 
+#metrics<mse<evaluate 
+#loss와 metrics가 동일하기에 반환되는 값이 똑같다
 print("loss : ", loss)
 print("mse : ", mse)
 

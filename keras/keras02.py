@@ -10,12 +10,13 @@ x_test = np.array([101,102,103,104,105,106,107,108,109,110])
 y_test = np.array([101,102,103,104,105,106,107,108,109,110])
 
 # 모델 구성
-model = Sequential()
+model = Sequential() #순차적 모델
 model.add(Dense(5, input_dim=1, activation='relu'))
 model.add(Dense(3))
+model.add(Dense(2))
 model.add(Dense(1, activation='relu'))
 
-model.summary()
+model.summary() #모델 구성을 확인하는 함수
 '''
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
@@ -35,6 +36,7 @@ Non-trainable params: 0
 
 # 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
+#컴파일:loss는 손실함수, op
 
 model.fit(x_train, y_train, epochs=100, batch_size=1,
             validation_data= (x_train, y_train))

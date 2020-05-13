@@ -55,7 +55,7 @@ print(y_predict)
 
 from sklearn.metrics import mean_squared_error
 # 사이킷런 = 케라스, 텐서플로우 이전의 킹왕짱
-#사이킷런에는 RMSE가 없어서 mse를 불러옴
+#사이킷런에는 RMSE가 없어서 mse를 불러옴 -> 루트 씌울거임
 
 def RMSE(y_test, y_predict): # def = 함수를 호출하겠다 () = 입력값
     return np.sqrt(mean_squared_error(y_test, y_predict)) # 반환 = 출력값

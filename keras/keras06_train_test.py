@@ -26,7 +26,7 @@ model.add(Dense(500))
 model.add(Dense(1))
 
 #3. 훈련
-model.compile(loss='mse', optimizer='adam', metrics=['mse']) #metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
+model.compile(loss='mse', optimizer='adam', metrics=['acc']) #metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
 model.fit(x_train, y_train, epochs=30, batch_size=1)
 
 #4. 평가, 예측
@@ -49,3 +49,6 @@ print("y_predict : \n", y_pred)
 # y=삼성주가
 # 예를들어 x의 자료가 엑셀로 365일치의 데이터로 만들어져있다면, train 7달, test 3달로 나누어서 모델을 돌려야 y값이 정확히 나올 수 있다
 # model.fit에 train 값을, model.evalatae에 test 값을 넣으면 된다.
+# 왜 나누는가?
+# ex.수능시험 답만 외운 애들은 수능가서 망함
+# 평가 데이터는 모델에 반영이 안됨!

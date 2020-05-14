@@ -75,3 +75,8 @@ from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict) 
 print("R2 : ", r2)
 '''
+
+#하이퍼파라미터튜닝
+#epochs=500, 히든레이어=9, 노드=(5,3000,50,10,5)x2,1
+#RMSE : 6.72(1) / (2) / (3)
+#R2 : 0.95(1) / (2) / (3)

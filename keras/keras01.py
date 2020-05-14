@@ -22,28 +22,28 @@ loss, acc = model.evaluate(x, y, batch_size=1) #모델 평가
 print("loss : ", loss)
 print("acc : ", acc)
 
-#epochs=500, batch_size=1, Dense=1
+#epochs=500, batch_size=1, 노드=1
 #loss : 1.10..(2nd 훈련)
 #acc : 1.0
 
-#epochs=1000, batch_size=1, Dense=1
+#epochs=1000, batch_size=1, 노드=1
 #loss : 5.31..(1st 훈련) / 0.0(3rd 훈련)
 #acc : 1.0
 
-#epochs=5000, batch_size=10, Dense=1
+#epochs=5000, batch_size=10, 노드=1
 #loss : 38.5..(1st 훈련)
 #acc : 0.0
 #왜 실패지? -> 과적합이라는 부분. 데이터 양이 적은데 훈련을 많이해서 적합치를 넘김!
 
-#epochs=500, batch_size=2, Dense=1
+#epochs=500, batch_size=2, 노드=1
 #loss : 1.11..(1st 훈련) / 38.5(2nd 훈련) / 0.057..(3rd)
 #acc : 1.0 (1st) / 0.0 (2nd) / 1.0 (3rd)
 
-#epochs=500, batch_size=10, Dense=1
+#epochs=500, batch_size=10, 노드=1
 #loss : 38.5 (1st) / 9.010..(2nd 훈련) / 0.155..(3rd) / 38.5(4th)
 #acc : 1.0 (1st) / 0.1 (2nd) / 0.7 (3rd) / 0.0 (4th)
 
-#epochs=500, batch_size=100, Dense=1
+#epochs=500, batch_size=100, 노드=1
 #loss : 38.5 (1) / 0.01(2) / 0.006(3) / 38.5(4)
 #acc : 0.0 (1) / 1.0 (2) / 1.0 (3) / 0.0 (4)
 #배치사이즈가 100, 데이터가 10개지만 훈련가능.

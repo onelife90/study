@@ -1,0 +1,32 @@
+#1. 데이터
+import numpy as np
+# x_train = np.array([1,2,3,4,...,100]) #엄청나게 비효율적
+x = np.array(range(1,101)) # 1부터 시작해서 101-1까지 나열
+y = np.array(range(101,201)) # y=wx+b / w=1, b=100이 되는 함수
+
+from sklearn.model_selection import train_test_split
+# train_test_split라는 함수가 사이킷런에 구현되어있음
+# Q. x_train, x_test, x_val, y_train, y_test, y_val이라는 변수를 선언하지 않았는데요?
+# A. train_test_split이라는 함수에 이미 다 포함되어 있는 변수란다
+# train set과 test set을 손쉽게 분리할 수 있음
+# 하지만 과적합의 우려가 있기 때문에 validation set을 추가하여 방지
+# Train+Validation 훈련하면서 검증, TV로 생각하자
+x_train, x_test, y_train, y_test = train_test_split(
+    # x,y, random_state=99, shuffle=True,
+    x,y,
+    train_size=0.5, test_size=0.4
+)       
+
+
+print(x_train)
+# print(x_val)
+print(x_test)
+
+#결과값
+#[97 77 63 19 14 60 64 47 52 84 35 12 66 58 16 70 87 41 54 72 20 27 13 75
+ 81 38 28 51 61 50 82  9 55 67 36  8 21 85 46 62 11 56 89 32 93 10  5 73
+ 39 95] => 30개
+#[37  7 59 91 83 29 99 30 26 76 98 65 96 68  4 44 88 40 69 17 34 53 71 80
+ 24 92 25 49 78  1 57 31 23 79 43 18 48 42  3 33] => 40개
+ 
+#나머지 데이터는?

@@ -1,5 +1,5 @@
-# 지금껏 데이터를 가내수공업으로 잘라서 사용
-# 사이킷런에서 자동으로 데이터 잘라주는 train_test_split
+# 지금껏 데이터를 가내수공업으로 만들어서 사용
+# 사이킷런에서 자동으로 데이터 골라 훈련해주는 train_test_split
 # ex) 차를 왜타죠? 걸어가도 끝까지 가는데. 더 빠르고 효율적이기 때문에 사용
 # train(초1-1), val(초1-2), test(초2-1)
 # 훈련이 처음부터 안되면 train(초1-1) -> val(초1-2) : 다음 단계로 검증이 안된다
@@ -19,7 +19,7 @@ x_train, x_test, y_train, y_test = train_test_split(
     train_size=0.6
 )       
 # random_state=66 난수 지정하고 연속으로 실행해도 똑같은 값이 나온다
-# train_size=0.6 test_size 20% + train_size 80%
+# train_size=0.6 전체 데이터 셋의 60%를 차지. test_size 60% + train_size 40%
 x_val, x_test, y_val, y_test = train_test_split(
 # test 대신 train이 와도 무방    
     # x_test, y_test, random_state=99,
@@ -51,8 +51,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
 model.fit(x_train, y_train, epochs=300, batch_size=1,
             validation_data=(x_val, y_val)) 
-            #val 값은 train과 같이 훈련되어야 하기에 model.fit에 포함
-
+            
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
 

@@ -8,7 +8,7 @@ x = np.array(range(1,101)) # 1부터 시작해서 101-1까지 나열
 y = np.array(range(101,201)) # y=wx+b / w=1, b=100이 되는 함수
 
 #데이터 전처리
-x_train = x[:60] # 처음 인덱스(1)부터 60번째 인덱스(60)까지
+x_train = x[:60] # 처음 인덱스(1)부터 60번째 인덱스(59)까지
 x_val = x[60:80]
 x_test = x[80:] # 끝: == 명시하지 않으면 끝까지
 
@@ -40,7 +40,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
 model.fit(x_train, y_train, epochs=50, batch_size=1,
             validation_data=(x_val, y_val)) 
-            #val 값은 train과 같이 훈련되어야 하기에 model.fit에 포함
+            #val 값은 train과 같이 훈련되기에 model.fit에 포함
 
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
@@ -50,6 +50,7 @@ print("mse : ", mse)
 
 y_predict = model.predict(x_test)
 print(y_predict)
+#가급적이면 test한 값보다는 새로운 데이터로 예측하는 
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error

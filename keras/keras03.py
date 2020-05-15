@@ -29,7 +29,7 @@ model.fit(x, y, epochs=30, batch_size=1)
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x, y) #평가 반환 값을 loss, acc(변수)에 넣겠다
-#metrics<acc<evaluate
+#acc<metrics<evaluate
 print("loss : ", loss)
 print("acc : ", acc)
 

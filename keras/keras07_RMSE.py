@@ -63,6 +63,7 @@ from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict): # def = 함수를 호출하겠다 () = 입력값
     return np.sqrt(mean_squared_error(y_test, y_predict)) # 반환 = 출력값
             #sqrt = 루트
+            #mse=(실제값-예측값)^2 / n 한 후 루트이기에 y_test, y_predict가 입력값이 됨
 print("RMSE : ", RMSE(y_test, y_predict))
 
 # R2 = 1에 가까울수록 좋은 값. accuracy와 유사한 결과를 도출

@@ -31,7 +31,7 @@ model.fit(x_train, y_train, epochs=30, batch_size=1)
 
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test) #평가 반환 값을 loss, mse(변수)에 넣겠다 
-#metrics<mse<evaluate 
+#mse<metrics<evaluate 
 #loss와 metrics가 동일하기에 반환되는 값이 똑같다
 print("loss : ", loss)
 print("mse : ", mse)
@@ -47,10 +47,10 @@ print("y_predict : \n", y_pred)
 # [18.010998]]
 
 # train/test
-# x=수능점수, 오도, 날씨, 하이닉스, 유가 환율, 금시세, 금리 등
+# x=수능점수, 온도, 날씨, 하이닉스, 유가 환율, 금시세, 금리 등
 # y=삼성주가
 # 예를들어 x의 자료가 엑셀로 365일치의 데이터로 만들어져있다면, train 7달, test 3달로 나누어서 모델을 돌려야 y값이 정확히 나올 수 있다
 # model.fit에 train 값을, model.evalatae에 test 값을 넣으면 된다.
 # 왜 나누는가?
 # ex.수능시험 답만 외운 애들은 수능가서 망함
-# 평가 데이터는 모델에 반영이 안됨!
+# 평가 데이터(검증값)는 모델에 반영이 안됨!

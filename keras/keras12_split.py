@@ -19,7 +19,7 @@ x_train, x_test, y_train, y_test = train_test_split(
     train_size=0.6
 )       
 # random_state=66 난수 지정하고 연속으로 실행해도 똑같은 값이 나온다
-# train_size=0.6 전체 데이터 셋의 60%를 차지. test_size 60% + train_size 40%
+# train_size=0.6 전체 데이터 셋의 60%를 차지. test_size 40% + train_size 60%
 x_val, x_test, y_val, y_test = train_test_split(
 # test 대신 train이 와도 무방    
     # x_test, y_test, random_state=99,
@@ -63,7 +63,6 @@ print(y_predict)
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
-
 
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 

@@ -33,10 +33,13 @@ Total params: 39
 Trainable params: 39
 Non-trainable params: 0
 '''
+# parameter = (input_node+bias_node(1))*ouput_node
+# 머신은 딥러닝을 할 때, bias도 1개의 node로 인식
 
 # 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
-#컴파일:loss는 손실함수, op
+# 컴파일=머신이 어떤 방식으로 모델을 돌릴 것인지 지정해주는 작업
+# loss=손실함수, optimizer=최적화함수, metrics=어떤방식?
 
 model.fit(x_train, y_train, epochs=100, batch_size=1,
             validation_data= (x_train, y_train))

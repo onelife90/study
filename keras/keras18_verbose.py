@@ -34,10 +34,13 @@ model.add(Dense(1))
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
-model.fit(x_train, y_train, epochs=5000, batch_size=1,
-            validation_split=0.3)
-            # validation_split=0.3 / train_size=60 / 60% X 30% = 18%
-            # 즉, train=42%, val=18%의 비율로 훈련됨
+model.fit(x_train, y_train, epochs=100, batch_size=1,
+            validation_split=0.3, verbose=3)
+            #verbose=0 --> 결과값만 빠르게 스캔
+            #verbose=1 --> 통상 보던 디폴트
+            #verbose=2 --> 진행 bar가 없어짐
+            #verbose=3 --> epochs 진행, 예측값, RMSE, R2 결과
+
            
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)

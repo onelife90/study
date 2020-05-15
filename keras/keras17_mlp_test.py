@@ -10,7 +10,6 @@ print(y.shape)
 
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(
-    # x,y, random_state=99, shuffle=True,
     x,y, train_size=0.6
 )       
 
@@ -32,9 +31,7 @@ model.add(Dense(1))
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
 model.fit(x_train, y_train, epochs=5000, batch_size=1,
-            validation_split=0.3)
-            # validation_split=0.3 / train_size=60 / 60% X 30% = 18%
-            # 즉, train=42%, val=18%의 비율로 훈련됨
+            validation_split=0.1)
            
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
@@ -68,29 +65,51 @@ print("R2 : ", r2)
 # epochs=30, 히든레이어=5, 노드=500,1000,10,100,9000,1., batch_size=8
 #R2 : 0.999994
 
-# epochs=20, 히든레이어=5, 노드=500,1000,10,100,9000,1., batch_size=8
-#R2 : 0.997
-
-# epochs=10, 히든레이어=5, 노드=500,1000,10,100,9000,1., batch_size=8
-#R2 : 0.90
-
-# epochs=5, 히든레이어=5, 노드=500,1000,10,100,9000,1., batch_size=8
-#R2 : -25
-
-# epochs=5, 히든레이어=5, 노드=500,1000,10,100,9000,1., batch_size=8
-#R2 : 0.999995
-
 # epochs=30, 히든레이어=5, 노드=500,1000,10,100,30,1., batch_size=8
 #R2 : 0.999994
 
 # epochs=30, 히든레이어=5, 노드=(10)x5,1, batch_size=8
 #R2 : 0.73(1) / -0.27(2) / 0.99(3)
 
+# epochs=30, 히든레이어=5, 노드=(10)x5,1, batch_size=4
+#R2 : 0.94
+
 # epochs=30, 히든레이어=10, 노드=(10)x5,1, batch_size=8
 #R2 : 0.98(1) / -3.70(2)
 
-# epochs=10, 히든레이어=10, 노드=(10)x5,1, batch_size=8
-#R2 : -0.72
-
 # epochs=30, 히든레이어=5, 노드=10,1000,10,1000,10,1, batch_size=8
 #R2 : 0.98(1) / -3.70(2)
+
+# epochs=30, 히든레이어=5, 노드=10,1000,10,1000,10,1, batch_size=4
+#R2 : 0.9999999998
+
+# epochs=30, 히든레이어=5, 노드=(10)x5,1, batch_size=5
+#R2 : 0.999999998
+
+# epochs=30, 히든레이어=5, 노드=(10)x5,1, batch_size=6
+#R2 : 0.68 / 0.23 / -1.16 / -1.18
+
+# epochs=30, 히든레이어=5, 노드=(10)x5,1, batch_size=7
+#R2 : 0.77 / 0.96 / 0.17 / 0.9999998
+
+# epochs=3000, 히든레이어=5, 노드=(10)x5,1, batch_size=7
+#R2 : 0.999999999996
+
+# epochs=5000, 히든레이어=5, 노드=(10)x5,1, batch_size=7
+#R2 : 0.999999999996
+
+# epochs=50, 히든레이어=5, 노드=(10)x5,1, batch_size=8
+#R2 : 0.9994
+
+# epochs=80, 히든레이어=5, 노드=(10)x5,1, batch_size=8
+#R2 : 0.991
+
+# epochs=100, 히든레이어=5, 노드=(10)x5,1, batch_size=8
+#R2 : 0.997
+
+# epochs=300, 히든레이어=5, 노드=(10)x5,1, batch_size=8
+#R2 : 0.99999999998
+
+# epochs=500, 히든레이어=5, 노드=(10)x5,1, batch_size=4
+#RMSE : 6.95e-05
+#R2 : 0.999999999993

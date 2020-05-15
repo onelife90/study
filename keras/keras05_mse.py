@@ -28,7 +28,9 @@ model.compile(loss='mse', optimizer='adam', metrics=['mse']) #metrics에는 대�
 model.fit(x, y, epochs=30, batch_size=1)
 
 #4. 평가, 예측
-loss, mse = model.evaluate(x, y) #평가 반환 값을 loss, mse(변수)에 넣겠다 #metrics<mse<evaluate #loss와 metrics가 동일하기에 반환되는 값이 똑같다
+loss, mse = model.evaluate(x, y) #평가 반환 값을 loss, mse(변수)에 넣겠다 
+#mse<metrics<evaluate 
+#loss와 mse가 동일하기에 반환되는 값이 똑같다
 print("loss : ", loss)
 print("mse : ", mse)
 
@@ -42,5 +44,5 @@ print("y_predict : \n", y_pred)
 #  [13.000012]]
 
 # 이 모델의 잘못된점?
-# model.fit에 1~10까지 넣고, model.evaluat에도 훈련된 값이 중복
+# model.fit에 1~10까지 넣고, model.evaluate에도 훈련된 값이 중복
 # 따라서 훈련 데이터와 평가 데이터를 구분해야함!

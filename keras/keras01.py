@@ -1,8 +1,8 @@
 import numpy as np
 
 # 데이터생성
-x = np.array([1,2,3,4,5,6,7,8,9,10])
-y = np.array([1,2,3,4,5,6,7,8,9,10])
+x = np.array([1,2,3,4,5,6,7,8,9,10]) # input
+y = np.array([1,2,3,4,5,6,7,8,9,10]) # output
 
 # 모델구성
 from keras.models import Sequential #Seq<models<keras 큰범위

@@ -19,14 +19,14 @@ y1 = np.transpose(y1)
 # print(y1.shape)
 
 from sklearn.model_selection import train_test_split
-x1_train, x1_test, y1_train, y1_test = train_test_split(
-    x1,y1, shuffle=False, train_size=0.8
+x1_train, x1_test, x2_train, x2_test, y1_train, y1_test = train_test_split(
+    x1,x2,y1, shuffle=False, train_size=0.8
 )       
 
-from sklearn.model_selection import train_test_split
-x2_train, x2_test, y1_train, y1_test = train_test_split(
-    x2,y1, shuffle=False, train_size=0.8
-)     
+# from sklearn.model_selection import train_test_split
+# x2_train, x2_test, y1_train, y1_test = train_test_split(
+#     x2,y1, shuffle=False, train_size=0.8
+# )     
 
 #2. 모델구성
 from keras.models import Sequential, Model
@@ -34,40 +34,50 @@ from keras.layers import Dense, Input # 함수형 모델은 input, output을 명
 
 input1 = Input(shape=(3, ))
 dense1_1 = Dense(80, activation='relu', name='bit1')(input1)
-dense1_2 = Dense(50, activation='relu', name='bit2')(dense1_1)
+dense1_2 = Dense(500, activation='relu', name='bit2')(dense1_1)
+dense1_3 = Dense(100, activation='relu', name='bit3')(dense1_2)
+dense1_4 = Dense(200, activation='relu', name='bit4')(dense1_3)
 
 input2 = Input(shape=(3, ))
-dense2_1 = Dense(40, activation='relu', name='camp1')(input2)
-dense2_2 = Dense(20, activation='relu', name='camp2')(dense2_1)
+dense2_1 = Dense(400, activation='relu', name='camp1')(input2)
+dense2_2 = Dense(200, activation='relu', name='camp2')(dense2_1)
+dense2_3 = Dense(100, activation='relu', name='camp3')(dense2_2)
+dense2_4 = Dense(50, activation='relu', name='camp4')(dense2_3)
 
 # M1, M2 두 개 모델의 레이어들을 엮어주는 API 호출
 from keras.layers.merge import concatenate
 # concatenate=사슬 같이 잇다
 merge1 = concatenate([dense1_2, dense2_2])
 # merge1 레이어를 만들어줌 (M1_끝 레이어 + M2_끝 레이어)
-middle1 = Dense(1000)(merge1)
-middle1 = Dense(800)(middle1)
+middle1 = Dense(100)(merge1)
+middle1 = Dense(80)(middle1)
+middle1 = Dense(60)(middle1)
+middle1 = Dense(70)(middle1)
+middle1 = Dense(90)(middle1)
 middle1 = Dense(40)(middle1)
 # merge 된 이후에 딥러닝이 구성
 # output이 y1이므로 총 1개로 도출되어야 함
 
 ##### output 모델 구성 #####
 
-output1 = Dense(90)(middle1) # y_M1의 가장 끝 레이어가 middle1
-output1_2 = Dense(60)(output1)
-output1_3 = Dense(3)(output1_2)
+output1 = Dense(50)(middle1) # y_M1의 가장 끝 레이어가 middle1
+output1_2 = Dense(250)(output1)
+output1_3 = Dense(400)(output1_2)
+output1_4 = Dense(30)(output1_3)
+output1_5 = Dense(100)(output1_4)
+output1_6 = Dense(3)(output1_5)
 
-model = Model(inputs=[input1, input2], outputs=output1_3)
+model = Model(inputs=[input1, input2], outputs=output1_6)
 # 함수형 모델은 범위가 어디서부터 어디까지인지 명시. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
 
-model.summary()
+# model.summary()
 # M1-M3가 번갈아 가면서 훈련될 예정
 # model.summary()의 layer 이름 변경하는 파라미터? ==> name 파라미터
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
 model.fit([x1_train, x2_train],
-          y1_train, epochs=100, batch_size=1,
+          y1_train, epochs=80, batch_size=1,
           validation_split=0.3, verbose=3)
           # list로 묶어서 한번에 model.fit 완성
                    
@@ -98,40 +108,3 @@ print("RMSE : ", RMSE)
 from sklearn.metrics import r2_score
 R2 = r2_score(y1_test, y1_predict) 
 print("R2 : ", R2)
-
-# 하이퍼파라미터튜닝
-# epochs=100, input1_노드=80,50 input2_노드=40,20 concatenate_노드=1000,800,400 output_노드=90,60,3
-#RMSE : 18.31
-#R2 : -9.08
-
-# epochs=300, input1_노드=80,50,10,20 input2_노드=40,20,10,5 concatenate_노드=100,80,40,10,90,4 output_노드=90,60,,40,20,10,3
-#RMSE : 41.7
-#R2 : -51
-
-# epochs=100, input1_노드=80,50,10,20 input2_노드=40,20,10,5 concatenate_노드=100,80,40,10,90,4 output_노드=90,60,,40,20,10,3
-#RMSE : 4.98
-#R2 : 0.25
-
-# epochs=100, input1_노드=8,50,10,20 input2_노드=40,20,10,5 concatenate_노드=10,8,6,7,9,4 output_노드=5,25,40,3,10,3
-#RMSE : 1.55
-#R2 : 0.92
-
-# epochs=300, input1_노드=8,50,10,20 input2_노드=40,20,10,5 concatenate_노드=10,8,6,7,9,4 output_노드=5,25,40,3,10,3
-#RMSE : 0.35(1) / 1.34(2)
-#R2 : 0.996(1) / 0.94(2)
-
-# epochs=300, input1_노드=80,500,100,200 input2_노드=400,200,100,50 concatenate_노드=100,80,60,70,90,40 output_노드=50,250,400,30,100,3
-#RMSE : 15.13(1)
-#R2 : -5.89(1)
-
-# epochs=100, input1_노드=80,500,100,200 input2_노드=400,200,100,50 concatenate_노드=100,80,60,70,90,40 output_노드=50,250,400,30,100,3
-#RMSE : 2.00(1)
-#R2 : 0.87(1)
-
-# epochs=50, input1_노드=80,500,100,200 input2_노드=400,200,100,50 concatenate_노드=100,80,60,70,90,40 output_노드=50,250,400,30,100,3
-#RMSE : 39(1)
-#R2 : -46(1)
-
-# epochs=80, input1_노드=80,500,100,200 input2_노드=400,200,100,50 concatenate_노드=100,80,60,70,90,40 output_노드=50,250,400,30,100,3
-#RMSE : 8.44(1)
-#R2 : -1.14(1)

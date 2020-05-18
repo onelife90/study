@@ -82,10 +82,10 @@ model.fit([x1_train, x2_train],
 loss = model.evaluate([x1_test, x2_test],
                            [y1_test, y2_test], batch_size=1)
 # 전체 loss 값(1)
-# M1에 output1-dense_8에 대한 loss(1)
-# M2에 output2-dense_11에 대한 loss(1)
-# M1에 output1-dense_8에 대한 mse(1)
-# M2에 output2-dense_11에 대한 mse(1)
+# y1_output1에 대한 loss(1)
+# y2_output2에 대한 loss(1)
+# y1_output1에 대한 mse(1)
+# y2_output2에 대한 mse(1)
 # 총 5개의 반환값
 
 print("loss : ", loss)

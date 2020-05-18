@@ -70,7 +70,7 @@ output1_6 = Dense(3)(output1_5)
 model = Model(inputs=[input1, input2], outputs=output1_6)
 # 함수형 모델은 범위가 어디서부터 어디까지인지 명시. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
 
-# model.summary()
+model.summary()
 # M1-M3가 번갈아 가면서 훈련될 예정
 # model.summary()의 layer 이름 변경하는 파라미터? ==> name 파라미터
 
@@ -78,16 +78,15 @@ model = Model(inputs=[input1, input2], outputs=output1_6)
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
 model.fit([x1_train, x2_train],
           y1_train, epochs=80, batch_size=1,
-          validation_split=0.3, verbose=3)
+          validation_split=0.3, verbose=1)
           # list로 묶어서 한번에 model.fit 완성
                    
 #4. 평가, 예측
 loss = model.evaluate([x1_test, x2_test],
                            y1_test, batch_size=1)
-# 전체 loss 값 (1)
-# M1에 output1-dense_6에 대한 loss(1)
-# M1에 output1-dense_6에 대한 mse(1)
-# 총 3개의 반환값
+# y1_output1에 대한 loss(1)
+# y1_output1에 대한 mse(1)
+# 총 2개의 반환값
 
 print("loss : ", loss)
 

@@ -113,3 +113,21 @@ print("R2 : ", r2)
 # epochs=500, 히든레이어=5, 노드=(10)x5,1, batch_size=4
 #RMSE : 6.95e-05
 #R2 : 0.999999999993
+
+# epochs=100, 히든레이어=3, 노드=10,10000,10,1, batch_size=8, validation_split=0.1
+#R2 : 0.999999999998
+
+# epochs=100, 히든레이어=3, 노드=10,10000,10,1, batch_size=8, validation_split=0.9
+#R2 : 0.9990(1) / -0.44(2) / 0.55(3)
+
+# epochs=200, 히든레이어=3, 노드=10,10000,10,1, batch_size=8, validation_split=0.9
+#R2 : 0.99999994
+
+# epochs=500, 히든레이어=3, 노드=10,10000,10,1, batch_size=8, validation_split=0.9
+#R2 : 0.999999999998
+
+# epochs=5000, 히든레이어=3, 노드=10,10000,10,1, batch_size=8, validation_split=0.9
+#R2 : 0.999999999998
+
+# epochs=1000, 히든레이어=3, 노드=10,5000,5000,1, batch_size=8, validation_split=0.5
+#R2 : CPU

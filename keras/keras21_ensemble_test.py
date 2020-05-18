@@ -17,7 +17,6 @@ print(y2.shape)
 
 from sklearn.model_selection import train_test_split
 x1_train, x1_test, x2_train, x2_test, y1_train, y1_test, y2_train, y2_test = train_test_split(x1,x2,y1,y2, train_size=0.8)
-# X1, X2, Y1, Y2 한꺼번에 다 넣어도 train_test_split을 쓸 수 있지만 너무 길어지는 문제도 있음
 
 #2. 모델구성
 from keras.models import Sequential, Model
@@ -69,11 +68,11 @@ model.fit([x1_train, x2_train],
 #4. 평가, 예측
 loss = model.evaluate([x1_test, x2_test],
                            [y1_test, y2_test], batch_size=1)
-# 전체 loss 값 (1)
-# M1에 output1-dense_8에 대한 loss(1)
-# M2에 output2-dense_11에 대한 loss(1)
-# M1에 output1-dense_8에 대한 mse(1)
-# M2에 output1-dense_11에 대한 mse(1)
+# 전체 loss 값(1)
+# y1_output1에 대한 loss(1)
+# y2_output2에 대한 loss(1)
+# y1_output1에 대한 mse(1)
+# y2_output2에 대한 mse(1)
 # 총 5개의 반환값
 
 print("loss : ", loss)

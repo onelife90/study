@@ -1,6 +1,7 @@
 # 함수형 모델
 # 함수는 재사용을 위해 생성
-# A_sequential 모델 + B_sequential 모델. 어떻게 한번에 묶을까? A_sequential 모델==A 함수, B_sequential 모델==B함수로 묶어줘서 표현
+# A_sequential 모델 + B_sequential 모델. 어떻게 한번에 묶을까?
+# A_sequential 모델==A 함수, B_sequential 모델==B함수로 묶어서 전체를 또다른 하나의 신경망으로 표현
 
 #1. 데이터
 import numpy as np
@@ -29,14 +30,45 @@ from keras.layers import Dense, Input # 함수형 모델은 input, output을 명
 
 input1 = Input(shape=(3, )) #행무시 열우선. 100행 3열이기에 3열 표시
 # 변수명은 소문자로 암묵적인 룰
-# 함수형 모델에서는 keras.layer라는 계층 친구인 Input을 명시해줘야함
-dense1 = Dense(5, activation='relu')(input1)
+# 함수형 모델에서는 keras.layer의 계층 친구인 Input을 명시해줘야함
+dense1 = Dense(5000, activation='relu')(input1)
 # activation=활성화 함수 # 앞단의 아웃풋이 뒤 꽁지에 붙음
-dense2 = Dense(4, activation='relu')(dense1)
+dense2 = Dense(4000, activation='relu')(dense1)
 output1 = Dense(1)(dense2) #activation에도 디폴트가 있음
 
 model = Model(inputs=input1, outputs=output1)
-# 순차적 모델은 model = Sequential()이라고 명시
-# 함수형 모델은 범위가 어디서부터 어디까지인지 명시. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
+# 순차적 모델은 model = Sequential()이라고 명시를 하고 시작했지만,
+# 함수형 모델은 범위가 어디서부터 어디까지인지 명시해줘야 함. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
 
 model.summary()
+
+#3. 훈련
+model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
+model.fit(x_train, y_train, epochs=100, batch_size=1,
+            validation_split=0.3, verbose=3)
+                   
+#4. 평가, 예측
+loss, mse = model.evaluate(x_test, y_test)
+
+print("loss : ", loss)
+print("mse : ", mse)
+
+y_predict = model.predict(x_test)
+print(y_predict)
+
+# RMSE 구하기
+from sklearn.metrics import mean_squared_error
+
+def RMSE(y_test, y_predict): 
+    return np.sqrt(mean_squared_error(y_test, y_predict)) 
+            
+print("RMSE : ", RMSE(y_test, y_predict))
+
+#R2 구하기
+from sklearn.metrics import r2_score
+r2 = r2_score(y_test, y_predict) 
+print("R2 : ", r2)
+
+# 하이퍼파라미터튜닝
+# epochs=100, 히든레이어=2, 노드=3,5000,4000,1 validation_split=0.3
+# 

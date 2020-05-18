@@ -66,15 +66,15 @@ middle1 = Dense(7)(middle1)
 
 output1 = Dense(30)(middle1) # y_M1의 가장 끝 레이어가 middle1
 output1_2 = Dense(7)(output1)
-output1_3 = Dense(3)(output1_2)
+output1_3 = Dense(2)(output1_2)
 
 output2 = Dense(30)(middle1) # y_M2의 가장 끝 레이어가 middle1
 output2_2 = Dense(7)(output2)
-output2_3 = Dense(3)(output2_2)
+output2_3 = Dense(2)(output2_2)
 
 output3 = Dense(30)(middle1) # y_M3의 가장 끝 레이어가 middle1
 output3_2 = Dense(7)(output3)
-output3_3 = Dense(3)(output3_2)
+output3_3 = Dense(2)(output3_2)
 
 model = Model(inputs=[input1, input2], outputs=[output1_3, output2_3, output3_3])
 # 함수형 모델은 범위가 어디서부터 어디까지인지 명시. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
@@ -136,3 +136,34 @@ print("R2_1 : ", r2_1)
 print("R2_2 : ", r2_2)
 print("R2_3 : ", r2_3)
 print("R2 : ", (r2_1+r2_2+r2_3)/3)
+
+# 하이퍼파라미터튜닝
+# epochs=300, input1_노드=800,100 input2_노드=50,40 concatenate_노드=300,50,70 output_노드=300,70,2
+#RMSE1 :  6.511126149330684
+#RMSE2 :  2.5715337932567524
+#RMSE3 :  2.566436776913353
+#RMSE :  3.8830322398335966
+#R2_1 :  -0.275030488195423
+#R2_2 :  0.80111921654552
+#R2_3 :  0.8019068351911759
+#R2 :  0.4426651878470909
+
+# epochs=300, input1_노드=800,100 input2_노드=500,400 concatenate_노드=300,500,70 output_노드=900,70,2
+# RMSE1 :  35.86261049170846
+# RMSE2 :  9.863173538587718
+# RMSE3 :  15.218945051526184
+# RMSE :  20.314909693940788
+# R2_1 :  -37.6805062039097
+# R2_2 :  -1.925780218114194
+# R2_3 :  -5.965903412973634
+# R2 :  -15.190729944999175
+
+# epochs=100, input1_노드=80,50 input2_노드=40,20 concatenate_노드=1000,800,400 output_노드=90,60,2
+# RMSE1 :  4.503735615807973
+# RMSE2 :  10.139260764152167
+# RMSE3 :  4.545409788108546
+# RMSE :  6.396135389356229
+# R2_1 :  0.3899658797865495
+# R2_2 :  -2.0918679351421225
+# R2_3 :  0.37862405588472253
+# R2 :  -0.4410926664902835

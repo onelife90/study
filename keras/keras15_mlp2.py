@@ -1,6 +1,6 @@
 # 데이터 두개 이상을 사용해보자
 # ex) data = 삼성, 하이닉스 주가 output = 다우지수, xx지수 (output은 2개 이상 나올 수 있음)
-
+# MLP(Multi Layer Perceptron) 다층신경망. Perceptron? 시각과 뇌의 기능을 모델화한 학습 기계
 
 #1. 데이터
 import numpy as np

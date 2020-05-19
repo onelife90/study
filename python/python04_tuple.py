@@ -3,13 +3,13 @@
 # ex) 게임 전사캐릭터
 a = (1,2,3)
 b = 1,2,3
-print(type(a))
-print(type(b))
+print(type(a))      #<class 'tuple'>
+print(type(b))      #<class 'tuple'>
 
-# a.remove(2)     # 에러
+# a.remove(2)       # 에러
 # print(a)
 
-print(a+b)      #(1, 2, 3, 1, 2, 3)
-print(a*3)      #(1, 2, 3, 1, 2, 3, 1, 2, 3)   # a*3==a+a+a
+print(a+b)          #(1,2,3,1,2,3)
+print(a*3)          #(1,2,3,1,2,3,1,2,3)   # a*3==a+a+a
 
-# print(a-3)    # 에러
+# print(a-3)        # 에러

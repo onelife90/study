@@ -33,38 +33,43 @@ from keras.models import Sequential, Model
 from keras.layers import Dense, Input # 함수형 모델은 input, output을 명시해줘야함
 
 input1 = Input(shape=(2, ))
-dense1_1 = Dense(80, activation='relu', name='bit1')(input1)
-dense1_2 = Dense(500, activation='relu', name='bit2')(dense1_1)
-dense1_3 = Dense(100, activation='relu', name='bit3')(dense1_2)
-dense1_4 = Dense(200, activation='relu', name='bit4')(dense1_3)
+# input(shape=(2, )) 2콤마!!
+# shape=(x, ) 나중에 인풋이 많아지면 헷갈리니 shape와 dim 구분
+dense1 = Dense(10, activation='relu', name='bit1')(input1)
+dense1 = Dense(500, activation='relu', name='bit2')(dense1)
+dense1 = Dense(8, activation='relu', name='bit3')(dense1)
+dense1 = Dense(10, activation='relu', name='bit4')(dense1)
+dense1 = Dense(500, activation='relu', name='bit5')(dense1)
+dense1 = Dense(8, activation='relu', name='bit6')(dense1)
+dense1 = Dense(20, activation='relu', name='bit7')(dense1)
 
 ##### output 모델 구성 #####
 
-output1 = Dense(50)(dense1_4)
-output1_2 = Dense(250)(output1)
-output1_3 = Dense(400)(output1_2)
-output1_4 = Dense(30)(output1_3)
-output1_5 = Dense(100)(output1_4)
-output1_6 = Dense(2)(output1_5)
+output1 = Dense(100)(dense1)
+output1 = Dense(80)(output1)
+output1 = Dense(60)(output1)
+output1 = Dense(400)(output1)
+output1 = Dense(20)(output1)
+output1 = Dense(2)(output1)
 
-output2 = Dense(20)(dense1_4)
-output2_2 = Dense(400)(output2)
-output2_3 = Dense(400)(output2_2)
-output2_4 = Dense(30)(output2_3)
-output2_5 = Dense(100)(output2_4)
-output2_6 = Dense(2)(output2_5)
+output2 = Dense(90)(dense1)
+output2 = Dense(70)(output2)
+output2 = Dense(50)(output2)
+output2 = Dense(300)(output2)
+output2 = Dense(10)(output2)
+output2 = Dense(2)(output2)
 
-model = Model(inputs=input1, outputs=[output1_6, output2_6])
+model = Model(inputs=input1, outputs=[output1, output2])
 # 함수형 모델은 범위가 어디서부터 어디까지인지 명시. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
 
-model.summary()
+# model.summary()
 # M1-M3가 번갈아 가면서 훈련될 예정
 # model.summary()의 layer 이름 변경하는 파라미터? ==> name 파라미터
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
-model.fit(x_train, [y1_train, y2_train], epochs=80, batch_size=1,
-          validation_split=0.3, verbose=1)
+model.fit(x_train, [y1_train, y2_train], epochs=300, batch_size=1,
+          validation_split=0.3, verbose=3)
           # list로 묶어서 한번에 model.fit 완성
                    
 #4. 평가, 예측

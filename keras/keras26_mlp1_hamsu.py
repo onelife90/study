@@ -74,3 +74,6 @@ from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict) 
 print("R2 : ", r2)
 
+# epochs=300, input1노드=3,1000,10,5,1000,10,5 output노드=100,80,60,40,20,10,3
+#RMSE :  23.95533246253344
+#R2 :  0.344936717362822

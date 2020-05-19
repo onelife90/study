@@ -23,6 +23,10 @@ x_train, x_test, y1_train, y1_test, y2_train, y2_test = train_test_split(
     x,y1,y2, shuffle=False, train_size=0.8
 )       
 
+print(x_train.shape)
+print(y1_test.shape)
+print(y2_test.shape)
+
 # from sklearn.model_selection import train_test_split
 # x2_train, x2_test, y1_train, y1_test = train_test_split(
 #     x2,y1, shuffle=False, train_size=0.8
@@ -45,18 +49,18 @@ dense1 = Dense(20, activation='relu', name='bit7')(dense1)
 
 ##### output 모델 구성 #####
 
-output1 = Dense(100)(dense1)
-output1 = Dense(80)(output1)
-output1 = Dense(60)(output1)
-output1 = Dense(400)(output1)
-output1 = Dense(20)(output1)
+output1 = Dense(15)(dense1)
+output1 = Dense(45)(output1)
+output1 = Dense(35)(output1)
+output1 = Dense(55)(output1)
+output1 = Dense(25)(output1)
 output1 = Dense(2)(output1)
 
-output2 = Dense(90)(dense1)
-output2 = Dense(70)(output2)
-output2 = Dense(50)(output2)
-output2 = Dense(300)(output2)
-output2 = Dense(10)(output2)
+output2 = Dense(35)(dense1)
+output2 = Dense(45)(output2)
+output2 = Dense(15)(output2)
+output2 = Dense(30)(output2)
+output2 = Dense(25)(output2)
 output2 = Dense(2)(output2)
 
 model = Model(inputs=input1, outputs=[output1, output2])
@@ -99,6 +103,7 @@ RMSE1 = RMSE(y1_test, y1_predict)
 RMSE2 = RMSE(y2_test, y2_predict)
 print("RMSE1 : ", RMSE1)
 print("RMSE2 : ", RMSE2)
+print("RMSE : ", (RMSE1+RMSE2)/2)
 
 #R2 구하기
 from sklearn.metrics import r2_score
@@ -106,6 +111,7 @@ R2_1 = r2_score(y1_test, y1_predict)
 R2_2 = r2_score(y2_test, y2_predict) 
 print("R2_1 : ", R2_1)
 print("R2_2 : ", R2_2)
+print("R2 : ", (R2_1+R2_2)/2)
 
 # 하이퍼파라미터튜닝
 # epochs=80, input노드=2,80,500,100,200 output1노드=50,250,400,30,100,2 output2노드=20,400,400,30,100,2
@@ -167,3 +173,19 @@ print("R2_2 : ", R2_2)
 # RMSE2 :  34.99508145554693
 # R2_1 :  -8.393633653859334
 # R2_2 :  -35.83175116031171
+
+# epochs=300, input노드=2,10,500,8,10,500,8,20 output1노드=15,45,35,55,25,2 output2노드=35,45,15,30,25,2
+# RMSE1 :  9.271965203369358
+# RMSE2 :  37.89167425208559
+# R2_1 :  -1.5855440220298402
+# R2_2 :  -42.18132263537343
+
+# epochs=300, input노드=2,10,500,8,10,500,8,20 output1노드=15,450,35,55,25,2 output2노드=35,45,150,300,25,2
+# RMSE1 :  41.55549887941749
+# RMSE2 :  14.587416632616355
+# RMSE :  28.071457756016923
+# R2_1 :  -50.93562367269979
+# R2_2 :  -5.399781173339317
+# R2 :  -28.167702423019556
+
+# epochs=3000, input노드=2,10,500,8,10,500,8,20 output1노드=15,450,35,55,25,2 output2노드=35,45,150,300,25,2

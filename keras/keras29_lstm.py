@@ -12,6 +12,7 @@
 
 # RNN, LSTM, GRU의 이미지 검색해보자
 # 책 p.158 [그림7-1]
+![lstm](https://user-images.githubusercontent.com/64455878/82438545-3455bd80-9ad4-11ea-9207-d68709c6c56e.gif)
 
 from numpy import array
 from keras.models import Sequential

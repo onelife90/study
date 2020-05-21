@@ -44,3 +44,6 @@ print(y_predict)
 loss = model.evaluate(x, y, batch_size=1)
 print("loss : ", loss)
 
+# 하이퍼파라미터 튜닝
+# epochs=5000 GRU노드=9,3,7,1
+# [[71.22982]]

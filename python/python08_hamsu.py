@@ -11,15 +11,15 @@ print(c)            # 3
 # mul1, div1, sub1
 def mul1(a,b):
     return a*b
-print(a*b)          # 2
+print(mul1(a,b))    # 2
 
 def div1(a,b):
     return a/b
-print(a/b)          # 0.5
+print(div1(a,b))          # 0.5
 
 def sub1(a,b):
     return a-b
-print(a-b)          # -1
+print(sub1(a,b))          # -1
 
 def sayYeh():       # 매개변수(파라미터)가 없는 함수
     return 'Hi' 

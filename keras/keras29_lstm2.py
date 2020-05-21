@@ -41,13 +41,14 @@ print(x.shape)          #(4,3,1)
 #2. 모델구성
 model = Sequential()
 # model.add(LSTM(10, activation='relu', input_shape=(3, 1)))      #(4,3,1)에서 행무시 즉,(3,1)
-model.add(LSTM(5, input_length=3, input_dim=1))        
+model.add(LSTM(10, input_length=3, input_dim=1))        
 # input_shape=(3,1) ==> input_length=3(3개의 컬럼), input_dim=1((3,1)에서 하나씩 잘라서 입력하기 때문에)
-# 연산(h)이 다음 연산에 영향을 미친다
-# 1. 1*10 = input_dim*1st 노드
-# 2. 1*10 = bias*1st 노드
-# 3. 10*10 = 역전파 1st 노드를 왔다갔다 하면서 연산
+## LSTM params 계산법
+# 1. 1*10 = input_dim*output 노드
+# 2. 1*10 = bias*output 노드
+# 3. 10*10 = 역전파 output 노드를 왔다갔다 하면서 연산
 # 4. (1.+2.+3.)*4 = 인풋 게이트, 망각 게이트, 셀 게이트, 아웃풋 게이트 ==> 4배 연산
+# 결론. 4*(input_dim+bias+output노드)*output노드
 model.add(Dense(5))
 model.add(Dense(1))
 

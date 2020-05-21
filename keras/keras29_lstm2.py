@@ -58,16 +58,16 @@ model.summary()
 model.compile(optimizer='adam', loss='mse')
 model.fit(x,y, epochs=500)
 
-x_input = array([5,6,7])            
+x_predict = array([5,6,7])            
 # (3,) 스칼라 3개짜리 벡터1개로 x와 모양이 맞지 않음-->(1,3,1)로 reshape
 # ( ,3,1) = 3개짜리 1개씩 작업하겠다. 그럼 행은 어떻게 정할까?
 # x_input 3차원. 즉, 다 곱해보면 개수가 나옴. reshape 하기 전과 갯수가 같아야 함. 그래서 행은 1
-x_input = x_input.reshape(1,3,1)
+x_predict = x_predict.reshape(1,3,1)
 
-print(x_input)
+print(x_predict)
 
-yhat = model.predict(x_input)
-print(yhat)
+y_predict = model.predict(x_predict)
+print(y_predict)
 # yhat의 출력값이 왜 하나죠?
 # |---x---|--y--|
 # |1  2  3|  4  |

@@ -35,6 +35,8 @@ scaler = RobustScaler()
 scaler = MaxAbsScaler()
 scaler.fit(x)                   # 실행
 x = scaler.transform(x)         # 변환. 항상 선실행 후변환
+x_predict = x_predict.reshape(1,3)
+# reshape 하지 않으면 1D인 상태이기 때문에 돌아가지 않음! 데이터는 항상 shape부터 맞추기!!!
 x_predict = scaler.transform(x_predict)           
 # 앞서 x에게 선실행 후변환 했기 때문에 x_predict도 변환이 됨
 print(x)

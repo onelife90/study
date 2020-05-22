@@ -48,5 +48,8 @@ loss = model.evaluate(x, y, batch_size=1)
 print("loss : ", loss)
 
 # 하이퍼파라미터 튜닝
-# epochs=900 노드=3,5,10,71
+# epochs=900 노드=3,5,10,7,1
 # [[72.66392]
+
+# epochs=3700 노드=3,5,100,7,1
+# [[78.34938]]

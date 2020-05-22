@@ -41,7 +41,8 @@ input1                          (n,3,1)
 input_1 (InputLayer)         (None, 3, 1)              0
 _________________________________________________________________
 output노드가 다음 파라미터 연산의 feature로 간다!
-bias는 레이어 하나에 항상 하나만 존재. 개수이기 때문에!
+feature=input_dim이 되어 4*(output노드+input_dim+bias)*output노드
+bias는 레이어 하나에 항상 하나만 존재. 갯수이기 때문에!
 lstm_1 (LSTM)                (None, 3, '10')             480
 _____________________________________input_dim=feature___________
 lstm_2 (LSTM)                (None, 10)                840

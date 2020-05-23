@@ -7,7 +7,7 @@ test_2_grades = [100,85,60,90,70]
 plt.axis("equal")
 
 plt.scatter(test_1_grades, test_2_grades)
-plt.title("Axes Aren't Compaarable")
+plt.title("Axes Are Comparable")
 plt.xlabel("test 1 grade")
 plt.ylabel("test 2 grade")
 plt.show()

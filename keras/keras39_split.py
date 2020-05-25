@@ -5,9 +5,11 @@ from keras.layers import Dense, LSTM
 #1. 데이터
 a = np.array(range(1,11))
 size = 5
+# 10을 6개씩 자르면 (5x6)
+# 1 2 3 4 5 6
+# 2 3 4 5 6 7 ...
+# 즉, (data set 개수-size+1, size)가 됨
 
-# 코드 분석 시, 처음보는 변수명이나 매개변수가 나와도 당황하지 말자
-# 코드 안에 반드시 존재한다. 그렇지 않으면 구글링링링링마벨
 def split_x(seq, size):
     aaa = []
     for i in range(len(seq) - size + 1):

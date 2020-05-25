@@ -4,7 +4,7 @@ from keras.layers import Dense, LSTM
 
 #1. 데이터
 a = np.array(range(1,11))
-size = 5                # timesteps = 4
+size = 5                
 
 def split_x(seq, size):
     aaa=[]

@@ -25,6 +25,7 @@ print(type(dataset))        # numpy.ndarray
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
 y = dataset[:, 4]
 x_predict = dataset[len(dataset)-6:, 0:4]
+# len(dataset)=96개의 리스트 -6 == 90
 
 print(x)
 print(y)

@@ -99,7 +99,7 @@ for i in jumsu:
         break                       # break에서 걸리면 break와 가장 가까운 for문을 날려버림
     if i >= 60 :
         print("경] 합격 [축")        # "경] 합격 [축" ==1번출력 / break에 걸린 for문이 날아가버림
-        number = number + 1
+        number = number + 1         # 진짜 하늘 위로 날아가버려서 for문 종료
 
 print("합격인원 : ", number, "명")   # 합격인원:1명
 

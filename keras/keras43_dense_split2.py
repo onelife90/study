@@ -22,7 +22,8 @@ dataset = split_x(a, size)
 
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
 y = dataset[:, 4]
-x_predict = dataset[90:, 0:4]
+x_predict = dataset[len(dataset)-6:, 0:4]
+
 
 print(x)
 print(y)
@@ -53,9 +54,6 @@ early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 model.compile(loss = 'mse', optimizer='adam', metrics=['mse'])
 model.fit(x_train, y_train, epochs=1000, batch_size=1, verbose=1,
         validation_split=0.2, shuffle=True, callbacks=[early_stopping])
-# model.fit의 batch_size와 x데이터의 batch_size는 다르다
-# x데이터의 batch_size는 총 6행으로 자르겠다는 의미이고
-# model.fit의 batch_size는 그 6행을 하나씩 자르겠다는 의미
 
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test,y_test, batch_size=1)

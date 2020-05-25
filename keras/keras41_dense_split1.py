@@ -43,9 +43,6 @@ early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 model.compile(loss = 'mse', optimizer='adam', metrics=['mse'])
 model.fit(x,y, epochs=30, batch_size=1, verbose=1,
         callbacks=[early_stopping])
-# model.fit의 batch_size와 x데이터의 batch_size는 다르다
-# x데이터의 batch_size는 총 6행으로 자르겠다는 의미이고
-# model.fit의 batch_size는 그 6행을 하나씩 자르겠다는 의미
 
 #4. 평가, 예측
 

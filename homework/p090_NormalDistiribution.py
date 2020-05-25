@@ -17,3 +17,6 @@ plt.plot(xs, [normal_pdf(x,mu=-1) for x in xs], '-.', label='mu=-1, sigma=1')
 plt.legend()
 plt.title("Various Normal pdfs")
 plt.show()
+
+# 표준정규분포 μ=0 이고 σ=1인 정규분포를 의미
+# Z를 표준정규분포의 확률변수를 나타낸다면 X=σZ+μ

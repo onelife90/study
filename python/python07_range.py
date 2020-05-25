@@ -14,4 +14,12 @@ print(type(a))      # <class 'range'>
 sum = 0
 for i in range(1,11):
     sum = sum + i   # 1부터 10까지의 총합
+    # sum1 = 0+1
+    # sum2 = 0+1+2
+    # sum3 = 0+1+2+3
+    # sum4 = 0+1+2+3+4
+    # .
+    # .
+    # .
+    # sum10 = 0+1+2+3+4+5+6+7+8+9+10
 print(sum)          # 55

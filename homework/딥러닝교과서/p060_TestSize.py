@@ -1,3 +1,5 @@
+# 전체 데이터셋에서 20%를 테스트 데이터로 지정하여 출력하세요
+
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 

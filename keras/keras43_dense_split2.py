@@ -23,7 +23,7 @@ dataset = split_x(a, size)
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
 y = dataset[:, 4]
 x_predict = dataset[len(dataset)-6:, 0:4]
-
+# len(dataset)=96개의 리스트 -6 == 마지막 6행
 
 print(x)
 print(y)
@@ -39,7 +39,6 @@ x_train, x_test, y_train, y_test = train_test_split(
     )  
 
 #2. 모델구성
-
 model = Sequential()
 model.add(Dense(10, input_shape=(4,)))
 model.add(Dense(5))

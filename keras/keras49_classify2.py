@@ -20,7 +20,7 @@ x_predict = np.array([1,2,3])
 #[0 0 0 1 0 0] == 3
 #[0 0 0 0 1 0] == 4
 #[0 0 0 0 0 1] == 5
-# 그 자리에 맞게 1 표시. 나머지 0
+# 각 레이블의 인덱스 자리에 맞게 1 표시. 나머지 0인 벡터
 # 배열로 만들기 때문에 2차원으로 변환
 # 두 가지 이상의 분류면 반드시 one-hot 인코딩!!!
 
@@ -46,7 +46,7 @@ model.add(Dense(6, activation='softmax'))
 # model.summary()
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop',
+model.compile(loss='categorical_crossentropy', optimizer='adam',
               metrics=['acc'])
 model.fit(x, y, epochs=100, batch_size=1)
 
@@ -63,3 +63,6 @@ print('y_predict: \n', y_predict)
 #  [0.06832937 0.18680668 0.18600237 0.18575802 0.18661039 0.18649308]]
 # (10,6)으로 6개가 지정이 되어있기 때문에 이렇게 출력
 # 가장 높은 값을 제외한 두번째 큰 숫자가 값을 표현
+
+# 과제 dim을 6->5 변경
+# y_predict를 숫자로 바꿔라

@@ -1,4 +1,7 @@
+# 전이학습
 # 모델 저장을 했으니 불러오자
+# 남의 모델을 써도 땡겨오면 하이퍼파라미터 튜닝을 해야함
+# 왜? 데이터가 다르기 때문에
 
 import numpy as np
 from keras.models import Sequential

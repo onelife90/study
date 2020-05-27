@@ -68,4 +68,4 @@ _________________________________________________________________
 # maxpooling 쓰레기 값을 버리고 이미지 특성에 잘 맞는 부분만 추출
 
 # 과제3 Conv2D의 parameter 계산법
-# number_parameters = out_channels(=pre_filter) * (in_channels * kernel_h * kernel_w + 1)  # 1 for bias
+# (input*kernel**2+bias)*output

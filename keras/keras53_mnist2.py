@@ -35,9 +35,9 @@ print(y_train.shape)
 x_train = x_train.reshape(60000,28,28,1).astype('float32')/255
 x_test = x_test.reshape(10000,28,28,1).astype('float32')/255
 # reshape로 4차원을 만든 다음 실수형으로 타입을 바꾸고 255로 나눈다(x의 데이터가 255이기 때문에)
-# minmax와 비슷한 정규화 과정
+# minmax와 비슷한 정규화 과정. 255로 나누면 최대값=1, 최소값=0이 되기 때문에
 
-# x의 데이터 양이 6만개라서 x의 데이터 범위를 0~1
+# x의 데이터 양이 6만개라서 x의 데이터 범위를 0~1으로 정규화
 # x_train = x_train / 255
 # 이 방식도 가능. x_train의 최대값이 255이기 때문에 범위 최대값=1, 최소값=0
 

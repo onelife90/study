@@ -26,7 +26,7 @@ with tf.device('/gpu:0'):
 end = datetime.datetime.now()
 time_delta = end - start
 print('GPU 처리시간 : ', time_delta)
-
+# GPU 처리시간 :  0:00:44.002782
 
 start = datetime.datetime.now()
 with tf.device('/cpu:0'):
@@ -45,3 +45,4 @@ with tf.device('/cpu:0'):
 end = datetime.datetime.now()
 time_delta = end - start
 print('CPU 처리시간 : ', time_delta)
+# CPU 처리시간 :  0:00:55.740300

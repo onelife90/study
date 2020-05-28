@@ -25,7 +25,7 @@ y_test = np_utils.to_categorical(y_test)
 # print(y_test.shape)         # (10000, 10)
 
 x_train = x_train.reshape(-1,28,28,1).astype('float32')/255
-x_test = x_test.reshape(-1,2828,1).astype('float32')/255
+x_test = x_test.reshape(-1,28,28,1).astype('float32')/255
 # print(x_train.shape)        # (60000, 28, 28, 1)
 # print(x_test.shape)         # (10000, 28, 28, 1)
 
@@ -54,4 +54,4 @@ print("loss: ", loss)
 print("acc: ", acc)
 
 # 튜닝
-# epochs=100, batch=300, 노드=10,900,max,drop0.3,810,max,30,drop0.3,flat
+# epochs=100, batch=300, 노드=10,900,max3,drop0.3,flat

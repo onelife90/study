@@ -46,3 +46,8 @@ model.fit(x_train, y_train, epochs=100, batch_size=300)
 loss, acc = model.evaluate(x_test, y_test)
 print("loss: ", loss)
 print("acc: ", acc)
+
+# 하이퍼파라미터 
+# epochs=100, batch=0, 노드=500,1000,5000,Drop(0.4),7000,Drop(0.3),900,Drop(0.1),100
+#loss: 
+#acc: 

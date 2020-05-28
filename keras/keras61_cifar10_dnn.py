@@ -1,5 +1,5 @@
 # cifar10 : 10가지 이미지를 찾는 데이터
-# DNN_함수형 Dense를 쓸 것이기 때문에 현재 x데이터(4차원) ==> 2차원으로 reshape
+# LSTM_함수형 2차원 필요. 현재 x데이터(4차원) ==> input_shape 2차원 넣기
 
 from keras.datasets import cifar10
 from keras.utils import np_utils
@@ -21,28 +21,26 @@ import matplotlib.pyplot as plt
 #1-1. 데이터 전처리
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
-print(y_train.shape)        # (50000, 10)
-print(y_test.shape)         # (10000, 10)
+# print(y_train.shape)        # (50000, 10)
+# print(y_test.shape)         # (10000, 10)
 
-x_train = x_train.reshape(-1,32*32*3).astype('float32')/255
-x_test = x_test.reshape(-1,32*32*3).astype('float32')/255
-# print(x_train.shape)        # (50000, 3072)
-# print(x_test.shape)         # (10000, 3072)
+x_train = x_train.reshape(-1,32*32,3).astype('float32')/255
+x_test = x_test.reshape(-1,32*32,3).astype('float32')/255
+# print(x_train.shape)        # (50000, 1024, 3)
+# print(x_test.shape)         # (10000, 1024, 3)
 
 #2. 모델 구성
-input1 = Input(shape=(3072, ))
-dense1 = Dense(100)(input1)
-dense1 = Dense(9000)(dense1)
-dense1 = Dense(300)(dense1)
+input1 = Input(shape=(1024,3))
+dense1 = LSTM(5)(input1)
+dense1 = Dense(100)(dense1)
+dense1 = Dropout(0.3)(dense1)
 output1 = Dense(10, activation='softmax')(dense1)
 
 model = Model(inputs=input1, outputs=output1)
 
-# model.summary()
-
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit(x_train, y_train, epochs=100, batch_size=100)
+model.fit(x_train, y_train, epochs=100, batch_size=500)
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)
@@ -51,7 +49,7 @@ print("loss: ", loss)
 print("acc: ", acc)
 
 #튜닝
-#epochs=100, batch_size=100, 노드=100,9000,300,10
-#loss:  1.7487422406673432
-#acc:  0.39969998598098755
+#epochs=500, batch_size=50, 노드=LSTM5,100,drop0.3,10
+#loss:  
+#acc:  
 

@@ -14,8 +14,8 @@ y_test = np_utils.to_categorical(y_test)
 print(y_train.shape)        # (60000, 10)
 print(y_test.shape)         # (10000, 10)
 
-x_train = x_train.reshape(x_train.shape[0], x_train.shape[1]*x_train.shape[2],1).astype('float32')/255
-x_test = x_test.reshape(x_test.shape[0], x_test.shape[1]*x_test.shape[2],1).astype('float32')/255
+x_train = x_train.reshape(-1, x_train.shape[1]*x_train.shape[2],1).astype('float32')/255
+x_test = x_test.reshape(-1, x_test.shape[1]*x_test.shape[2],1).astype('float32')/255
 
 print(x_train.shape)        # (60000, 784, 1)
 print(x_test.shape)         # (10000, 784, 1)

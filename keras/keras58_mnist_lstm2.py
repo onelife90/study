@@ -3,6 +3,7 @@ from keras.datasets import mnist
 from keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout
+from keras.callbacks import EarlyStopping
 
 #1. 데이터
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -23,8 +24,9 @@ model.add(LSTM(10, input_shape=(28,28)))
 model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
+earlyStopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit(x_train, y_train, epochs=100, batch_size=600)
+model.fit(x_train, y_train, epochs=100, batch_size=600, callbacks=[earlyStopping])
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=600)

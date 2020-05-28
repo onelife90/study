@@ -1,11 +1,12 @@
 # cifar10 : 10가지 이미지를 찾는 데이터
-# CNN_함수형 3차원 필요. 현재 x데이터(4차원) ==> 3차원으로 reshape
+# CNN_함수형 3차원 필요. 현재 x데이터(4차원) ==> input_shape 3차원 넣기
 
 from keras.datasets import cifar10
 from keras.utils import np_utils
 from keras.models import Sequential, Model
 from keras.layers import Dense, LSTM, Conv2D, Flatten, MaxPooling2D, Dropout, Input
 import matplotlib.pyplot as plt
+from keras.callbacks import EarlyStopping
 
 #1. 데이터
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -21,8 +22,8 @@ import matplotlib.pyplot as plt
 #1-1. 데이터 전처리
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
-print(y_train.shape)        # (50000, 10)
-print(y_test.shape)         # (10000, 10)
+# print(y_train.shape)        # (50000, 10)
+# print(y_test.shape)         # (10000, 10)
 
 #2. 모델 구성
 input1 = Input(shape=(32,32,3))
@@ -36,8 +37,9 @@ output1 = Dense(10, activation='softmax')(dense1)
 model = Model(inputs=input1, outputs=output1)
 
 #3. 컴파일, 훈련
+earlyStopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit(x_train, y_train, epochs=100, batch_size=100)
+model.fit(x_train, y_train, epochs=100, batch_size=100, callbacks=[earlyStopping])
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)

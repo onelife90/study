@@ -40,7 +40,7 @@ model.add(MaxPooling2D(pool_size=2))
 model.add(Conv2D(30, (2,2), padding='same'))
 model.add(Dropout(0.3))
 model.add(Flatten())
-model.add(Dense(10))
+model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])

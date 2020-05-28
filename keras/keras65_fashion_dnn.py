@@ -1,6 +1,6 @@
 # Sequential형으로 완성하시오
 # 하단에 주석으로 acc와 loss 결과 명시
-# DNN_2차원 필요. 현재 x데이터(3차원)==> 2차원 reshape ==> input_shape=1차원 벡터
+# DNN=2차원 / 현재 x데이터(3차원)==> 2차원 reshape ==> input_shape=1차원 벡터
 
 import numpy as np
 from keras.datasets import fashion_mnist

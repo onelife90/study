@@ -3,6 +3,7 @@ from keras.datasets import mnist
 from keras.utils import np_utils
 from keras.models import Sequential, Model
 from keras.layers import Dense, Input, Dropout
+from keras.callbacks import EarlyStopping
 
 #1. 데이터
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -20,34 +21,33 @@ y_test = np_utils.to_categorical(y_test)
 
 x_train = x_train.reshape(-1,28*28).astype('float32')/255
 x_test = x_test.reshape(-1,28*28).astype('float32')/255
-print(x_train.shape)        # (60000, 784)      # 왜 784가 되나? reshape하기 전에 차원의 구성요소를 곱한 값은 항상 같아야하므로!
-print(x_test.shape)         # (10000, 784)
+# print(x_train.shape)        # (60000, 784)      # 왜 784가 되나? reshape하기 전에 차원의 구성요소를 곱한 값은 항상 같아야하므로!
+# print(x_test.shape)         # (10000, 784)
 
 #2. 모델 구성
 input1 = Input(shape=(784,))
-dense1 = Dense(500)(input1)
-dense1 = Dense(1000)(dense1)
-dense1 = Dense(5000)(dense1)
+dense1 = Dense(5000)(input1)
 dense1 = Dropout(0.4)(dense1)
-dense1 = Dense(7000)(dense1)
+dense1 = Dense(70)(dense1)
 dense1 = Dropout(0.3)(dense1)
-dense1 = Dense(900)(dense1)
+dense1 = Dense(30)(dense1)
 dense1 = Dropout(0.1)(dense1)
-dense1 = Dense(100)(dense1)
+dense1 = Dense(10)(dense1)
 output1 = Dense(10, activation='softmax')(dense1)
 
 model = Model(inputs=input1, outputs=output1)
 
 #3. 컴파일, 훈련
+earlyStopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit(x_train, y_train, epochs=100, batch_size=300)
+model.fit(x_train, y_train, epochs=100, batch_size=600, validation_split=0.3, callbacks=[EarlyStopping])
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=600)
 print("loss: ", loss)
 print("acc: ", acc)
 
-# 하
+# 튜닝
 # epochs=100, batch=600, 노드=5000,Drop0.4,70,Drop0.3,30,drop0.1,10
 #loss:  0.3085723387263715
 #acc:  0.9169999957084656

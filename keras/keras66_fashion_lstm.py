@@ -31,7 +31,7 @@ model.add(Dropout(0.3))
 model.add(Dense(500))
 model.add(Dropout(0.3))
 model.add(Dense(100))
-model.add(Dense(10))
+model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])

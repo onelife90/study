@@ -29,17 +29,17 @@ print(x_test.shape)         # (10000, 784)
 #2. 모델구성
 model = Sequential()
 model.add(Dense(10, input_dim=(28*28)))
-model.add(Dense(30))
+model.add(Dense(300))
 model.add(Dropout(0.3))
-model.add(Dense(800))
+model.add(Dense(8000))
 model.add(Dropout(0.4))
-model.add(Dense(90))
+model.add(Dense(900))
 model.add(Dropout(0.2))
 model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
-earlystopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
+earlystopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
 model.fit(x_train, y_train, epochs=100, batch_size=600, validation_split=0.3, callbacks=[earlystopping])
 
 #4. 평가, 예측

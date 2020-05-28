@@ -46,3 +46,7 @@ model.fit(x_train, y_train, epochs=100, batch_size=300)
 loss, acc = model.evaluate(x_test, y_test, batch_size=600)
 print("loss: ", loss)
 print("acc: ", acc)
+
+# epochs=100, batch=60, 노드=500,1000,5000,Drop0.4,7000,Drop0.3,900,drop0.1,100
+#loss:  
+#acc:  

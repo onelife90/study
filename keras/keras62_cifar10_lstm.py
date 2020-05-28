@@ -40,12 +40,12 @@ output1 = Dense(10, activation='softmax')(dense1)
 model = Model(inputs=input1, outputs=output1)
 
 #3. 컴파일, 훈련
-earlyStopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit(x_train, y_train, epochs=500, batch_size=500)
+earlystopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
+model.fit(x_train, y_train, epochs=500, batch_size=500, validation_split=0.3, callbacks=['earlystopping'])
 
 #4. 평가, 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size=100)
+loss, acc = model.evaluate(x_test, y_test, batch_size=500)
 
 print("loss: ", loss)
 print("acc: ", acc)

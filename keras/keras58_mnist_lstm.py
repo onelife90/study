@@ -22,10 +22,9 @@ print(x_test.shape)         # (10000, 784, 1)
 
 #2. 모델 구성
 model = Sequential()
-model.add(LSTM(100, input_shape=(784,1)))
+model.add(LSTM(10, input_shape=(784,1)))
 model.add(Dense(500))
-model.add(Dropout(0.3))
-model.add(Dense(100))
+model.add(Dropout(0.5))
 model.add(Dense(50))
 model.add(Dropout(0.2))
 model.add(Dense(10, activation='softmax'))

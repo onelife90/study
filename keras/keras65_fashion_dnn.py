@@ -1,6 +1,6 @@
 # Sequential형으로 완성하시오
 # 하단에 주석으로 acc와 loss 결과 명시
-# DNN_2차원 필요. 현재 x데이터(3차원)==> reshape 필요없음 ==> input_shape=2차원 
+# DNN_2차원 필요. 현재 x데이터(3차원)==> 2차원 reshape ==> input_shape=1차원 벡터
 
 import numpy as np
 from keras.datasets import fashion_mnist
@@ -23,9 +23,14 @@ y_test = np_utils.to_categorical(y_test)
 # print(y_train.shape)        # (60000, 10)
 # print(y_test.shape)         # (10000, 10)
 
+x_train = x_train.reshape(-1,28*28).astype('float32')/255
+x_test = x_test.reshape(-1,28*28).astype('float32')/255
+print(x_train.shape)        # (60000, 784)
+print(x_test.shape)         # (10000, 784)
+
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(10, input_shape=(28,28)))
+model.add(Dense(10, input_shape=(784, )))
 model.add(Dense(9000))
 model.add(Dropout(0.3))
 model.add(Dense(500))
@@ -43,4 +48,3 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=300)
 
 print("loss: ", loss)
 print("acc: ", acc)
-

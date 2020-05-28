@@ -47,6 +47,6 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=600)
 print("loss: ", loss)
 print("acc: ", acc)
 
-# epochs=100, batch=60, 노드=500,1000,5000,Drop0.4,7000,Drop0.3,900,drop0.1,100
+# epochs=100, batch=600, 노드=5000,Drop0.4,70,Drop0.3,30,drop0.1,10
 #loss:  
 #acc:  

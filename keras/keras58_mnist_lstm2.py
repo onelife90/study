@@ -33,6 +33,6 @@ print("loss: ", loss)
 print("acc: ", acc)
 
 # 하이퍼파라미터튜닝
-# epochs=100, batch=0, 노드=LSTM10,500,Drop(0.5),50,Drop(0.2)
+# epochs=100, batch=0, 노드=LSTM10,10
 #loss: 
 #acc: 

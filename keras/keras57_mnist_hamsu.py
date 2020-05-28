@@ -48,5 +48,5 @@ print("loss: ", loss)
 print("acc: ", acc)
 
 # epochs=100, batch=600, 노드=5000,Drop0.4,70,Drop0.3,30,drop0.1,10
-#loss:  
-#acc:  
+#loss:  0.3085723387263715
+#acc:  0.9169999957084656

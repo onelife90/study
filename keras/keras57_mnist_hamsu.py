@@ -18,8 +18,8 @@ y_test = np_utils.to_categorical(y_test)
 # print(y_train.shape)        # (60000, 10)
 # print(y_test.shape)         # (10000, 10)
 
-x_train = x_train.reshape(x_train.shape[0],x_train.reshape[1]*x_train.reshape[2]).astype('float32')/255
-x_test = x_test.reshape(x_test.shape[0],y_train.reshape[1]*x_train.reshape[2]).astype('float32')/255
+x_train = x_train.reshape(-1,28*28).astype('float32')/255
+x_test = x_test.reshape(-1,28*28).astype('float32')/255
 print(x_train.shape)        # (60000, 784)      # 왜 784가 되나? reshape하기 전에 차원의 구성요소를 곱한 값은 항상 같아야하므로!
 print(x_test.shape)         # (10000, 784)
 
@@ -43,11 +43,6 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc']
 model.fit(x_train, y_train, epochs=100, batch_size=300)
 
 #4. 평가, 예측
-loss, acc = model.evaluate(x_test, y_test)
+loss, acc = model.evaluate(x_test, y_test, batch_size=600)
 print("loss: ", loss)
 print("acc: ", acc)
-
-# 하이퍼파라미터 
-# epochs=100, batch=0, 노드=500,1000,5000,Drop(0.4),7000,Drop(0.3),900,Drop(0.1),100
-#loss: 
-#acc: 

@@ -97,3 +97,8 @@ plt.xlabel('epoch')
 plt.legend()
 plt.show()
 '''
+
+# 튜닝
+# epochs=31,노드=169,13,drop0.2.max4,drop0.1,303
+#RMSE:  <function RMSE at 0x00000193E7678168>
+#r2:  0.46706543866600814

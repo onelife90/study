@@ -3,7 +3,7 @@ from keras.datasets import cifar100
 from keras.utils import np_utils
 from keras.models import Sequential, Input, Model
 from keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense
-from keras.callbacks import EarlyStopping, ModelCheckpoint
+from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 import matplotlib.pyplot as plt
 
 #1. 데이터
@@ -36,7 +36,10 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc']
 modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'       
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
 earlystopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
-hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])
+tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
+hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint, tb_hist])
+
+print(hist.history.keys())
 
 #4. 평가, 예측
 loss_acc = model.evaluate(x_test, y_test, batch_size=100)

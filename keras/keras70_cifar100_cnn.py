@@ -42,7 +42,10 @@ hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=
 print(hist.history.keys())
 
 #4. 평가, 예측
-loss_acc = model.evaluate(x_test, y_test, batch_size=100)
+loss, acc = model.evaluate(x_test, y_test, batch_size=100)
+
+print("loss: ", loss)
+print("acc: ", acc)
 
 loss = hist.history['loss']
 acc = hist.history['acc']

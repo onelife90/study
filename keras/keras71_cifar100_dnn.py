@@ -44,7 +44,10 @@ earlystopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])
 
 #4. 평가, 예측
-loss_acc = model.evaluate(x_test, y_test, batch_size=100)
+loss, acc = model.evaluate(x_test, y_test, batch_size=100)
+
+print("loss: ", loss)
+print("acc: ", acc)
 
 loss = hist.history['loss']
 acc = hist.history['acc']
@@ -77,4 +80,4 @@ plt.legend()
 plt.show()
 
 # 튜닝
-# epochs=100,batch=100,노드=
+# epochs=113,batch=100,노드=5000.drop0.5,300,100,drop0.3,30,20,10

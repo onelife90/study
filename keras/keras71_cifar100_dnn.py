@@ -75,3 +75,6 @@ plt.ylabel('acc')
 plt.xlabel('epoch')
 plt.legend()
 plt.show()
+
+# 튜닝
+# epochs=100,batch=100,노드=

@@ -69,7 +69,7 @@ print('val_acc: \n', val_acc)
 print('loss_acc: \n', loss_acc)
 
 
-# 시각화
+### 시각화
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(10,6))                # 가로 10인치, 세로 6인치

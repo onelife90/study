@@ -76,3 +76,16 @@ plt.ylabel('acc')
 plt.xlabel('epoch')
 plt.legend()
 plt.show()
+
+# 튜닝
+# epochs=71, batch=100, 노드=1024,max2,drop0.3,64,96,max2,32,drop0.3,flat
+#loss:  4.235457990169525
+#acc:  0.1842000037431717
+
+# epochs=78, batch=100, 노드=320,max2,drop0.3,64,96,max2,32,drop0.3,flat
+#loss:  3.128042597770691
+#acc:  0.29980000853538513
+
+# epochs=, batch=100, 노드=32,max2,drop0.2,64,96,max2,drop0.1,flat
+#loss:  4.998792147636413
+#acc:  0.2345999926328659

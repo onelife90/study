@@ -46,16 +46,15 @@ earlystopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])
 
 #4. 평가, 예측
-loss_acc = model.evaluate(x_test, y_test, batch_size=100)
+loss,acc = model.evaluate(x_test, y_test, batch_size=100)
+
+print("loss: ", loss)
+print("acc: ", acc)
 
 loss = hist.history['loss']
 acc = hist.history['acc']
 val_loss = hist.history['val_loss']
 val_acc = hist.history['val_acc']
-
-print('acc: \n', acc)
-print('val_loss: \n', val_loss)
-print('loss_acc: \n', loss_acc)
 
 #5. 시각화
 plt.figure(figsize=(10,6))

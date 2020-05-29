@@ -51,7 +51,7 @@ model.add(Dense(10))
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])          
 earlystopping = EarlyStopping(monitor='loss', patience=10)
-hist = model.fit(x_train, y_train, epochs=10, batch_size=600, callbacks=[earlystopping])
+hist = model.fit(x_train, y_train, epochs=10, batch_size=600, validation_split=0.2, callbacks=[earlystopping])
 
 #4. 평가, 예측
 loss_acc = model.evaluate(x_test, y_test, batch_size=100)

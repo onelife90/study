@@ -4,7 +4,6 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from keras.utils import np_utils
-from sklearn.preprocessing import OneHotEncoder
 from keras.models import Sequential, Model
 from keras.layers import Input, Dense, Dropout
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
@@ -81,3 +80,4 @@ plt.show()
 
 # 튜닝
 # epochs=100,batch=1,노드=1000,700,drop0.1,300,100,drop0.1
+# 쓰렉..

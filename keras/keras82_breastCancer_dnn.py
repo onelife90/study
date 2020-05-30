@@ -14,7 +14,7 @@ x = breast_cancer.data
 y = breast_cancer.target
 
 # print(x[0])         # 30개 컬럼
-# print(y[0])         # 0,1 이진분류
+# print(y[0])         # 예측모델..? 회귀모델
 # print(x.shape)      # (569,30)
 # print(y.shape)      # (569, )
 
@@ -59,11 +59,11 @@ print("RMSE: ", RMSE)
 #R2 구하기
 r2 = r2_score(y_test, y_predict)
 print("r2: ", r2)
-'''
+
 loss = hist.history['loss']
-acc = hist.history['acc']
+mse = hist.history['mse']
 val_loss = hist.history['val_loss']
-val_acc = hist.history['val_acc']
+val_mse = hist.history['val_mse']
 
 #5. 시각화
 plt.figure(figsize=(10,6))
@@ -76,11 +76,10 @@ plt.xlabel('epoch')
 plt.legend()
 
 plt.subplot(2,1,2)
-plt.plot(acc, marker='.', c='red', label='acc')
-plt.plot(val_acc, marker='.', c='blue', label='val_acc')
+plt.plot(mse, marker='.', c='red', label='mse')
+plt.plot(val_mse, marker='.', c='blue', label='val_mse')
 plt.title('acc')
 plt.ylabel('acc')
 plt.xlabel('epoch')
 plt.legend()
 plt.show()
-'''

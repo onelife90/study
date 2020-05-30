@@ -13,7 +13,7 @@ x = breast_cancer.data
 y = breast_cancer.target
 
 # print(x[0])         # 30개 컬럼
-# print(y[0])         # 0,1 이진분류
+# print(y[0])         # 예측모델.. 회귀 
 # print(x.shape)      # (569,30)
 # print(y.shape)      # (569, )
 

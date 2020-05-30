@@ -9,11 +9,14 @@ from keras.layers import Dense, Dropout
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 import matplotlib.pyplot as plt
 
+# 
+
 #1. 데이터
 iris = load_iris()
 x = iris.data
 y = iris.target
 # print(x[0])         # [5.1 3.5 1.4 0.2] == 4컬럼
+# print(y)            # 0,1,2 세 종류
 # print(x.shape)      # (150, 4)
 # print(y.shape)      # (150, )
 

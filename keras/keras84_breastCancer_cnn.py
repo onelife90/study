@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, LSTM, Conv2D, MaxPooling2D, Flatten
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
+from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
 #1. 데이터
@@ -47,6 +48,15 @@ hist = model.fit(x_train, y_train, epochs=500, batch_size=5, validation_split=0.
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test, batch_size=5)
 y_predict = model.predict(x_test)
+
+#RMSE 구하기
+def RMSE(y_test, y_predict):
+    return np.sqrt(mean_squared_error(y_test, y_predict))
+print("RMSE: ", RMSE)
+
+#R2 구하기
+r2 = r2_score(y_test, y_predict)
+print("R2: ", r2)
 
 loss = hist.history['loss']
 mse = hist.history['mse']

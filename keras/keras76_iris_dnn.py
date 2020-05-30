@@ -76,3 +76,8 @@ plt.ylabel('acc')
 plt.xlabel('epoch')
 plt.legend()
 plt.show()
+
+# 튜닝
+# epochs=100, batch=1, 노드=5,1000,700,drop0.2,300
+#loss:  0.08523475031011571
+#acc:  0.9333333373069763

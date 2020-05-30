@@ -79,3 +79,8 @@ plt.ylabel('mse')
 plt.xlabel('epoch')
 plt.legend()
 plt.show()
+
+# 튜닝
+# epochs=22,batch=5,노드=LSTM50,9000,5000,drop0.1,7000,300,100
+#RMSE:  <function RMSE at 0x0000024BDFD3F168>
+#r2:  0.6934145390683433

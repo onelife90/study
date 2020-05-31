@@ -45,7 +45,7 @@ model = Model(inputs=input1, outputs=output1)
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 early_stop = EarlyStopping(monitor='loss', patience=5, mode='auto')
 modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'
-checkpoint = ModelCheckpoint(filepath=modelpath, save_best_only=True, mode='auto')
+checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
 tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
 hist = model.fit(x_train, y_train, epochs=1000, batch_size=1, validation_split=0.2, callbacks=[early_stop, checkpoint, tb_hist])
 
@@ -88,5 +88,6 @@ plt.legend()
 plt.show()
 
 # 튜닝
-# epochs=100,batch=1,노드=1000,700,drop0.1,300,100,drop0.1
-# 쓰렉..
+# epochs=100,batch=1,노드=3000,340,2340,drop0.2,4300,7000,drop0.1,100,drop0.1
+#RMSE:  83.43947884620023
+#r2:  -0.15285883508415465

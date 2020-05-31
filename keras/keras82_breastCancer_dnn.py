@@ -48,6 +48,9 @@ hist = model.fit(x_train, y_train, epochs=500, batch_size=5, validation_split=0.
 loss, acc = model.evaluate(x_test, y_test, batch_size=5)
 y_predict = model.predict(x_test)
 
+print("loss: ", loss)
+print("acc: ", acc)
+
 loss = hist.history['loss']
 acc = hist.history['acc']
 val_loss = hist.history['val_loss']

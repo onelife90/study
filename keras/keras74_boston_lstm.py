@@ -1,6 +1,5 @@
 import numpy as np
 from sklearn.datasets import load_boston
-from keras.utils import np_utils
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
@@ -18,9 +17,6 @@ y = boston.target
 # print(y.shape)        # (506,)
 
 #1-1. 데이터 전처리
-y = y.reshape(y.shape[0],1)
-# print(y.shape)                  # (503, 1)
-
 scaler = MinMaxScaler()
 x = scaler.fit_transform(x)
 # print(x[1])
@@ -28,10 +24,6 @@ x = x.reshape(-1, x.shape[1], 1)
 # print(x.shape)                  # (506, 13, 1)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6)
-print(x_train.shape)        # (303, 13, 1)                
-print(x_test.shape)         # (203, 13, 1)
-print(y_train.shape)        # (303, 1)
-print(y_test.shape)         # (203, 1)
 
 #2. 모델 구성
 input1 = Input(shape=(13,1))
@@ -50,7 +42,7 @@ model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 earlystopping = EarlyStopping(monitor='mse', patience=5, mode='auto')
 modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
-tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True, )
+tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
 hist = model.fit(x_train, y_train, epochs=100, batch_size=1, validation_split=0.2, callbacks=[earlystopping, checkpoint, tb_hist])
 
 #4. 평가, 예측
@@ -90,3 +82,8 @@ plt.xlabel('epoch')
 plt.legend()
 
 plt.show()
+
+# 튜닝
+# epochs=100,batch=1,노드=LSTM10,LSTM1,5000,drop0.2,500,300
+#RMSE:  7.926188563523864
+#R2:  0.1622650037405542

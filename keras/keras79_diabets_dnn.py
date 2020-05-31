@@ -28,15 +28,10 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train
 
 #2. 모델
 input1 = Input(shape=(10, ))
-dense1 = Dense(3000)(input1)
-dense1 = Dense(340)(dense1)
-dense1 = Dense(2340)(dense1)
+dense1 = Dense(9000)(input1)
 dense1 = Dropout(0.2)(dense1)
-dense1 = Dense(4300)(dense1)
-dense1 = Dense(7000)(dense1)
-dense1 = Dropout(0.1)(dense1)
-dense1 = Dense(100)(dense1)
-dense1 = Dropout(0.1)(dense1)
+dense1 = Dense(2340)(dense1)
+dense1 = Dense(442)(dense1)
 output1 = Dense(1)(dense1)
 
 model = Model(inputs=input1, outputs=output1)
@@ -88,6 +83,6 @@ plt.legend()
 plt.show()
 
 # 튜닝
-# epochs=100,batch=1,노드=3000,340,2340,drop0.2,4300,7000,drop0.1,100,drop0.1
-#RMSE:  83.43947884620023
-#r2:  -0.15285883508415465
+# epochs=22,batch=1,노드=9000,drop0.2,2340,442
+#RMSE:  56.223379372889966
+#r2:  0.47656005925434797

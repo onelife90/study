@@ -17,8 +17,6 @@ y = boston.target
 # print(y.shape)      # (506,)
 
 #1-1. 데이터 전처리
-y = y.reshape(y.shape[0],1)
-# print(y.shape)                  # (506, 1)
 scaler = MinMaxScaler()
 x = scaler.fit_transform(x)
 # print(x[1])

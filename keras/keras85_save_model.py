@@ -30,6 +30,7 @@ model.add(Flatten())
 model.add(Dense(10, activation='softmax'))
 
 # model.save('./model/model_test01.h5')
+# fit한 결과까지 반영 X
 # model.summary()
 
 #3. 컴파일, 훈련

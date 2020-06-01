@@ -53,7 +53,7 @@ print("loss: ", loss)
 print("acc: ", acc)
 
 #튜닝
-#epochs=500, batch_size=50, 노드=LSTM5,100,drop0.3,10
-#loss:  
-#acc:  
+#epochs=81, batch_size=100, 노드=100,9000(softmax),70,drop0.1,40,20
+# loss:  1.8786926889419555
+# acc:  0.4575999975204468
 

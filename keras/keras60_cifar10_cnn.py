@@ -46,3 +46,6 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=100)
 
 print("loss: ", loss)
 print("acc: ", acc)
+
+# 튜닝
+# epochs=

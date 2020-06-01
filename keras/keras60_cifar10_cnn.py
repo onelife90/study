@@ -48,4 +48,6 @@ print("loss: ", loss)
 print("acc: ", acc)
 
 # 튜닝
-# epochs=
+# epochs=12,batch=50,node=100,500,200,pool2,drop0.1,flat
+# loss:  2.1646940628290174
+# acc:  0.17149999737739563

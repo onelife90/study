@@ -1,5 +1,5 @@
 # CSV 데이터 파일. 엑셀 친구. 행렬로 되어있음
-# 받아서 Pandas, Numpy로 변환
+# 받아서 Pandas(여러가지 데이터 형식), Numpy(한가지 데이터 형식)로 변환
 # 데이터에는 결측치, 이상치가 포함
 # 결측치 제거 방법 : train_test_split해서 predict 값을 얻고 메운다
 # 이상치 제거 방법 : robustscaler(중앙값(median)이 0, IQR(interquartile range)이 1이 되도록 변환)을 써서 이상치 모두 날려버린다

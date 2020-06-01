@@ -8,23 +8,6 @@ from keras.callbacks import EarlyStopping
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-# print(x_train[0])
-# print("y_train: ", y_train[0])
-
-# print(x_train.shape)        # (60000, 28, 28)
-# print(x_test.shape)         # (10000, 28, 28)
-# print(y_train.shape)        # (60000,)
-# print(y_test.shape)         # (10000,)
-
-# plt.imshow(x_train[0], 'gray')
-# plt.imshow(x_train[0])    # 랜덤색깔
-# print(x_train[0].shape)
-# plt.imshow(가로, 세로)==가로, 세로를 넣어주면 이미지를 출력
-# plt.show()
-
-# 0~9까지(손글씨 숫자) 10개로 분류
-# 분류모델로 쓰려면 one-hot 인코딩을 사용해서 2차원으로 변환
-
 # 데이터 전처리 1. one-hot 인코딩
 from keras.utils import np_utils
 y_train = np_utils.to_categorical(y_train)

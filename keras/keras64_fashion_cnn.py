@@ -52,9 +52,6 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=300)
 print("loss: ", loss)
 print("acc: ", acc)
 
-# loss:  9.715988025665283
-# acc:  0.10000000149011612
-
 # 튜닝
 # epochs=21, batch=100, 노드=10,900,max2,3000,drop0.3,flat
 #loss:  1.3226781857013703

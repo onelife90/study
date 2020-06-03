@@ -22,3 +22,24 @@ print("df: \n", df)
 #     time  year
 # 1     4  2002
 # 2     5  2001
+
+# 문제
+import numpy as np
+import pandas as pd
+np.random.seed(0)
+columns = ["apple", "orange", "banana", "strawberry", "kiwifruit"]
+
+# DataFrame을 생성하고 열 추가
+df = pd.DataFrame()
+for column in columns:
+    df[column] = np.random.choice(range(1,11), 10)
+print(df)
+
+#range(시작행수, 종료행수-1)
+df.index = range(1,11)
+
+# loc[]을 사용하여 df의 2~5행(4개행)과 "banana", "kiwifruit"의 2열을 포함한 DataFrame을 df에 대입
+# 첫번째 행의 인덱스는 1, 이후의 인덱스는 정수의 오름차순
+df = df.loc[range(2,6), ["banana", "kiwifruit"]]
+# loc이므로 이름 참조. range(i,j)=i에서부터 j-1까지. 콤마로 명시! / 컬럼이 2개이므로 리스트 형식으로 묶어줌
+print(df)

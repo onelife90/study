@@ -1,6 +1,7 @@
 # 분류모델과 회귀모델을 각각 완성하시오
 # iris 다중분류
 # LogisticRegression ==> 분류
+# 속도가 빠른 러신머닝. 결측치를 x_pred로 넣은 다음 나머지를 머신 돌림
 import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.decomposition import PCA
@@ -57,11 +58,13 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train
 # model = RandomForestRegressor()         
 # error
 
-model = KNeighborsClassifier()          
+# model = KNeighborsClassifier()          
 # score:  0.9666666666666667
 # acc:  0.9666666666666667
 # R2 :  0.9469964664310954
-# model = KNeighborsRegressor()           # score:  0.9195305889795395
+
+model = KNeighborsRegressor()           
+# error
 
 #3. 컴파일, 훈련
 # model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
@@ -80,30 +83,3 @@ print("R2 : ", r2)
 
 # print("loss: ", loss)
 # print("acc: ", acc)
-'''
-loss = hist.history['loss']
-acc = hist.history['acc']
-val_loss = hist.history['val_loss']
-val_acc = hist.history['val_acc']
-
-#5. 시각화
-plt.figure(figsize=(10,6))
-plt.subplot(2,1,1)
-plt.plot(loss, marker='.', c='red', label='loss')
-plt.plot(val_loss, marker='.', c='blue', label='val_loss')
-plt.grid()
-plt.title('loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend()
-
-plt.subplot(2,1,2)
-plt.plot(acc, marker='.', c='red', label='acc')
-plt.plot(val_acc, marker='.', c='blue', label='val_acc')
-plt.grid()
-plt.title('acc')
-plt.ylabel('acc')
-plt.xlabel('epoch')
-plt.legend()
-plt.show()
-'''

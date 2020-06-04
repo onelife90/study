@@ -31,7 +31,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=77, train
 # acc:  0.9868421052631579
 # r2:  0.9434523809523809
 
-# model = LinearSVC()                      
+# model = LinearSVC()                   # 규제에 편향을 포함싴켜서 SVC보다 낮은 정확도                  
 # score:  0.9692982456140351
 # acc:  0.9692982456140351
 # r2:  0.8680555555555556

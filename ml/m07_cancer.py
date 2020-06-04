@@ -1,21 +1,13 @@
 # breast cancer 유방암. 이진분류
 
-import numpy as np
 from sklearn.datasets import load_breast_cancer
-from keras.utils import np_utils
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from keras.models import Sequential
-from keras.layers import Dense, Dropout
-from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
-from sklearn.metrics import mean_squared_error, r2_score
-import matplotlib.pyplot as plt
-
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
-from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
+from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
 
 #1. 데이터
 breast_cancer = load_breast_cancer()
@@ -70,8 +62,7 @@ y_pred = model.predict(x_test)
 score = model.score(x_test, y_test)
 acc = accuracy_score(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
+
 print("score: ", score)
 print("acc: ", acc)
 print("r2: ", r2)
-# print("loss: ", loss)
-# print("acc: ", acc)

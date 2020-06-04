@@ -69,9 +69,7 @@ y_pred = model.predict(x_test)
 score = model.score(x_test, y_test)
 acc = accuracy_score(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
+
 print("score: ", score)         
 print("acc: ", acc)         
 print("R2 : ", r2)
-
-# print("loss: ", loss)
-# print("acc: ", acc)

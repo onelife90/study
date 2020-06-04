@@ -1,15 +1,8 @@
 # boston 회귀
 
-import numpy as np
 from sklearn.datasets import load_boston
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
-from keras.models import Sequential, Model, Input
-from keras.layers import Dense, Dropout
-from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
-import matplotlib.pyplot as plt
-
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score, r2_score
@@ -63,6 +56,7 @@ y_pred = model.predict(x_test)
 score = model.score(x_test, y_test)
 # acc = accuracy_score(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
+
 print("score: ", score)         
 # print("acc: ", acc)         
 print("R2: ", r2)         

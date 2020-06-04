@@ -1,5 +1,5 @@
 # xor 모델을 완성하시오.
-# SVC import
+# 다른 방법
 
 from sklearn.svm import SVC
 # 서포트 or 서포트벡터 : 아웃풋 중에서 가장 경계선에 가까이 붙어있는 최전방의 데이터들
@@ -10,13 +10,15 @@ from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 #1. 데이터
 x_data = [[0,0], [1,0], [0,1], [1,1]]
 y_data = [0,1,1,0]
-# 인풋 [0,0] 아웃풋 0
-# 인풋 [1,0] 아웃풋 1
-# 인풋 [0,1] 아웃풋 1
-# 인풋 [1,1] 아웃풋 0
+# xor_|___0___1_____
+#     |
+#  0  |   0   1      
+#     |
+#  1  |   1   0
+#     |
 
 #2. 모델
-# model = LinearSVC(penalty='l1', loss='squared_hinge', dual=True)
+# model = LinearSVC()
 # model = SVC()
 model = KNeighborsClassifier(n_neighbors=1)
 # n_neighbors=2로 하게 되면 acc 0.5 / 1번째 이웃한테 가고 2번째 이웃일때 자기 자신한테 돌아오는듯

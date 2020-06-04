@@ -10,14 +10,22 @@ from sklearn.metrics import accuracy_score
 #1. 데이터
 x_data = [[0,0], [1,0], [0,1], [1,1]]
 y_data = [0,0,0,1]
-# 인풋 [0,0] 아웃풋0
-# 인풋 [1,0] 아웃풋 0
-# 인풋 [0,1] 아웃풋 0
-# 인풋 [1,1] 아웃풋 1
+# and_|___0___1_____
+#     |
+#  0  |   0   1      
+#     |
+#  1  |   1   0
+#     |
+
+# 인공지능의 겨울이 찾아옴. 어떻게 선형분리 할것인가?
+# 실습. acc1.0이 나오는 방법을 찾으시오
 
 #2. 모델
 # model = LinearSVC(penalty='l1', loss='squared_hinge', dual=True)
-model = LinearSVR(C=1, dual=True, epsilon=0.5)
+# model = LinearSVR(C=1, dual=True, epsilon=0.5)
+
+# SVC 모델 사용. 서포트 벡터 클래스 (Support Vector Classifier) 클래스
+# 경계선을 두개 그어주어 서포트벡터와 경계선 사이의 거리를 최소화
 
 #3. 훈련
 model.fit(x_data, y_data)

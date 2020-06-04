@@ -22,10 +22,8 @@ y_data = [0,1,1,0]
 
 #2. 모델
 model = LinearSVC()
+# acc =  0.25
 # model = LinearSVR(C=1, dual=True, epsilon=0.5)
-
-# SVC 모델 사용. 서포트 벡터 클래스 (Support Vector Classifier) 클래스
-# 경계선을 두개 그어주어 서포트벡터와 경계선 사이의 거리를 최소화
 
 #3. 훈련
 model.fit(x_data, y_data)

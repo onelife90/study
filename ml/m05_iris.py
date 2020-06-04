@@ -2,22 +2,14 @@
 # iris 다중분류
 # LogisticRegression ==> 분류
 # 속도가 빠른 러신머닝. 결측치를 x_pred로 넣은 다음 나머지를 머신 돌림
-import numpy as np
-from sklearn.datasets import load_iris
-from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split
-from keras.utils import np_utils
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from keras.models import Sequential, Model
-from keras.layers import Dense, Dropout
-from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
-import matplotlib.pyplot as plt
 
-from sklearn.svm import SVC
-from sklearn.svm import LinearSVC
-from sklearn.metrics import accuracy_score, r2_score
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC, LinearSVC
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
+from sklearn.metrics import accuracy_score, r2_score
 
 #1. 데이터
 iris = load_iris()
@@ -73,10 +65,10 @@ y_pred = model.predict(x_test)
 
 #4. 평가, 예측
 # loss, acc = model.evaluate(x_test, y_test, batch_size=1)
+# model.score 분류, 회귀 둘 다 사용 가능
 score = model.score(x_test, y_test)
 acc = accuracy_score(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
-# model.score 분류, 회귀 둘 다 사용 가능
 print("score: ", score)         
 print("acc: ", acc)         
 print("R2 : ", r2)

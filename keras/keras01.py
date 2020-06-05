@@ -10,6 +10,7 @@ from keras.layers import Dense #Dense<layers<keras
 
 model = Sequential() #순차적인 모델
 model.add(Dense(1, input_dim=1, activation='relu')) #히든 레이어가 없다 #add<Dense<keras
+# 인풋 1, 아웃풋 1
 
 # 훈련
 model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
@@ -47,6 +48,6 @@ print("acc : ", acc)
 #loss : 38.5 (1) / 0.01(2) / 0.006(3) / 38.5(4)
 #acc : 0.0 (1) / 1.0 (2) / 1.0 (3) / 0.0 (4)
 #배치사이즈가 100, 데이터가 10개지만 훈련가능.
-#왜? 일단 배치사이즈 디폴트 값은 32.\
+#왜? 일단 배치사이즈 디폴트 값은 32
 #가중치는 mini-batch gradient라는 값의 순서대로 업데이트됨
 #32는 LSTM 모델의 기본 구성

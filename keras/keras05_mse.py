@@ -24,17 +24,20 @@ model.add(Dense(500))
 model.add(Dense(1))
 
 #3. 훈련
-model.compile(loss='mse', optimizer='adam', metrics=['mse']) #metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
+model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
+# metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
 model.fit(x, y, epochs=30, batch_size=1)
 
 #4. 평가, 예측
-loss, mse = model.evaluate(x, y) #평가 반환 값을 loss, mse(변수)에 넣겠다 
-#mse<metrics<evaluate 
-#loss와 mse가 동일하기에 반환되는 값이 똑같다
+loss, mse = model.evaluate(x, y) 
+# 평가 반환 값을 loss, mse(변수)에 넣겠다 
+# mse<metrics<evaluate 
+# loss와 mse가 동일하기에 반환되는 값이 똑같다
 print("loss : ", loss)
 print("mse : ", mse)
 
-y_pred = model.predict(x_pred) #y_pred로 반환한다
+y_pred = model.predict(x_pred) 
+# y_pred로 반환한다 y_pred라는 변수명에 대입하는 것뿐!
 print("y_predict : \n", y_pred)
 
 
@@ -46,3 +49,4 @@ print("y_predict : \n", y_pred)
 # 이 모델의 잘못된점?
 # model.fit에 1~10까지 넣고, model.evaluate에도 훈련된 값이 중복
 # 따라서 훈련 데이터와 평가 데이터를 구분해야함!
+# 그리고 회귀 모델이기 때문에 평가 지표는 mse가 되어야함

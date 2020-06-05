@@ -26,17 +26,20 @@ model.add(Dense(500))
 model.add(Dense(1))
 
 #3. 훈련
-model.compile(loss='mse', optimizer='adam', metrics=['acc']) #metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
+model.compile(loss='mse', optimizer='adam', metrics=['acc']) 
+# metrics에는 대괄호 필수 문법임. 훈련 돌릴 때 보여지는 부분
 model.fit(x_train, y_train, epochs=30, batch_size=1)
 
 #4. 평가, 예측
-loss, mse = model.evaluate(x_test, y_test) #평가 반환 값을 loss, mse(변수)에 넣겠다 
-#mse<metrics<evaluate 
-#loss와 metrics가 동일하기에 반환되는 값이 똑같다
+loss, mse = model.evaluate(x_test, y_test) 
+# 평가 반환 값을 loss, mse(변수)에 넣겠다 
+# mse<metrics<evaluate 
+# loss와 metrics가 동일하기에 반환되는 값이 똑같다
 print("loss : ", loss)
 print("mse : ", mse)
 
-y_pred = model.predict(x_pred) #y_pred로 반환한다
+y_pred = model.predict(x_pred) 
+# y_pred로 반환한다 y_pred라는 변수명에 대입하는 것일뿐
 print("y_predict : \n", y_pred)
 
 #하이퍼파라미터 튜닝
@@ -46,7 +49,7 @@ print("y_predict : \n", y_pred)
 # [17.010408]
 # [18.010998]]
 
-# train/test
+# 데이터 train/test 나누기
 # x=수능점수, 온도, 날씨, 하이닉스, 유가 환율, 금시세, 금리 등
 # y=삼성주가
 # 예를들어 x의 자료가 엑셀로 365일치의 데이터로 만들어져있다면, train 7달, test 3달로 나누어서 모델을 돌려야 y값이 정확히 나올 수 있다

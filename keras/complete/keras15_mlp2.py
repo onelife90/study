@@ -5,7 +5,7 @@
 #1. 데이터
 import numpy as np
 x = np.array([range(1,101), range(311,411), range(100)]) # 100개짜리 3덩어리
-y = np.array(range(711,811))
+y = np.array([range(711,811)])
 # 통상적으로 y는 하나의 값이 좋다
 # input_data = 삼성, 하이닉스 / output_data = 삼성 // 이렇게 하나만 나오는 결과가 더 높은 신뢰성
 # 그래서 output_data를 한 컬럼으로 체체체인지
@@ -23,17 +23,11 @@ y = np.transpose(y)
 print(x.shape)
 print(y.shape)
 
-
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(
-    # x,y, random_state=99, shuffle=True,
-    x,y, train_size=0.6
-)       
-
+x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.6)       
 # print(x_train)
 # print(x_val)
 # print(x_test)
-
 
 #2. 모델구성
 from keras.models import Sequential
@@ -54,14 +48,12 @@ model.add(Dense(1))
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
-model.fit(x_train, y_train, epochs=300, batch_size=1,
-            validation_split=0.3)
-            # validation_split=0.3 / train_size=60 / 60% X 30% = 18%
-            # 즉, train=42%, val=18%의 비율로 훈련됨
+model.fit(x_train, y_train, epochs=300, batch_size=1, validation_split=0.3)
+# validation_split=0.3 / train_size=60 / 60% X 30% = 18%
+# 즉, train=42%, val=18%의 비율로 훈련됨
            
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
-
 print("loss : ", loss)
 print("mse : ", mse)
 
@@ -73,7 +65,6 @@ from sklearn.metrics import mean_squared_error
 
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 
-            
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기
@@ -82,7 +73,6 @@ r2 = r2_score(y_test, y_predict)
 print("R2 : ", r2)
 
 #하이퍼파라미터튜닝
-
 #epochs=500, 히든레이어=8, 노드=5,1000,10,10,5,1000,10,5,1
 #RMSE : 0.0036(1) / 0.0001(2) / 0.0001(3)
 #R2 : 0.99999998(1) / 0.99999999998(2) / 0.99999999997(3)

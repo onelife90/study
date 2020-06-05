@@ -6,15 +6,11 @@ y = np.array(range(711,811))
 x = np.transpose(x)
 y = np.transpose(y)
 
-print(x.shape)
-print(y.shape)
+print(x.shape)  # (100,3)
+print(y.shape)  # (100,1)
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(
-    # x,y, random_state=99, shuffle=True,
-    x,y, train_size=0.6
-)       
-
+x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.6)       
 # print(x_train)
 # print(x_val)
 # print(x_test)
@@ -34,17 +30,14 @@ model.add(Dense(1))
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
-model.fit(x_train, y_train, epochs=100, batch_size=1,
-            validation_split=0.3, verbose=3)
-            #verbose=0 --> 결과값만 빠르게 스캔
-            #verbose=1 --> 통상 보던 디폴트
-            #verbose=2 --> 진행 bar가 없어짐
-            #verbose=3 --> epochs 진행, 예측값, RMSE, R2 결과
-
+model.fit(x_train, y_train, epochs=100, batch_size=1,validation_split=0.3, verbose=3)
+#verbose=0 --> 결과값만 빠르게 스캔
+#verbose=1 --> 통상 보던 디폴트
+#verbose=2 --> 진행 bar가 없어짐
+#verbose=3 --> epochs 진행, 예측값, RMSE, R2 결과
            
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
-
 print("loss : ", loss)
 print("mse : ", mse)
 
@@ -53,10 +46,8 @@ print(y_predict)
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
-
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 
-            
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기

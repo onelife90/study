@@ -1,6 +1,6 @@
 # 데이터 두개 이상을 사용해보자
 # ex) data = 삼성, 하이닉스 주가 output = 다우지수, xx지수 (output은 2개 이상 나올 수 있음)
-
+# MLP(Multi Layer Perceptron) 다층신경망. Perceptron? 시각과 뇌의 기능을 모델화한 학습 기계
 
 #1. 데이터
 import numpy as np
@@ -26,11 +26,7 @@ print(y.shape)
 # (3,100) 3행 100열 이기 때문에 우리가 통상적으로 생각하는 엑셀로 바꿔줘야함
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(
-    # x,y, random_state=99, shuffle=True,
-    x,y, train_size=0.6
-)       
-
+x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.6)       
 # print(x_train)
 # print(x_val)
 # print(x_test)
@@ -53,14 +49,12 @@ model.add(Dense(3))
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
-model.fit(x_train, y_train, epochs=500, batch_size=1,
-            validation_split=0.3)
-            # validation_split=0.2 / train_size=60 / 60% X 20% = 12%
-            # 즉, train=48%, val=12%의 비율로 훈련됨
+model.fit(x_train, y_train, epochs=500, batch_size=1, validation_split=0.3)
+# validation_split=0.2 / train_size=60 / 60% X 20% = 12%
+# 즉, train=48%, val=12%의 비율로 훈련됨
            
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
-
 print("loss : ", loss)
 print("mse : ", mse)
 
@@ -69,10 +63,8 @@ print(y_predict)
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
-
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 
-            
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기
@@ -80,6 +72,7 @@ from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict) 
 print("R2 : ", r2)
 
+# 튜닝
 # epochs=500, 히든레이어=8, 노드=1000,10,10,5,1000,10,5,3
 #RMSE : 0.0163(1) / 0.3339(2)
 #R2 : 0.9999997(1) / 0.999998(2)

@@ -1,8 +1,8 @@
-#validation 추가
-#train만 하면 교과서만 푼 것
-#train, val은 훈련하면서 검증 model.fit에서 실행이 되고 교과서 + 모의고사를 같이 푼 것
-#다시말해, 훈련시키고 컨닝(1epoch), 훈련시키고 컨닝(2epoch), ... 반복적인 행위가 됨
-#test는 model.evaluate에서 실행
+# validation 추가
+# train만 하면 교과서만 푼 것
+# train, val은 훈련하면서 검증 model.fit에서 실행이 되고 교과서 + 모의고사를 같이 푼 것
+# 다시말해, 훈련시키고 컨닝(1epoch), 훈련시키고 컨닝(2epoch), ... 반복적인 행위가 됨
+# test는 model.evaluate에서 실행
 
 #1. 데이터
 import numpy as np
@@ -36,11 +36,10 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
 model.fit(x_train, y_train, epochs=80, batch_size=1,
             validation_data=(x_val, y_val)) 
-            #val 값은 train과 같이 훈련되어야 하기에 model.fit에 포함
+# val 값은 train과 같이 훈련되어야 하기에 model.fit에 포함
 
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
-
 print("loss : ", loss)
 print("mse : ", mse)
 
@@ -50,10 +49,8 @@ print(y_predict)
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
 
-
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 
-            
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기

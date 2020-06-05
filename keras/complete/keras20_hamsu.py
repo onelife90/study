@@ -10,25 +10,19 @@ y = np.array(range(711,811))
 
 x = np.transpose(x)
 y = np.transpose(y)
-
-print(x.shape)
-print(y.shape)
+print(x.shape)  # (100,3)
+print(y.shape)  # (100, )
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(
-    # x,y, random_state=99, shuffle=True,
-    x,y, train_size=0.6
-)       
+x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.6)       
 
 #2. 모델구성
 from keras.models import Sequential, Model
-from keras.layers import Dense, Input # 함수형 모델은 input, output을 명시해줘야함
-# model = Sequential()
-# model.add(Dense(5, input_dim = 3))
-# model.add(Dense(4))
-# model.add(Dense(1))
+from keras.layers import Dense, Input 
+# 함수형 모델은 input, output을 명시해줘야함
 
-input1 = Input(shape=(3, )) #행무시 열우선. 100행 3열이기에 3열 표시
+input1 = Input(shape=(3, )) 
+# 행무시 열우선. 100행 3열이기에 3열 표시
 # 변수명은 소문자로 암묵적인 룰
 # 함수형 모델에서는 keras.layer의 계층 친구인 Input을 명시해줘야함
 dense1 = Dense(5000, activation='relu')(input1)
@@ -40,16 +34,14 @@ model = Model(inputs=input1, outputs=output1)
 # 순차적 모델은 model = Sequential()이라고 명시를 하고 시작했지만,
 # 함수형 모델은 범위가 어디서부터 어디까지인지 명시해줘야 함. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
 
-model.summary()
+# model.summary()
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
-model.fit(x_train, y_train, epochs=100, batch_size=1,
-            validation_split=0.3, verbose=3)
+model.fit(x_train, y_train, epochs=100, batch_size=1, validation_split=0.3, verbose=3)
                    
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
-
 print("loss : ", loss)
 print("mse : ", mse)
 
@@ -58,10 +50,8 @@ print(y_predict)
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
-
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 
-            
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기

@@ -29,7 +29,6 @@ model.fit(x_train, y_train, epochs=100, batch_size=1)
 
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test)
-
 print("loss : ", loss)
 print("mse : ", mse)
 
@@ -41,7 +40,6 @@ from sklearn.metrics import mean_squared_error
 
 def RMSE(y_test, y_predict):
     return np.sqrt(mean_squared_error(y_test, y_predict))
-           
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기

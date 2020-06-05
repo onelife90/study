@@ -8,30 +8,24 @@
 #1. 데이터
 import numpy as np
 # x_train = np.array([1,2,3,4,...,100]) #엄청나게 비효율적
-x = np.array(range(1,101)) # 1부터 시작해서 101-1까지 나열
-y = np.array(range(101,201)) # y=wx+b / w=1, b=100이 되는 함수
+x = np.array(range(1,101)) 
+# 1부터 시작해서 100까지 나열
+y = np.array(range(101,201)) 
+# y=wx+b / w=1, b=100이 되는 함수
 
 from sklearn.model_selection import train_test_split
 #train_test_split라는 함수가 사이킷런에 구현되어있음
-x_train, x_test, y_train, y_test = train_test_split(
-    # x,y, random_state=99, shuffle=True,
-    x,y, 
-    train_size=0.6
-)       
+x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.6)
+# x,y, random_state=99, shuffle=True
 # random_state=66 난수 지정하고 연속으로 실행해도 똑같은 값이 나온다
 # train_size=0.6 전체 데이터 셋의 60%를 차지. test_size 40% + train_size 60%
-x_val, x_test, y_val, y_test = train_test_split(
-# test 대신 train이 와도 무방    
-    # x_test, y_test, random_state=99,
-    x_test, y_test,
-    test_size=0.5
-)       
+x_val, x_test, y_val, y_test = train_test_split(x_test, y_test, test_size=0.5)
+# x_test, y_test 대신 train이 와도 무방    
 
 print(x_train)
 print(x_val)
 print(x_test)
 
-'''
 #2. 모델구성
 from keras.models import Sequential
 from keras.layers import Dense
@@ -73,7 +67,6 @@ print("RMSE : ", RMSE(y_test, y_predict))
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict) 
 print("R2 : ", r2)
-'''
 
 #하이퍼파라미터튜닝
 #epochs=500, 히든레이어=9, 노드=(5,3000,50,10,5)x2,1

@@ -21,3 +21,14 @@ for i in storage:
 # 3
 # 4
 # break도 종료 시 ; 세미클론 필수!
+
+# continue : break와 달리 특정 조건일 떄 루프를 한번 건너뜀
+storages = [1,2,3,4,5,6]
+for i in storages:
+    if i %2 ==0:
+        continue
+    print(i)
+# 1
+# 3
+# 5
+# if문은 2의 배수가 되면 건너뛰므로 print문은 for문 구역 안에 있어야 2의 배수 아닌 숫자들이 출력

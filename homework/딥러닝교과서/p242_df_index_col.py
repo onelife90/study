@@ -1,39 +1,18 @@
-# df에 새로운 관측 데이터나 거래 정보를 얻었을 때 기존에 추가
-# df.append("Series형 데이터", ignore_index=True)
-# 인덱스가 일치하지 않으면 df에 새로운 컬럼이 추가되고 값이 존재하지 않는 요소는 nan이 됨
-import  pandas as pd
-index = ["apple","orange","banana","strawberry","kiwi"]
-data1 = [10,5,8,12,3]
-data2 = [30,25,12,10,8]
-data3 = [30,12,10,8,25,3]
-series1 = pd.Series(data1, index=index)
-series2 = pd.Series(data2, index=index)
-df = pd.DataFrame([series1, series2])
-# df에 seires3를 추가하고 df에 다시 대입
-index.append("pineapple")
-series3 = pd.Series(data3, index=index)
-df = pd.DataFrame([series1, series2])
-# df에 다시 대입
-df = df.append(series3, ignore_index=True)
-print(df)
-#    apple  orange  banana  strawberry  kiwi  pineapple
-# 0     10       5       8          12     3        NaN
-# 1     30      25      12          10     8        NaN
-# 2     30      12      10           8    25        3.0
-
-# 열 추가 df["새로운 컬럼"]으로 Series 또는 리스트를 대입해서 새 열 추가
-# 리스트를 대입하면 첫 행부터 순소대로 요소가 할당, Series를 대입하면 Series의 인덱스가 df의 인덱스에 대응
+# df에서 행의 이름을 인덱스, 열의 이름을 컬럼
+# 인수를 지정하지 않으면 0부터 오름차순으로 인덱스 할당
+# 컬럼은 원본 데이터 Series의 인덱스 및 딕셔너리형의 키가 됨
+# df.index에 행 수와 같은 길이의 리스트를 대입하여 설정
+# df.columns에 열 수와 같은 길이의 리스트 대입하여 설정
 import  pandas as pd
 index = ["apple","orange","banana","strawberry","kiwi"]
 data1 = [10,5,8,12,3]
 data2 = [30,25,12,10,8]
 series1 = pd.Series(data1, index=index)
 series2 = pd.Series(data2, index=index)
-new_col = pd.Series([15,7], index=[0,1])
 df = pd.DataFrame([series1, series2])
-# df에 새로운 열 "mango"를 만들어 new_col의 데이터 추가
-df["mango"] = new_col
+# df의 인덱스가 1부터 시작하도록 설정
+df.index = [1,2]
 print(df)
-#    apple  orange  banana  strawberry  kiwi  mango
-# 0     10       5       8          12     3     15
-# 1     30      25      12          10     8      7
+#    apple  orange  banana  strawberry  kiwi
+# 1     10       5       8          12     3
+# 2     30      25      12          10     8

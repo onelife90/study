@@ -17,19 +17,13 @@ x1 = np.transpose(x1)
 x2 = np.transpose(x2)
 y1 = np.transpose(y1)
 
-# print(x1.shape)
-# print(x2.shape)
-# print(y1.shape)
+# print(x1.shape)   # (100,3)
+# print(x2.shape)   # (100,3)
+# print(y1.shape)   # (100,3)
 
 from sklearn.model_selection import train_test_split
-x1_train, x1_test, x2_train, x2_test, y1_train, y1_test = train_test_split(
-    x1,x2,y1, random_state=66, train_size=0.8
-)       
+x1_train, x1_test, x2_train, x2_test, y1_train, y1_test = train_test_split(x1,x2,y1, random_state=66, train_size=0.8)       
 
-# from sklearn.model_selection import train_test_split
-# x2_train, x2_test, y1_train, y1_test = train_test_split(
-#     x2,y1, shuffle=False, train_size=0.8
-# )     
 
 #2. 모델구성
 from keras.models import Sequential, Model
@@ -66,7 +60,6 @@ middle1 = Dense(40)(middle1)
 # output이 y1이므로 총 1개로 도출되어야 함
 
 ##### output 모델 구성 #####
-
 output1 = Dense(50)(middle1) # y_M1의 가장 끝 레이어가 middle1
 output1_2 = Dense(250)(output1)
 output1_3 = Dense(400)(output1_2)
@@ -78,7 +71,6 @@ model = Model(inputs=[input1, input2], outputs=output1_6)
 # 함수형 모델은 범위가 어디서부터 어디까지인지 명시. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
 
 # model.summary()
-# M1-M3가 번갈아 가면서 훈련될 예정
 # model.summary()의 layer 이름 변경하는 파라미터? ==> name 파라미터
 
 #3. 훈련
@@ -91,15 +83,11 @@ early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 # patience=선생님의 개그를 견디는 횟수 / mode가 min이면 그 횟수 이하, max면 그 횟수 이상
 # mode=min, max, auto
 
-model.fit([x1_train, x2_train],
-          y1_train, epochs=500, batch_size=1,
-          validation_split=0.25, verbose=3, 
-          callbacks=[early_stopping])
+model.fit([x1_train, x2_train], y1_train, epochs=500, batch_size=1, validation_split=0.25, verbose=3, callbacks=[early_stopping])
           # 콜백에는 리스트 형태                 
               
 #4. 평가, 예측
-loss = model.evaluate([x1_test, x2_test],
-                           y1_test, batch_size=1)
+loss = model.evaluate([x1_test, x2_test], y1_test, batch_size=1)
 # y1_output1에 대한 loss(1)
 # y1_output1에 대한 mse(1)
 # 총 2개의 반환값
@@ -107,11 +95,9 @@ loss = model.evaluate([x1_test, x2_test],
 print("loss : ", loss)
 
 y1_predict = model.predict([x1_test, x2_test])
-#(20,3)짜리 3개 왜? train_size=0.8이기 때문에
 print(y1_predict)
 
 # RMSE 구하기
-
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 

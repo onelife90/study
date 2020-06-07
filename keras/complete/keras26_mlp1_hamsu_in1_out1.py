@@ -8,18 +8,15 @@ y = np.array([range(101,201), range(711,811), range(100)])
 
 x = np.transpose(x)
 y = np.transpose(y)
-# print(x.shape)
-# print(y.shape)
+# print(x.shape)    # (100,3)
+# print(y.shape)    # (100,3)
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(
-    x,y, random_state=99, train_size=0.6
-)       
-
-# print(x_train.shape)
-# print(x_test.shape)
-# print(y_train.shape)
-# print(y_test.shape)
+x_train, x_test, y_train, y_test = train_test_split(x,y, random_state=99, train_size=0.6)       
+# print(x_train.shape)    # (60, 3)
+# print(x_test.shape)     # (40, 3)
+# print(y_train.shape)    # (60, 3)
+# print(y_test.shape)     # (40, 3)
 
 #2. 모델구성
 from keras.models import Sequential, Model
@@ -49,10 +46,7 @@ model = Model(inputs=input1, outputs=output1)
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
 from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
-
-model.fit(x_train, y_train, epochs=300, batch_size=1,
-            validation_split=0.3, verbose=3,
-            callbacks=[early_stopping])
+model.fit(x_train, y_train, epochs=300, batch_size=1, validation_split=0.3, verbose=3, callbacks=[early_stopping])
            
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test, batch_size=1)
@@ -66,7 +60,6 @@ print(y_predict)
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 
-
 print("RMSE : ", RMSE(y_test, y_predict))
 
 #R2 구하기

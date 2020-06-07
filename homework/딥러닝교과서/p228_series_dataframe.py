@@ -1,5 +1,6 @@
+# series에 딕셔너리형을 전달하면 키에 의해 오름차순 정렬
+# series는 라벨이 붙은 1차원 데이터, dataframe은 여러 series를 묶은 것과 같은 2차원 데이터 구조
 import pandas as pd
-
 # series용 라벨(인덱스) 작성
 index = ["apple", "orange", "banana", "strawberry", "kiwifruit"]
 

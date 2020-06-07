@@ -14,23 +14,16 @@ x = np.transpose(x)
 y1 = np.transpose(y1)
 y2 = np.transpose(y2)
 
-# print(x.shape)
-# print(y1.shape)
-# print(y2.shape)
+# print(x.shape)    # (100,2)
+# print(y1.shape)   # (100,2)
+# print(y2.shape)   # (100,2)
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y1_train, y1_test, y2_train, y2_test = train_test_split(
-    x,y1,y2, shuffle=False, train_size=0.8
-)       
+x_train, x_test, y1_train, y1_test, y2_train, y2_test = train_test_split(x,y1,y2, shuffle=False, train_size=0.8)       
 
-print(x_train.shape)
-print(y1_test.shape)
-print(y2_test.shape)
-
-# from sklearn.model_selection import train_test_split
-# x2_train, x2_test, y1_train, y1_test = train_test_split(
-#     x2,y1, shuffle=False, train_size=0.8
-# )     
+# print(x_train.shape)    # (80, 2)
+# print(y1_test.shape)    # (20, 2)
+# print(y2_test.shape)    # (20, 2)
 
 #2. 모델구성
 from keras.models import Sequential, Model
@@ -48,7 +41,6 @@ dense1 = Dense(8, activation='relu', name='bit6')(dense1)
 dense1 = Dense(20, activation='relu', name='bit7')(dense1)
 
 ##### output 모델 구성 #####
-
 output1 = Dense(15)(dense1)
 output1 = Dense(45)(output1)
 output1 = Dense(35)(output1)
@@ -65,15 +57,11 @@ output2 = Dense(2)(output2)
 
 model = Model(inputs=input1, outputs=[output1, output2])
 # 함수형 모델은 범위가 어디서부터 어디까지인지 명시. 히든레이어는 명시해줄 필요 없으므로 input과 output만 명시
-
-# model.summary()
-# M1-M3가 번갈아 가면서 훈련될 예정
 # model.summary()의 layer 이름 변경하는 파라미터? ==> name 파라미터
 
 #3. 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse']) 
-model.fit(x_train, [y1_train, y2_train], epochs=300, batch_size=1,
-          validation_split=0.3, verbose=3)
+model.fit(x_train, [y1_train, y2_train], epochs=300, batch_size=1, validation_split=0.3, verbose=3)
           # list로 묶어서 한번에 model.fit 완성
                    
 #4. 평가, 예측
@@ -88,13 +76,11 @@ loss = model.evaluate(x_test, [y1_test, y2_test], batch_size=1)
 print("loss : ", loss)
 
 y1_predict, y2_predict = model.predict(x_test)
-#(20,3)짜리 3개 왜? train_size=0.8이기 때문에
 print(y1_predict)
 print("==============")
 print(y2_predict)
 
 # RMSE 구하기
-
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict): 
     return np.sqrt(mean_squared_error(y_test, y_predict)) 

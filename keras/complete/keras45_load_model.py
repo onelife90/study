@@ -12,7 +12,6 @@ a = np.array(range(1,11))
 size = 5               
 
 # LSTM 모델을 완성하시오
-
 def split_x(seq, size):
     aaa=[]
     for i in range(len(seq)-size+1):
@@ -20,7 +19,6 @@ def split_x(seq, size):
         aaa.append([item for item in subset])
     # print(type(aaa))
     return np.array(aaa)
-
 dataset = split_x(a, size)
 # print(dataset)
 # print(dataset.shape)
@@ -29,7 +27,6 @@ dataset = split_x(a, size)
 
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
 y = dataset[:, 4]
-
 # print(x)
 # print(y)
 
@@ -44,15 +41,14 @@ model = load_model('./model/save_keras44.h5')
 # 아웃풋 노드를 1로 맞춰주고 레이어명을 새로운 걸로 지정해줘야 함
 
 model.add(Dense(1, name='new1'))
-model.summary()
+# model.summary()
 
 #3. 실행
 from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 
 model.compile(loss = 'mse', optimizer='adam', metrics=['mse'])
-model.fit(x,y, epochs=1000, batch_size=1, verbose=1,
-        callbacks=[early_stopping])
+model.fit(x,y, epochs=1000, batch_size=1, verbose=1,callbacks=[early_stopping])
 # model.fit의 batch_size와 x데이터의 batch_size는 다르다
 # x데이터의 batch_size는 총 6행으로 자르겠다는 의미이고
 # model.fit의 batch_size는 그 6행을 하나씩 자르겠다는 의미
@@ -75,4 +71,3 @@ print('y_predict: \n', y_predict)
 #  [8.063926 ]
 #  [9.082881 ]
 #  [9.93467  ]]
-

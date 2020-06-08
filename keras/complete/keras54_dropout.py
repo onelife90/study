@@ -29,7 +29,7 @@ from keras.datasets import mnist
 from keras.utils import np_utils
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
-print(y_train.shape)
+# print(y_train.shape)        # (60000, 10)
 
 # 데이터 전처리 2. 정규화
 x_train = x_train.reshape(60000,28,28,1).astype('float32')/255
@@ -49,27 +49,22 @@ model.add(Conv2D(900, (3,3), padding='same'))
 model.add(MaxPooling2D(pool_size=2))
 model.add(Dropout(0.4))
 # Dropout 전까지의 모든 레이어의 40%를 제거
-
 model.add(Conv2D(50, (3,3), padding='same'))
 model.add(MaxPooling2D(pool_size=2))
 model.add(Dropout(0.2))
-
 model.add(Conv2D(15, (2,2), padding='same'))
 model.add(MaxPooling2D(pool_size=2))
-
 model.add(Flatten())
 model.add(Dense(10))
 
 # model.summary()
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam',
-              metrics=['acc'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 model.fit(x_train, y_train, epochs=100, batch_size=600)
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)
-
 print("loss: ", loss)
 print("acc: ", acc)
 
@@ -80,8 +75,3 @@ print("acc: ", acc)
 # Conv2D(10),Max(pool=2),Conv2D(80),
 #loss:  nan
 #acc:  0.09799999743700027
-
-
-# Conv2D(10, ker_s=2),Max(pool=2),Conv2D(900, ker_s=3),max(pool=2),Drop=0.4,Conv2D(50, ker_s=3),max(pool=2),Drop=0.2,Conv2D(15,ker_s=2),max,Flatten
-#loss:  
-#acc:  

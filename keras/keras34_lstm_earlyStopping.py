@@ -1,3 +1,4 @@
+# LSTM 3차원
 from numpy import array
 from keras.models import Sequential, Model
 from keras.layers import Dense, LSTM, Input
@@ -9,19 +10,16 @@ x = array([[1,2,3],[2,3,4],[3,4,5],[4,5,6],
            [20,30,40], [30,40,50], [40,50,60]])
 y = array([4,5,6,7,8,9,10,11,12,13,50,60,70])
 x_predict = array([50,60,70])
-
-print("x.shape : ", x.shape)        # (13,3)
-print("y.shape : ", y.shape)        # (13,)
-print("x_predict.shape : ", x_predict.shape)       # (3,)
+# print("x.shape : ", x.shape)                        # (13,3)
+# print("y.shape : ", y.shape)                        # (13,)
+# print("x_predict.shape : ", x_predict.shape)        # (3,)
 
 x = x.reshape(x.shape[0], x.shape[1], 1)   
 x_predict = x_predict.reshape(1,3,1)
-
-print(x.shape)          #(13,3,1)
-print(x_predict.shape)  #(1,3,1)
+# print(x.shape)          #(13,3,1)
+# print(x_predict.shape)  #(1,3,1)
 
 #2. 모델구성
-
 input1 = Input(shape=(3,1))
 dense1 = LSTM(5)(input1)
 dense1 = Dense(100)(dense1)

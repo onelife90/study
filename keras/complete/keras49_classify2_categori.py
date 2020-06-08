@@ -9,12 +9,11 @@ x = np.array(range(1,11))
 y = np.array([1,2,3,4,5,1,2,3,4,5])
 # 데이터전처리가 필요. 벡터인 2차원으로 변환
 x_predict = np.array([1,2,3])
-
 # print(x.shape)      # (10,)
 # print(y.shape)      # (10,)
 
 y = y-1
-print(y)
+# print(y)        # [0 1 2 3 4 0 1 2 3 4]
 
 from keras.utils import np_utils
 y = np_utils.to_categorical(y)
@@ -22,9 +21,21 @@ y = np_utils.to_categorical(y)
 # 현재의 y 값을 예시로 들어 2!=1*2, 3!=1*3,... 2배, 3배가 아니기 때문에 각 인덱스에 해당하는 자리로 표시해줘야 한다
 # 그래서 one-hot 인코딩을 하는 것이고 y의 종류에 따라 열이 결정됨
 
-print(y)
-print(y.shape)          # (10,6)
-# 우리가 의도하는 건 (10,5) 왜? print(y)의 0번째 열이 필요없다.
+# print(y)
+# [[1. 0. 0. 0. 0.]
+#  [0. 1. 0. 0. 0.]
+#  [0. 0. 1. 0. 0.]
+#  [0. 0. 0. 1. 0.]
+#  [0. 0. 0. 0. 1.]
+#  [1. 0. 0. 0. 0.]
+#  [0. 1. 0. 0. 0.]
+#  [0. 0. 1. 0. 0.]
+#  [0. 0. 0. 1. 0.]
+#  [0. 0. 0. 0. 1.]]
+
+# one-hot 인코딩 전의 y.shape
+# print(y.shape)          # (10,6)
+# 우리가 의도하는 건 (10,5) 왜? print(y)의 0번째 열이 필요없다. 슬라이싱
 # y = y[:, 1:6]
 # print(y)
 # print(y.shape)          # (10,6)
@@ -43,8 +54,7 @@ model.add(Dense(5, activation='softmax'))
 # model.summary()
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam',
-              metrics=['acc'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 model.fit(x, y, epochs=100, batch_size=1)
 
 #4. 평가, 예측
@@ -55,8 +65,8 @@ y_predict = np.argmax(y_predict, axis=1) +1
 print('loss: ', loss)
 print('acc: ', acc)
 
-print(y_predict.shape)              # (3,)
-print(type(y_predict))              # <class 'numpy.ndarray'>
+# print(y_predict.shape)              # (3,)
+# print(type(y_predict))              # <class 'numpy.ndarray'>
 print('y_predict: \n', y_predict)
 # y_predict:
 #  [5 5 5]

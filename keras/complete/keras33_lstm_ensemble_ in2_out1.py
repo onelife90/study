@@ -1,3 +1,4 @@
+# LSTM 3차원
 from numpy import array
 from keras.models import Sequential, Model
 from keras.layers import Dense, LSTM, Input
@@ -14,25 +15,22 @@ x2 = array([[10,20,30],[20,30,40],[30,40,50],[40,50,60],
 y = array([4,5,6,7,8,9,10,11,12,13,50,60,70])
 x1_predict = array([55,65,75])            
 x2_predict = array([65,75,85])            
-
-print("x.shape : ", x1.shape)        # (13,3)
-print("x.shape : ", x2.shape)        # (13,3)
-print("y.shape : ", y.shape)         # (13,)
-print("x_predict.shape : ", x1_predict.shape)       # (3,)
-print("x_predict.shape : ", x2_predict.shape)       # (3,)
+# print("x.shape : ", x1.shape)                       # (13,3)
+# print("x.shape : ", x2.shape)                       # (13,3)
+# print("y.shape : ", y.shape)                        # (13,)
+# print("x_predict.shape : ", x1_predict.shape)       # (3,)
+# print("x_predict.shape : ", x2_predict.shape)       # (3,)
 
 x1 = x1.reshape(x1.shape[0], x1.shape[1], 1)   
 x2 = x2.reshape(x2.shape[0], x1.shape[1], 1)   
 x1_predict = x1_predict.reshape(1,3,1)
 x2_predict = x2_predict.reshape(1,3,1)
-
-print(x1.shape)          #(13,3,1)
-print(x2.shape)          #(13,3,1)
-print(x1_predict.shape)  #(1,3,1)
-print(x2_predict.shape)  #(1,3,1)
+# print(x1.shape)          #(13,3,1)
+# print(x2.shape)          #(13,3,1)
+# print(x1_predict.shape)  #(1,3,1)
+# print(x2_predict.shape)  #(1,3,1)
 
 #2. 모델구성
-
 input1 = Input(shape=(3,1))
 dense1 = LSTM(10)(input1)
 dense1 = Dense(4)(dense1)
@@ -56,7 +54,7 @@ output = Dense(1)(middle1)
 
 model = Model(inputs=[input1, input2], outputs=output)
 
-model.summary()
+# model.summary()
 
 #3. 훈련
 model.compile(optimizer='adam', loss='mse')

@@ -11,7 +11,6 @@ a = np.array(range(1,101))
 size = 5                # timesteps = 4
 
 # LSTM 모델을 완성하시오
-
 def split_x(seq, size):
     aaa=[]
     for i in range(len(seq)-size+1):
@@ -28,7 +27,6 @@ dataset = split_x(a, size)
 
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
 y = dataset[:, 4]
-
 # print(x)
 # print(y)
 
@@ -47,15 +45,13 @@ model.add(Dense(1))
 
 #3. 실행
 from keras.callbacks import EarlyStopping, TensorBoard
-tb_hist = TensorBoard(log_dir='graph', histogram_freq=0,
-                      write_graph=True, write_images=True)
+tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
                       # 항상 중요한 경로! log_dir=지정 / 바로 현재 폴더에 하단으로 들어감
                       # cmd 창 tensorboard --logdir=.
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 
 model.compile(loss = 'mse', optimizer='adam', metrics=['acc'])
-hist = model.fit(x,y, epochs=1000, batch_size=1, verbose=1,
-                 callbacks=[early_stopping, tb_hist], validation_split=0.2)
+hist = model.fit(x,y, epochs=1000, batch_size=1, verbose=1, callbacks=[early_stopping, tb_hist], validation_split=0.2)
                  # callbacks가 리스트인 이유가 밝혀졌다
 
 print(hist)                     # <keras.callbacks.callbacks.History object at 0x0000013432FAC8C8>
@@ -72,7 +68,7 @@ plt.title('loss & acc')
 plt.ylabel('loss, acc')
 plt.xlabel('epoch')
 plt.legend(['train loss', 'val loss', 'train acc', 'val acc'])
-# plt.show()
+plt.show()
 
 '''
 #4. 평가, 예측

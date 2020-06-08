@@ -1,7 +1,9 @@
+# preprocessing 전처리
 # Standardization, minmax가 제일 중요! ==> 데이터 전처리
+
 # ★ 정규화 minmax = x-최소/최대-최소
-# minmax : min과 max를 사용해서 0~1 사이의 범위로 데이터를 표준화해주는 변환
-# sklearn.preprocessing.MinMaxScaler() method   # preprocessing 전처리
+# minmax : min과 max를 사용해서 0~1 사이의 범위로 데이터 변환
+# sklearn.preprocessing.MinMaxScaler() method   
 # sklearn.preprocessing.minmax_scale() 함수
 
 # ★ 표준화 standardScaler x-평균/표편
@@ -39,21 +41,17 @@ x_predict = x_predict.reshape(1,3)
 # reshape 하지 않으면 1D인 상태이기 때문에 돌아가지 않음! 데이터는 항상 shape부터 맞추기!!!
 x_predict = scaler.transform(x_predict)           
 # 앞서 x에게 선실행 후변환 했기 때문에 x_predict도 변환이 됨
-print(x)
-
-
-print("x.shape : ", x.shape)        # (14,3)
-print("y.shape : ", y.shape)        # (14,)
-print("x_predict.shape : ", x_predict.shape)       # (3,)
+# print(x)
+# print("x.shape : ", x.shape)                        # (14,3)
+# print("y.shape : ", y.shape)                        # (14,)
+# print("x_predict.shape : ", x_predict.shape)        # (3,)
 
 x = x.reshape(x.shape[0], x.shape[1], 1)   
 x_predict = x_predict.reshape(1,3,1)
-
-print(x.shape)          #(13,3,1)
-print(x_predict.shape)  #(1,3,1)
+# print(x.shape)          #(13,3,1)
+# print(x_predict.shape)  #(1,3,1)
 
 #2. 모델구성
-
 input1 = Input(shape=(3,1))
 dense1 = LSTM(10, return_sequences=True)(input1)
 dense1 = LSTM(10)(dense1)
@@ -62,7 +60,7 @@ output1 = Dense(1)(dense1)
 
 model = Model(inputs=input1, outputs=output1)
 
-model.summary()
+# model.summary()
 
 #3. 훈련
 model.compile(optimizer='adam', loss='mse')

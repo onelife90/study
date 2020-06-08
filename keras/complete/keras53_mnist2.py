@@ -5,16 +5,17 @@ from keras.layers import Conv2D, Dense, MaxPooling2D, Flatten
 from keras.datasets import mnist
 # mnist 손글씨로 된 7만장의 데이터
 
+# keras에서 데이터 불러오는 형식
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 print(x_train[0])
 # 0~255의 숫자가 컬럼으로 찍혀있다
 print("y_train: ", y_train[0])
 
-print(x_train.shape)        # (60000, 28, 28)
-print(x_test.shape)         # (10000, 28, 28)
-print(y_train.shape)        # (60000,)
-print(y_test.shape)         # (10000,)
+# print(x_train.shape)        # (60000, 28, 28)
+# print(x_test.shape)         # (10000, 28, 28)
+# print(y_train.shape)        # (60000,)
+# print(y_test.shape)         # (10000,)
 
 # plt.imshow(x_train[0], 'gray')
 # plt.imshow(x_train[0])    # 랜덤색깔
@@ -55,12 +56,10 @@ model.add(Dense(10))
 # model.summary()
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam',
-              metrics=['acc'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 model.fit(x_train, y_train, epochs=100, batch_size=1)
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)
-
 print("loss: ", loss)
 print("acc: ", acc)

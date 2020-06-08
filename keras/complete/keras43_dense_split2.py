@@ -5,7 +5,6 @@ from keras.layers import Dense, LSTM
 #1. 데이터
 a = np.array(range(1,101))
 size = 5                
-
 def split_x(seq, size):
     aaa=[]
     for i in range(len(seq)-size+1):
@@ -13,7 +12,6 @@ def split_x(seq, size):
         aaa.append([item for item in subset])
     # print(type(aaa))
     return np.array(aaa)
-
 dataset = split_x(a, size)      
 # print(dataset)
 # print(dataset.shape)        # (96,5)
@@ -25,18 +23,16 @@ y = dataset[:, 4]
 x_predict = dataset[len(dataset)-6:, 0:4]
 # len(dataset)=96개의 리스트 -6 == 마지막 6행
 
-print(x)
-print(y)
-print(x_predict)
+# print(x.shape)          # (96, 4)
+# print(y.shape)          # (96, )
+# print(x_predict.shape)  # (6, 4)
 
 #실습 1. train, test 분리할 것 (8:2)
 #실습 2. 마지막 6개의 행을 predict로 만들고 싶다
 #실습 3. validation을 넣을 것 (train의 20%)
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(
-    x,y, train_size=0.8
-    )  
+x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.8)  
 
 #2. 모델구성
 model = Sequential()
@@ -51,8 +47,7 @@ from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 
 model.compile(loss = 'mse', optimizer='adam', metrics=['mse'])
-model.fit(x_train, y_train, epochs=1000, batch_size=1, verbose=1,
-        validation_split=0.2, shuffle=True, callbacks=[early_stopping])
+model.fit(x_train, y_train, epochs=1000, batch_size=1, verbose=1,validation_split=0.2, shuffle=True, callbacks=[early_stopping])
 
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test,y_test, batch_size=1)

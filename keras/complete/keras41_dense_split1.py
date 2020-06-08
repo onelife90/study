@@ -16,27 +16,39 @@ def split_x(seq, size):
 
 dataset = split_x(a, size)
 # print(dataset)
-# print(dataset.shape)
+# [[ 1  2  3  4  5]
+#  [ 2  3  4  5  6]
+#  [ 3  4  5  6  7]
+#  [ 4  5  6  7  8]
+#  [ 5  6  7  8  9]
+#  [ 6  7  8  9 10]]
+# print(dataset.shape)        # (6, 5)
 # print(type(dataset))        # numpy.ndarray
 # 왜? split_x 함수에서 리턴을 np.array로 했기 때문에
 
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
 y = dataset[:, 4]
 
-print(x)
-print(y)
+# print(x)
+# [[1 2 3 4]
+#  [2 3 4 5]
+#  [3 4 5 6]
+#  [4 5 6 7]
+#  [5 6 7 8]
+#  [6 7 8 9]]
+# print(y)
+# [ 5  6  7  8  9 10]
 
 # x = np.reshape(x, (6,4,1))
 # x = x.reshape(6,4,1)과 같은 표현
 
 #2. 모델구성
-
 model = Sequential()
 model.add(Dense(10, input_shape=(4,)))
 model.add(Dense(5))
 model.add(Dense(1))
 
-#3. 실행
+#3. 컴파일, 훈련
 from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 
@@ -45,7 +57,6 @@ model.fit(x,y, epochs=30, batch_size=1, verbose=1,
         callbacks=[early_stopping])
 
 #4. 평가, 예측
-
 loss, mse = model.evaluate(x,y, batch_size=1)
 y_predict = model.predict(x)
 

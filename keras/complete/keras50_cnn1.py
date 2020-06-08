@@ -13,7 +13,7 @@ model.add(Conv2D(10, (2,2), input_shape=(10,10,1)))                    # (9,9,10
 # 10=Conv_filter (2,2)=Conv_kernel_size or kernel_size=2
 # 공식 용어 input_shape=(height, width, channel)
 # input_shape=3차원 그림(가로,세로,명암) 명암=1(흑백),3(컬러)
-# (10000,10,10,1)==가로,세로 10짜리 흑백 이미지 10000장. 행무시로 input_shape=(10,10,1)
+# (10000,10,10,1)==가로,세로 10픽셀 흑백 이미지 10000장. 행무시로 input_shape=(10,10,1)
 # 머신은 한번 자르는 것가지고는 이해를 잘 못함. 또 잘라줘야 함
 model.add(Conv2D(7, (3,3)))                                             # (7,7,7)        
 model.add(Conv2D(5, (2,2), padding='same'))                             # (7,7,5)                 

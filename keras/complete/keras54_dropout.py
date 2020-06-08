@@ -68,10 +68,5 @@ loss, acc = model.evaluate(x_test, y_test, batch_size=100)
 print("loss: ", loss)
 print("acc: ", acc)
 
-# 하이퍼파라미터튜닝
-#loss:  nan
-#acc:  0.09799999743700027
-
-# Conv2D(10),Max(pool=2),Conv2D(80),
-#loss:  nan
-#acc:  0.09799999743700027
+# loss:  1.1920930376163597e-07
+# acc:  0.09799999743700027

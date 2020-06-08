@@ -30,9 +30,15 @@ def split_x(seq, size):
 
 dataset = split_x(a, size)
 
-print(dataset)
-print(dataset.shape)
-print(type(dataset))        # numpy.ndarray
+# print(dataset)
+# [[ 1  2  3  4  5]
+#  [ 2  3  4  5  6]
+#  [ 3  4  5  6  7]
+#  [ 4  5  6  7  8]
+#  [ 5  6  7  8  9]
+#  [ 6  7  8  9 10]]
+# print(dataset.shape)        # (6, 5)
+# print(type(dataset))        # numpy.ndarray
 # 왜? split_x 함수에서 리턴을 np.array로 했기 때문에
 
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
@@ -45,14 +51,14 @@ y = dataset[:, 4]
 #  [ 5  6  7  8  9]
 #  [ 6  7  8  9 10]]
 
-print(x)
+# print(x)
 # [[1 2 3 4]
 #  [2 3 4 5]
 #  [3 4 5 6]
 #  [4 5 6 7]
 #  [5 6 7 8]
 #  [6 7 8 9]]
-print(y)
+# print(y)
 # [ 5  6  7  8  9 10]
 
 x = np.reshape(x, (6,4,1))

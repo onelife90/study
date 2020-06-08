@@ -10,7 +10,6 @@ a = np.array(range(1,101))
 size = 5                
 
 # LSTM 모델을 완성하시오
-
 def split_x(seq, size):
     aaa=[]
     for i in range(len(seq)-size+1):
@@ -18,7 +17,6 @@ def split_x(seq, size):
         aaa.append([item for item in subset])
     # print(type(aaa))
     return np.array(aaa)
-
 dataset = split_x(a, size)
 # print(dataset)
 # print(dataset.shape)
@@ -27,7 +25,6 @@ dataset = split_x(a, size)
 
 x = dataset[:, 0:4]     # [행, 열] = [: all 모든 값, 0:4] 
 y = dataset[:, 4]
-
 # print(x)
 # print(y)
 
@@ -45,15 +42,14 @@ model = load_model('./model/save_keras44.h5')
 model.add(Dense(170, name='new1'))
 model.add(Dense(100, name='new2'))
 model.add(Dense(1, name='new3'))
-model.summary()
+# model.summary()
 
 #3. 실행
 from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 
 model.compile(loss = 'mse', optimizer='adam', metrics=['acc'])
-hist = model.fit(x,y, epochs=100, batch_size=1, verbose=1,
-                 callbacks=[early_stopping], validation_split=0.2)
+hist = model.fit(x,y, epochs=100, batch_size=1, verbose=1, callbacks=[early_stopping], validation_split=0.2)
 
 print(hist)                     # <keras.callbacks.callbacks.History object at 0x0000013432FAC8C8>
 # 자료형만 보여줌

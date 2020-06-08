@@ -8,7 +8,7 @@
 import numpy as np
 y = np.array([1,2,3,4,5,1,2,3,4,5])
 y = y - 1
-print(y)          # [0,1,2,3,4,0,1,2,3,4]
+# print(y)          # [0,1,2,3,4,0,1,2,3,4]
 # 각각의 y값이 -1되어 출력
 
 # from keras.utils import np_utils
@@ -26,9 +26,7 @@ from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 y = np.array([1,2,3,4,5,1,2,3,4,5])
 y = y.reshape(-1,1)         # reshape(-1,1)의 -1은 자동으로 행을 맞추겠다
-print(y.shape)
-y = y.reshape(10,1)
-print(y.shape)
+print(y.shape)      # (10, 1)
 
 aaa = OneHotEncoder()       
 aaa.fit(y)
@@ -37,7 +35,17 @@ y = aaa.transform(y).toarray()
 # toarray = array 배열 형태로 만들겠다
 
 print(y)
-print(y.shape)
+# [1. 0. 0. 0. 0.]
+#  [0. 1. 0. 0. 0.]
+#  [0. 0. 1. 0. 0.]
+#  [0. 0. 0. 1. 0.]
+#  [0. 0. 0. 0. 1.]
+#  [1. 0. 0. 0. 0.]
+#  [0. 1. 0. 0. 0.]
+#  [0. 0. 1. 0. 0.]
+#  [0. 0. 0. 1. 0.]
+#  [0. 0. 0. 0. 1.]]
+# print(y.shape)      # (10, 5)
 
 # one-hot 인코딩의 두가지 방법
 # 1. from keras.utils import np_utils

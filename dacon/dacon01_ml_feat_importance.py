@@ -43,14 +43,14 @@ train = np.load('./data/dacon/comp1/train.npy')
 test = np.load('./data/dacon/comp1/test.npy')
 submission = np.load('./data/dacon/comp1/submission.npy')
 
-#1-2. 데이터 자르기
+#1-4. 데이터 자르기
 x = train[:, :71]
 y = train[:, -4:]
 # print(x.shape)  # (10000, 71)
 x_pred = test
 # print(x_pred.shape) # (10000, 71)
 
-#1-3. Scaler
+#1-5. Scaler
 scaler = MinMaxScaler()
 x = scaler.fit_transform(x)
 x_pred = scaler.fit_transform(x_pred)
@@ -63,10 +63,7 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2,random_sta
 # print(y_test.shape)     # (2000, 4)
 
 #2. 모델 구성
-# model = DecisionTreeRegressor(max_depth=4)
-# model = RandomForestRegressor()
-# model = GradientBoostingRegressor()
-model = XGBRegressor()
+model = DecisionTreeRegressor(max_depth=4)
 
 #3. 훈련
 model.fit(x_train, y_train)
@@ -99,16 +96,6 @@ submit = model.predict(x_pred)
 # score:  0.048912362965680266
 # MAE:  1.7209961010173156
 
-# RF
-# score:  0.20671395762473016
-# MAE:  1.56552955
-
-# GradientBoostingRegressor
-# error
-
-# XGBRegressor
-# error
-
-# #5. submit할 파일 생성
-# submit = pd.DataFrame(submit, index=np.arange(10000,20000))
-# submit.to_csv('./data/dacon/comp1/submission_RF.csv', header=["hhb","hbo2","ca","na"], index=True, index_label="id")
+#5. submit할 파일 생성
+submit = pd.DataFrame(submit, index=np.arange(10000,20000))
+submit.to_csv('./data/dacon/comp1/submission_RF.csv', header=["hhb","hbo2","ca","na"], index=True, index_label="id")

@@ -59,14 +59,6 @@ for thresh in thresholds:
     score = r2_score(y_test, y_pred)
     print("Thresh=%.3f, n=%d, R2: %.2f%%" %(thresh, selection_x_train.shape[1], score*100.0))
 
-#4. 평가
-
-#5. 예측
-# y_pred = model.predict(x_test)
-# r2 = r2_score(y_pred, y_test)
-# print("R2 : ", r2)
-# R2 :  0.823625251495531
-
 # (101, 13)
 # [0]     validation_0-rmse:16.83263      validation_0-mae:15.11649    
 #         validation_1-rmse:17.95198      validation_1-mae:16.14069    

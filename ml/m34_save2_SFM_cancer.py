@@ -10,7 +10,7 @@ import joblib
 
 #1. 데이터
 x, y = load_breast_cancer(return_X_y=True)
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.8, random_state=88)
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=88)
 
 #2. 모델 구성
 model = XGBClassifier(n_estimators=500, n_jobs=-1)
@@ -40,19 +40,20 @@ for thresh in thresholds:
     selection_x_test = selection.transform(x_test)
     print(selection_x_train.shape)
 
-    selection_model = XGBClassifier(n_estimators=500, n_jobs=-1) 
+    selection_model = XGBClassifier(n_estimators=500, max_depth=4, n_jobs=-1) 
 
-    selection_model.fit(selection_x_train, y_train, verbose=True, eval_metric=["error", "logloss"], 
+    selection_model.fit(selection_x_train, y_train, verbose=False, eval_metric=["error", "logloss"], 
                         eval_set=[(selection_x_train, y_train), (selection_x_test, y_test)], early_stopping_rounds=50)
     
     y_pred = selection_model.predict(selection_x_test)
     
-    results = selection_model.evals_result()
-    print("evals_result : \n", results)
+    # results = selection_model.evals_result()
+    # print("evals_result : \n", results)
     
     score = accuracy_score(y_test, y_pred)
     print("Thresh=%.3f, n=%d, acc: %.2f%%" %(thresh, selection_x_train.shape[1], score*100.0))
-# Thresh=0.521, n=1, acc: 90.35%
+# (455, 17)
+# Thresh=0.008, n=17, acc: 99.12%
 
 # 모델 저장
-joblib.dump(selection_model, "./model/xgb_save/cancer_acc_90.35_joblib.dat")
+joblib.dump(selection_model, "./model/xgb_save/cancer_acc_99.12_joblib.dat")

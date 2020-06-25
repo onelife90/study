@@ -7,12 +7,24 @@
 #3. 정수 입력 받는 다른 코드 구글링
 #4. A, B = map(int, input().split()) 맞음
 
-A, B = map(int, input().split())
-print(A+B)
+# A, B = map(int, input().split())
+# print(A+B)
 
 
 # 밑에 주석은 (0 < A, B < 10)의 조건에 맞게 하기 위해 짜봤던 거지만 너무 많은 오류에 시간을 허비할 수 없기에 일단 패스
+# try-except 사용
+# if문 사용
 '''
+try:
+    A, B = map(int, input().split())
+if A|B < 0:
+    except IndexError:
+    print("0보다 작은 수 입니다. 다시 입력해주세요 : ")
+except IndexError:
+    print("10보다 큰 수입니다. 다시 입력해주세요 : ")
+
+print(A+B)
+
 while A <= 0:
     print(input("A는 0보다 큰 정수입니다. 다시 입력해주세요 : "))
     if A > 0:

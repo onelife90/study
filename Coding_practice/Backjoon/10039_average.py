@@ -23,13 +23,14 @@ s5 = int(input())
 score=[s1,s2,s3,s4,s5]
 
 #3. for문 안에 if문을 사용하여 40점 미만이면 40점으로 리스트 안 수정하고, 평균 출력 : 런타임에러
+#3-1. 구글링 결과 파이썬 리스트 함수 중에 average가 없음 : 합계/5
+#3-2. print(sum(score)/5)으로 하니 실수로 출력이 되어서 int 형변환
 for i in range(5):
     if score[i]<40:
         score[i]=40
     # print(score)
 print(int(sum(score)/5))
 
-#3-1. print(sum(score)/5)으로 하니 실수형으로 출력이 되어서 형변환 시켜줌
 
 '''
 a = [10,20,30,40,50]

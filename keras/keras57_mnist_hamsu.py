@@ -26,11 +26,16 @@ x_test = x_test.reshape(-1,28*28).astype('float32')/255
 
 #2. 모델 구성
 input1 = Input(shape=(784,))
-dense1 = Dense(5000)(input1)
-dense1 = Dropout(0.4)(dense1)
-dense1 = Dense(70)(dense1)
+dense1 = Dense(28)(input1)
+dense1 = Dense(56)(dense1)
+dense1 = Dense(112)(dense1)
+dense1 = Dense(224)(dense1)
+dense1 = Dense(448)(dense1)
+dense1 = Dense(784)(dense1)
 dense1 = Dropout(0.3)(dense1)
-dense1 = Dense(30)(dense1)
+dense1 = Dense(128)(dense1)
+dense1 = Dense(64)(dense1)
+dense1 = Dense(32)(dense1)
 dense1 = Dropout(0.1)(dense1)
 dense1 = Dense(10)(dense1)
 output1 = Dense(10, activation='softmax')(dense1)
@@ -39,11 +44,11 @@ model = Model(inputs=input1, outputs=output1)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-earlystopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
+earlystopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 model.fit(x_train, y_train, epochs=100, batch_size=600, validation_split=0.3, callbacks=[earlystopping])
 
 #4. 평가, 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size=600)
+loss, acc = model.evaluate(x_test, y_test, batch_size=100)
 print("loss: ", loss)
 print("acc: ", acc)
 

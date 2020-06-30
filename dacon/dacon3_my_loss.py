@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split as tts
 import keras.backend as K
 from keras.models import Sequential, Model
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dropout, Dense, Input, Lambda, BatchNormalization
+from keras.callbacks import EarlyStopping
 import matplotlib.pyplot as plt
 
 #1. csv 불러오기
@@ -60,6 +61,7 @@ def my_loss(y_test, y_pred):
     # 함수를 딱 한줄로만 만들어주는 훌륭한 녀석
     div_res = Lambda(lambda x: x[0]/x[1])([(y_pred-y_test),(y_test+0.000001)])
     # 즉, (y_pred-y_test) / (y_test+0.000001)를 실행하겠다
+    # 왜 y_test+0.000001 인가? 0으로 나누어지는 걸 방지하기 위해
     return K.mean(K.square(div_res))
     # Mean of a tensor, alongside the specified axis.
     # square : Element-wise square.(제곱)
@@ -82,12 +84,21 @@ def set_model(train_target):
     input1 = Input(shape=(375,5,1))
     dense1 = BatchNormalization()(input1)
     dense1 = MaxPooling2D(pool_size=(2,1))(dense1)
-    dense1 = Conv2D(nf*2, fs, padding=padding, activation=activation)(dense1)
+    dense1 = Conv2D(nf*75, fs, padding=padding, activation=activation)(dense1)
     dense1 = BatchNormalization()(dense1)
     dense1 = MaxPooling2D(pool_size=(2,1))(dense1)
-    dense1 = Conv2D(nf*32, fs, padding=padding, activation=activation)(dense1)
+    dense1 = Conv2D(nf*25, fs, padding=padding, activation=activation)(dense1)
     dense1 = BatchNormalization()(dense1)
     dense1 = MaxPooling2D(pool_size=(2,1))(dense1)
+    dense1 = Conv2D(nf*5, fs, padding=padding, activation=activation)(dense1)
+    dense1 = BatchNormalization()(dense1)
+    dense1 = MaxPooling2D(pool_size=(2,1))(dense1)
+    # dense1 = Conv2D(nf*16, fs, padding=padding, activation=activation)(dense1)
+    # dense1 = BatchNormalization()(dense1)
+    # dense1 = MaxPooling2D(pool_size=(2,1))(dense1)
+    # dense1 = Conv2D(nf*32, fs, padding=padding, activation=activation)(dense1)
+    # dense1 = BatchNormalization()(dense1)
+    # dense1 = MaxPooling2D(pool_size=(2,1))(dense1)
     dense1 = Flatten()(dense1)
     dense1 = Dense(128, activation='elu')(dense1)
     dense1 = Dense(64, activation='elu')(dense1)
@@ -109,13 +120,12 @@ def set_model(train_target):
     else:
         model.compile(loss=my_loss_E2, optimizer='adam')
 
-    model.summary()
-
     return model
 
 #3. 훈련
 def train(model, x, y):
-    hist = model.fit(x,y, epochs=100, batch_size=100, validation_split=0.2)
+    e_stop = EarlyStopping(monitor='val_loss', patience=4)
+    hist = model.fit(x,y, epochs=80, batch_size=80, validation_split=0.2, callbacks=[])
     fig, loss_ax = plt.subplots()
     # twinx() 공통적인 x축을 갖지만 서로 다른 y축을 사용할 경우
     acc_ax = loss_ax.twinx()
@@ -143,11 +153,21 @@ for train_target in range(3):
         submit.iloc[:,3] = y_pred[:,3]
 
 #4. 평가, 예측
-mse = model.evaluate(x_test, y_test, batch_size=1)
+mse = model.evaluate(x_test, y_test, batch_size=10)
 y_pred = model.predict(x_pred)
 print("y_pred : \n", y_pred)
 print("mse: ", mse)
 
 #5. submit할 csv 파일 생성
 y_pred = pd.DataFrame(y_pred, index=np.arange(2800,3500))
-y_pred.to_csv('./data/dacon/comp3/submit_my_loss.csv', header=["X","Y","M","V"], index=True, index_label="id")
+y_pred.to_csv('./data/dacon/comp3/submit_my_loss_.%5f.csv'%(mse), header=["X","Y","M","V"], index=True, index_label="id")
+
+# y_pred :
+#  [[-0.99999696 26.64223    -0.9999341   0.36933222]
+#  [-0.9999999  34.526154   -0.9999901   0.34820142]
+#  [-0.99999857 28.505138   -0.999954    0.3162958 ]
+#  ...
+#  [-0.9999942  25.341022   -0.9999008   0.31081876]
+#  [-0.9999997  31.70241    -0.99998254  0.43847787]
+#  [-0.9999911  24.589811   -0.999862    0.23401032]]
+# mse:  0.001724754558591164

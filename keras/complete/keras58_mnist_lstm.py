@@ -24,24 +24,20 @@ print(x_test.shape)         # (10000, 784, 1)
 #2. 모델 구성
 model = Sequential()
 model.add(LSTM(10, input_shape=(784,1)))
-model.add(Dense(500))
-model.add(Dropout(0.5))
-model.add(Dense(50))
+model.add(Dense(280))
+model.add(Dense(196))
+model.add(Dense(140))
 model.add(Dropout(0.2))
+model.add(Dense(84))
 model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-earlystopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
-model.fit(x_train, y_train, epochs=100, batch_size=600, validation_split=0.3, callbacks=[earlystopping])
+earlystopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
+model.fit(x_train, y_train, epochs=100, batch_size=600, validation_split=0.2, callbacks=[earlystopping])
 
 #4. 평가, 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size=600)
+loss, acc = model.evaluate(x_test, y_test, batch_size=100)
 
 print("loss: ", loss)
 print("acc: ", acc)
-
-# 하이퍼파라미터튜닝
-# epochs=100, batch=0, 노드=LSTM10,500,Drop(0.5),50,Drop(0.2)
-#loss: 
-#acc: 

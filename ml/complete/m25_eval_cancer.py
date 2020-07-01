@@ -22,7 +22,7 @@ model = XGBClassifier(n_estimators=1000, learning_rate=0.1)
 #3. 훈련
 model.fit(x_train, y_train, verbose=True, eval_metric="error", eval_set=[(x_train,y_train), (x_test, y_test)],
          early_stopping_rounds=20)
-# verbose 딥러닝의 metrics가 있었음. 머신러닝의 지표는 rmse, mae, logloss, error(=acc), auc(정확도 acc의 친구)
+# 딥러닝의 metrics가 있었음. 머신러닝의 지표는 rmse, mae, logloss, error(<=>acc), auc(정확도 acc의 친구)
 # error가 0.8이면 acc가 0.2
 
 #4. 평가

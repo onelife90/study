@@ -45,16 +45,20 @@ x = scaler.fit_transform(x)
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=55, train_size=0.8)
 
 #2-1. 모델 구성
-# model = RandomForestClassifier()
-# R2:  0.4182067345852637
+model = RandomForestClassifier()
+# acc:  0.6673469387755102
+# R2:  0.42717711532954383
 
 # model = KNeighborsClassifier(n_neighbors=1)
+# acc:  0.6438775510204081
 # R2:  0.2323917048823193
 
 # model = LinearSVC()
+# acc:  0.5091836734693878
 # R2:  0.1465323463299243
 
-model = SVC()
+# model = SVC()
+# acc:  0.5285714285714286
 # R2:  0.21060649450335345
 
 #2-2. 훈련
@@ -62,7 +66,7 @@ model.fit(x_train, y_train)
 
 #2-3. 평가, 예측
 y_pred = model.predict(x_test)
-# acc  = accuracy_score(y_test, y_pred)
+acc  = accuracy_score(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
-# print("acc: ", acc)
+print("acc: ", acc)
 print("R2: ", r2)

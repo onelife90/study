@@ -25,6 +25,7 @@ y = iris.iloc[:, 4]
 # x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, test_size=0.2)
 
 #1-2. KFold(train_test_split 친구)
+# KFold는 (훈련, 검증)을 몇 번 반복하는지
 kfold = KFold(n_splits=5, shuffle=True)
 
 #2. 모델 구성

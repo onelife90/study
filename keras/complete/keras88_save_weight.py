@@ -37,11 +37,16 @@ x_test = x_test.reshape(10000,28,28,1).astype('float32')/255
 
 #2. 모델구성
 model = Sequential()
-model.add(Conv2D(100, (2,2), input_shape=(28,28,1)))
-model.add(Conv2D(80, (3,3), padding='same'))
-model.add(Dropout(0.3))
-model.add(Conv2D(300, (3,3), padding='same'))
-model.add(Conv2D(2, (3,3), padding='same'))
+model.add(Conv2D(28, (3,2), input_shape=(28,28,1)))
+model.add(Conv2D(56, (3,2), padding='same'))
+model.add(Conv2D(112, (3,2), padding='same'))
+model.add(Conv2D(168, (3,2), padding='same'))
+model.add(Conv2D(224, (3,2), padding='same'))
+model.add(Dropout(0.2))
+model.add(MaxPooling2D(pool_size=3))
+model.add(Conv2D(196, (3,1), padding='same'))
+model.add(Conv2D(140, (3,1), padding='same'))
+model.add(Conv2D(84, (3,1), padding='same'))
 model.add(MaxPooling2D(pool_size=2))
 model.add(Flatten())
 model.add(Dense(10, activation='softmax'))
@@ -51,8 +56,8 @@ model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])          
-earlystopping = EarlyStopping(monitor='loss', patience=10)
-hist = model.fit(x_train, y_train, epochs=10, batch_size=100, validation_split=0.2, callbacks=[earlystopping])
+earlystopping = EarlyStopping(monitor='loss', patience=5)
+hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping])
 
 model.save('./model/model_test01.h5')
 # loss:  0.13820593581534923
@@ -69,39 +74,3 @@ y_pred = model.predict(x_test[0:10])
 y_pred = np.argmax(y_pred, axis=1)
 # print(y_test[0:10])
 # print(y_test[])
-'''
-loss = hist.history['loss']
-val_loss = hist.history['val_loss']
-acc = hist.history['acc']
-val_acc = hist.history['val_acc']
-
-### 시각화
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10,6))          # 가로 10인치, 세로 6인치
-# subplot(2,1,1)==2행 1열의 첫번째 그림
-plt.subplot(2, 1, 1)                
-plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
-plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
-# plt.plot(hist.history['acc'])
-# plt.plot(hist.history['val_acc'])
-plt.grid()                                # 모눈종이처럼 보이게
-plt.title('loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-# plt.legend(['loss', 'val loss'])        # legend==엑셀의 범주(?)와 비슷
-plt.legend(loc='upper right')             # loc=location / 명시 안해주면 빈 자리에 자동으로 표시
-plt.show()
-
-# subplot(2,1,2)==2행 1열의 2번째 그림
-plt.subplot(2, 1, 2)                    
-plt.plot(hist.history['acc'])
-plt.plot(hist.history['val_acc'])
-# plt.plot(hist.history['acc'])
-# plt.plot(hist.history['val_acc'])
-plt.grid()                              # 모눈종이처럼 보이게
-plt.title('acc')
-plt.ylabel('acc')
-plt.xlabel('epoch')
-plt.legend(['loss', 'val_acc'])        # legend==엑셀의 범주(?)와 비슷
-plt.show()
-'''

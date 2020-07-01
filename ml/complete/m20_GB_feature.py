@@ -2,7 +2,7 @@
 # RF. 숲이 있으면 나무가 있다
 # 결정트리 모델. 결정나무. DecisionTree 여러개가 모여있으면 앙상블
 # from sklearn.ensemble import GradientBoostingClassifier
-# 트리 구조 model에서 주요 parameter는 #1) max_depth : 깊이 #2) feature_importance : 컬럼별 중요도 
+# 트리 구조 model에서 주요 parameter는 1)max_depth : 깊이 2)feature_importance : 컬럼별 중요도 
 # 사용법 : print(model.feature_importances_)
 
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier

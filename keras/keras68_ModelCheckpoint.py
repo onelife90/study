@@ -37,11 +37,18 @@ x_test = x_test.reshape(10000,28,28,1).astype('float32')/255
 
 #2. 모델구성
 model = Sequential()
-model.add(Conv2D(10, (2,2), input_shape=(28,28,1)))
-model.add(Conv2D(800, (3,3), padding='same'))
-model.add(Dropout(0.3))
+model.add(Conv2D(28, (2,2), input_shape=(28,28,1)))
+model.add(Conv2D(56, (2,1), padding='same'))
+model.add(Conv2D(112, (2,1), padding='same'))
+model.add(Conv2D(168, (2,1), padding='same'))
+model.add(Conv2D(224, (2,1), padding='same'))
+model.add(Dropout(0.2))
+model.add(MaxPooling2D(pool_size=3))
+model.add(Conv2D(196, (2,1), padding='same'))
+model.add(Conv2D(140, (2,1), padding='same'))
+model.add(Conv2D(84, (2,1), padding='same'))
+model.add(Dropout(0.25))
 model.add(MaxPooling2D(pool_size=2))
-model.add(Dropout(0.3))
 model.add(Flatten())
 model.add(Dense(10))
 
@@ -49,11 +56,11 @@ model.add(Dense(10))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])          
-earlystopping = EarlyStopping(monitor='loss', patience=10)
+earlystopping = EarlyStopping(monitor='loss', patience=5)
 modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'       
 # epoch훈련도 {d=decimal정수} {f=float실수} .hdf5라는 확장자
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
-hist = model.fit(x_train, y_train, epochs=10, batch_size=600, validation_split=0.2, callbacks=[earlystopping, checkpoint])
+hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])
 
 #4. 평가, 예측
 loss_acc = model.evaluate(x_test, y_test, batch_size=100)

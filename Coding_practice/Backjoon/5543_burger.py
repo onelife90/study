@@ -31,3 +31,5 @@ for i in range(len(burger)):
 #2. 다 때려박은 리스트 에서 인덱스 슬라이싱으로 최소값 뽑기
 set = [s, j, h, coke, cider]
 print(min(set[0:3])+min(set[3:])-50)
+
+#한 방에 맞아서 넘나 기분 좋았음...

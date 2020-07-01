@@ -1,10 +1,12 @@
 # xor 모델을 완성하시오.
-# SVC import
+# 선형으로 분류하겠다
 
 from sklearn.svm import LinearSVC
+# 선형 분류 알고리즘 support vector Calssifier
 # 페널티와 로스 기능에서 좀 더 유용하며 많은 데이터에 강하다
-# l2 라는 페널티가 디폴트
-from sklearn.svm import LinearSVR
+# 제곱힌지 손실함수, l2 규제(디폴트)
+# 규제의 강도를 결정하는 매개변수 C
+# C 값이 높아지면 규제 감소. Card 한도를 높게하여 규제를 풀어주는 거라 생각하자
 from sklearn.metrics import accuracy_score
 
 #1. 데이터
@@ -22,8 +24,6 @@ y_data = [0,1,1,0]
 
 #2. 모델
 model = LinearSVC()
-# acc =  0.25
-# model = LinearSVR(C=1, dual=True, epsilon=0.5)
 
 #3. 훈련
 model.fit(x_data, y_data)
@@ -33,6 +33,7 @@ x_test = [[0,0], [1,0], [0,1], [1,1]]
 y_pred = model.predict(x_test)
 
 # score = model.evaluate(예측)
-acc = accuracy_score([0,1,1,1], y_pred)
+acc = accuracy_score([0,1,1,0], y_pred)
 print(x_test, "의 예측 결과: ", y_pred)
 print("acc = ", acc)
+# acc =  0.5

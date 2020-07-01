@@ -27,7 +27,7 @@ x = scaler.fit_transform(x)
 x = x.reshape(-1,5,2,1)
 # print(x.shape)          # (442,5,2,1)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train_size=0.6)
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train_size=0.8)
 
 #2. 모델
 input1 = Input(shape=(5,2,1))

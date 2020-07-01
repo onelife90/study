@@ -9,8 +9,6 @@ from keras.layers import Dense, Dropout
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 import matplotlib.pyplot as plt
 
-# 
-
 #1. 데이터
 iris = load_iris()
 x = iris.data
@@ -25,21 +23,25 @@ y = np_utils.to_categorical(y)
 # print(y.shape)      # (150, 3)
 
 #1-2. train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train_size=0.6)
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train_size=0.8)
+# print(x_train.shape)    # (120, 4)
 
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(5, input_shape=(4, )))
-model.add(Dense(1000))
-model.add(Dense(700))
-model.add(Dropout(0.2))
-model.add(Dense(300))
+model.add(Dense(4, input_shape=(4, )))
+model.add(Dense(8))
+model.add(Dense(16))
+model.add(Dense(24))
+model.add(Dense(32))
+model.add(Dense(28))
+model.add(Dense(20))
+model.add(Dense(12))
 model.add(Dense(3, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 early_stop = EarlyStopping(monitor='loss', patience=5, mode='auto')
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'
+modelpath = './model/iris/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
 tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
 hist = model.fit(x_train, y_train, epochs=100, batch_size=1, validation_split=0.2, callbacks=[early_stop, checkpoint, tb_hist])

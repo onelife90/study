@@ -25,21 +25,23 @@ y_test = np_utils.to_categorical(y_test)
 
 #2. 모델 구성
 model = Sequential()
-model.add(LSTM(10, input_shape=(28,28)))
-model.add(Dense(9000))
-model.add(Dropout(0.3))
-model.add(Dense(500))
-model.add(Dropout(0.3))
-model.add(Dense(100))
+model.add(LSTM(28, input_shape=(28,28)))
+model.add(Dense(56))
+model.add(Dense(112))
+model.add(Dense(168))
+model.add(Dense(224))
+model.add(Dense(196))
+model.add(Dense(140))
+model.add(Dense(84))
 model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-earlystopping = EarlyStopping(monitor='loss', patience=300, mode='auto')
-model.fit(x_train, y_train, epochs=100, batch_size=300, validation_split=0.3, callbacks=[earlystopping])
+earlystopping = EarlyStopping(monitor='loss', patience=4, mode='auto')
+model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping])
 
 #4. 평가, 예측
-loss, acc = model.evaluate(x_test, y_test, batch_size=300)
+loss, acc = model.evaluate(x_test, y_test, batch_size=100)
 
 print("loss: ", loss)
 print("acc: ", acc)

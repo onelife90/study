@@ -32,11 +32,13 @@ x_test = x_test.reshape(-1,8,32*3*4).astype('float32')/255
 
 #2. 모델 구성
 input1 = Input(shape=(8,384))
-dense1 = LSTM(50)(input1)
-dense1 = Dense(5000)(dense1)
-dense1 = Dense(4000)(dense1)
-dense1 = Dense(1000)(dense1)
-dense1 = Dropout(0.1)(dense1)
+dense1 = LSTM(32)(input1)
+dense1 = Dense(64)(dense1)
+dense1 = Dense(128)(dense1)
+dense1 = Dense(256)(dense1)
+dense1 = Dense(224)(dense1)
+dense1 = Dense(160)(dense1)
+dense1 = Dense(69)(dense1)
 output1 = Dense(10, activation='softmax')(dense1)
 
 model = Model(inputs=input1, outputs=output1)
@@ -44,11 +46,11 @@ model = Model(inputs=input1, outputs=output1)
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 earlystopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'
+modelpath = './model/cifar10/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, save_weights_only=False)
-model.fit(x_train, y_train, epochs=1000, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])
+model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])
 
-model.save('./model/sample/cifar10/cifar10_checkpoint_best.h5')
+model.save('./model/cifar10/cifar10_checkpoint_best.h5')
 
 
 #4. 평가, 예측

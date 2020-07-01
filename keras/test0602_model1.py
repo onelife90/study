@@ -75,9 +75,9 @@ x1 = Dense(5000)(x1)
 
 input2 = Input(shape=(5, ))
 x2 = Dense(100)(input2)
-x2 = Dense(1000)(input2)
-x2 = Dense(3000)(input2)
-x2 = Dense(5000)(input2)
+x2 = Dense(1000)(x2)
+x2 = Dense(3000)(x2)
+x2 = Dense(5000)(x2)
 
 merge = concatenate([x1, x2])
 
@@ -90,15 +90,10 @@ model = Model(inputs=[input1, input2], outputs=output)
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 early_stop = EarlyStopping(monitor='loss', patience=3, mode='auto')
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'
+modelpath = './model/test0602/{epoch:02d}-{val_loss:.4f}.hdf5'
 check_p = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, save_weights_only=False)
 tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
-hist = model.fit([x1_train, x2_train], y_train, epochs=100, batch_size=1, validation_split=0.2, callbacks=[early_stop, check_p, tb_hist])
-
-loss = hist.history['loss']
-val_loss = hist.history['val_loss']
-mse = hist.history['mse']
-val_mse = hist.history['val_mse']
+model.fit([x1_train, x2_train], y_train, epochs=100, batch_size=1, validation_split=0.2, callbacks=[early_stop, check_p])
 
 #4. 평가, 예측
 loss, mse = model.evaluate([x1_test, x2_test], y_test)
@@ -112,29 +107,3 @@ print(x2_pred)              # [[19900 20150 19800 20100 254623]] 행렬
 # 벡터를 2차원으로 reshape ==> 행렬
 y_pred = model.predict([x1_pred, x2_pred])
 print("y_pred: \n", y_pred)
-
-'''
-print("loss: ", loss)
-print("mse: ", mse)
-print("y_pred: \n", y_pred)
-print(y_pred.shape)
-
-#5. 시각화
-plt.figure(figsize=(10,6))
-plt.subplot(2,1,1)
-plt.plot(loss, marker='.', c='red', label='loss')
-plt.plot(val_loss, marker='.', c='red', label='val_loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.title('loss')
-plt.legend()
-
-plt.subplot(2,1,2)
-plt.plot(mse, marker='.', c='red', label='mse')
-plt.plot(val_mse, marker='.', c='red', label='val_mse')
-plt.ylabel('mse')
-plt.xlabel('epoch')
-plt.title('mse')
-plt.legend()
-plt.show()
-'''

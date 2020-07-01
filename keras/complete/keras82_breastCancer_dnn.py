@@ -26,7 +26,7 @@ scaler = StandardScaler()
 x = scaler.fit_transform(x)
 # print(x.shape)      # (569,30)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=77, train_size=0.6)
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=77, train_size=0.8)
 
 #2. 모델 구성
 model = Sequential()

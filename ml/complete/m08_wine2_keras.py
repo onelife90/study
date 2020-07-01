@@ -97,5 +97,5 @@ print("loss: ", loss)
 print("acc: ", acc)
 y_pred = model.predict(x_test)
 
-# loss:  1.1247760133475673
-# acc:  0.5035714507102966
+# loss:  1.1074693014427108
+# acc:  0.5428571701049805

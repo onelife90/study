@@ -2,7 +2,7 @@
 # 다른 방법
 
 from sklearn.svm import SVC
-# 서포트 or 서포트벡터 : 아웃풋 중에서 가장 경계선에 가까이 붙어있는 최전방의 데이터들
+# 서포트벡터 : 아웃풋 중에서 가장 경계선에 가까이 붙어있는 최전방의 데이터들
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 # KNeighbors 최근접 이웃 / 데이터 별로 근접한 기준을 사용

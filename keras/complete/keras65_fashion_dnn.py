@@ -30,20 +30,22 @@ print(x_test.shape)         # (10000, 784)
 
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(10, input_shape=(784, )))
-model.add(Dense(9000))
+model.add(Dense(28, input_shape=(784, )))
+model.add(Dense(56))
+model.add(Dense(112))
+model.add(Dense(168))
+model.add(Dense(224))
 model.add(Dropout(0.1))
-model.add(Dense(5000))
-model.add(Dense(3000))
-model.add(Dense(1000))
+model.add(Dense(196))
+model.add(Dense(140))
+model.add(Dense(84))
 model.add(Dropout(0.1))
-model.add(Dense(100))
 model.add(Dense(10, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 earlystopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
-model.fit(x_train, y_train, epochs=1000, batch_size=100, validation_split=0.2, callbacks=[earlystopping])
+model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping])
 
 model.save_weights('./model/sample/fashion/fsahion_save_weights.h5')
 

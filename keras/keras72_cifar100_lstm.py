@@ -29,20 +29,26 @@ x_test = x_test.reshape(-1,32*32,3).astype('float32')/255
 
 #2. 모델구성
 input1 = Input(shape=(1024,3))
-dense1 = LSTM(30)(input1)
-dense1 = Dense(10)(dense1)
-dense1 = Dropout(0.5)(dense1)
-dense1 = Dense(3)(dense1)
-dense1 = Dropout(0.3)(dense1)
+dense1 = LSTM(32)(input1)
+dense1 = Conv2D(64, (2,2), padding='same')(dense1)
+dense1 = Conv2D(128, (2,2), padding='same')(dense1)
+dense1 = Conv2D(256, (2,2), padding='same')(dense1)
+dense1 = Dropout(0.2)(dense1)
+dense1 = MaxPooling2D(pool_size=3)(dense1)
+dense1 = Conv2D(224, (2,1), padding='same')(dense1)
+dense1 = Conv2D(175, (2,1), padding='same')(dense1)
+dense1 = Conv2D(105, (2,1), padding='same')(dense1)
+dense1 = MaxPooling2D(pool_size=2)(dense1)
+dense1 = Flatten()(dense1)
 output1 = Dense(100, activation='softmax')(dense1)
 
 model = Model(inputs=input1, outputs=output1)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'       
+modelpath = './model/cifar100/{epoch:02d}-{val_loss:.4f}.hdf5'       
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
-earlystopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
+earlystopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])
 
 #4. 평가, 예측

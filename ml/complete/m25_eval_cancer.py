@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score
 
 #1. 데이터
 x, y = load_breast_cancer(return_X_y=True)
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.8, random_state=99)
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=99)
 # print(x_train.shape)    # (30, 4)
 # print(x_test.shape)     # (120, 4)
 # print(y_train.shape)    # (30, )

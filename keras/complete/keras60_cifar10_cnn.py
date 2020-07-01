@@ -27,10 +27,16 @@ y_test = np_utils.to_categorical(y_test)
 
 #2. 모델 구성
 input1 = Input(shape=(32,32,3))
-dense1 = Conv2D(10, (2,2), padding='same')(input1)
-dense1 = Conv2D(900, (2,2), padding='same')(dense1)
+dense1 = Conv2D(32, (2,2), padding='same')(input1)
+dense1 = Conv2D(64, (2,2), padding='same')(dense1)
+dense1 = Conv2D(128, (2,2), padding='same')(dense1)
+dense1 = Conv2D(256, (2,2), padding='same')(dense1)
+dense1 = MaxPooling2D(pool_size=3, padding='same')(dense1)
+dense1 = Dropout(0.2)(dense1)
+dense1 = Conv2D(224, (2,1), padding='same')(dense1)
+dense1 = Conv2D(160, (2,1), padding='same')(dense1)
+dense1 = Conv2D(69, (2,1), padding='same')(dense1)
 dense1 = MaxPooling2D(pool_size=2, padding='same')(dense1)
-dense1 = Dropout(0.3)(dense1)
 dense1 = Flatten()(dense1)
 output1 = Dense(10, activation='softmax')(dense1)
 
@@ -48,6 +54,3 @@ print("loss: ", loss)
 print("acc: ", acc)
 
 # 튜닝
-# epochs=12,batch=50,node=100,500,200,pool2,drop0.1,flat
-# loss:  2.1646940628290174
-# acc:  0.17149999737739563

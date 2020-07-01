@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 
 #1. 데이터
 x, y = load_iris(return_X_y=True)
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.8, random_state=88)
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=88)
 
 #2. 모델 구성
 model = XGBClassifier()
@@ -43,15 +43,20 @@ for thresh in thresholds:
     selection_x_test = selection.transform(x_test)
     print(selection_x_train.shape)
 
-    selection_model = XGBClassifier(n_estimators=3, n_jobs=-1) 
+    selection_model = XGBClassifier(n_estimators=100, n_jobs=-1) 
 
-    selection_model.fit(selection_x_train, y_train, verbose=True, eval_metric=["merror", "mlogloss"], 
+    selection_model.fit(selection_x_train, y_train, verbose=False, eval_metric=["merror", "mlogloss"], 
                         eval_set=[(selection_x_train, y_train), (selection_x_test, y_test)], early_stopping_rounds=3)
     
     y_pred = selection_model.predict(selection_x_test)
     
     results = selection_model.evals_result()
-    print("evals_result : \n", results)
+    # print("evals_result : \n", results)
     
     score = accuracy_score(y_test, y_pred)
     print("Thresh=%.3f, n=%d, acc: %.2f%%" %(thresh, selection_x_train.shape[1], score*100.0))
+
+# (120, 2)
+# Thresh=0.345, n=2, acc: 96.67%
+# (120, 1)
+# Thresh=0.619, n=1, acc: 96.67%

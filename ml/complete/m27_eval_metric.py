@@ -11,7 +11,7 @@ from sklearn.metrics import r2_score
 
 #1. 데이터
 x, y = load_boston(return_X_y=True)
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.8, random_state=99)
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=99)
 
 #2. 모델 구성
 model = XGBRegressor(n_estimators=3, learning_rate=0.1)
@@ -20,7 +20,7 @@ model = XGBRegressor(n_estimators=3, learning_rate=0.1)
 #3. 훈련
 model.fit(x_train, y_train, verbose=True, eval_metric=["rmse", "logloss"], eval_set=[(x_train,y_train), (x_test, y_test)],
          early_stopping_rounds=20)
-# verbose 딥러닝의 metrics가 있었음. 머신러닝의 지표는 rmse, mae, logloss, error(=acc), auc(정확도 acc의 친구)
+# 딥러닝의 metrics가 있었음. 머신러닝의 지표는 rmse, mae, logloss, error(<=>acc), auc(정확도 acc의 친구)
 # error가 0.8이면 acc가 0.2
 # early_stopping_rounds 실행시 Stopping. Best iteration: 가 verbose에 출력
 # validation_1 == (x_test, y_test)의 결과이기 때문에 test를 기준으로 평가가 됨

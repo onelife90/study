@@ -1,6 +1,6 @@
 # pipeline : 전처리도 한 방에 처리하는 자동화
 # RandomizedSearchCV + Pipeline
-# RF
+# 아이리스 다중이 RF
 
 import pandas as pd
 import numpy as np
@@ -34,7 +34,6 @@ from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 # pipe = Pipeline([("scaler", MinMaxScaler()), ("svm", SVC())])
-# SVC 모델과 MinMaxScaler를 쓰겠다
 pipe = make_pipeline(MinMaxScaler(),RandomForestClassifier())
 model = RandomizedSearchCV(pipe, parameters, cv=5)
 

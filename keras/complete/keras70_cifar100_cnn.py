@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 
 #1. 데이터
 (x_train, y_train), (x_test, y_test) = cifar100.load_data()
-
 # print(x_train.shape)        # (50000, 32, 32, 3)
 # print(x_test.shape)         # (10000, 32, 32, 3)
 # print(y_train.shape)        # (50000, 1)
@@ -23,9 +22,16 @@ y_test = np_utils.to_categorical(y_test)
 
 #2. 모델구성
 input1 = Input(shape=(32,32,3))
-dense1 = Conv2D(1000, (4,4))(input1)
+dense1 = Conv2D(32, (2,2), padding='same')(input1)
+dense1 = Conv2D(64, (2,2), padding='same')(dense1)
+dense1 = Conv2D(128, (2,2), padding='same')(dense1)
+dense1 = Conv2D(256, (2,2), padding='same')(dense1)
+dense1 = Dropout(0.2)(dense1)
 dense1 = MaxPooling2D(pool_size=3)(dense1)
-dense1 = Dropout(0.3)(dense1)
+dense1 = Conv2D(224, (2,1), padding='same')(dense1)
+dense1 = Conv2D(175, (2,1), padding='same')(dense1)
+dense1 = Conv2D(105, (2,1), padding='same')(dense1)
+dense1 = MaxPooling2D(pool_size=2)(dense1)
 dense1 = Flatten()(dense1)
 output1 = Dense(100, activation='softmax')(dense1)
 
@@ -33,13 +39,13 @@ model = Model(inputs=input1, outputs=output1)
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'       
+modelpath = './model/cifar100/{epoch:02d}-{val_loss:.4f}.hdf5'       
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
-earlystopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
+earlystopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
 hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint, tb_hist])
 
-print(hist.history.keys())
+# print(hist.history.keys())
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)

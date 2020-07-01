@@ -23,7 +23,7 @@ x = scaler.fit_transform(x)
 # print(x[1])
 # print(x.shape)                  # (506, 13)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6)
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8)
 
 #2. 모델 구성
 # model = SVC()                           
@@ -35,24 +35,25 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6)
 # model = RandomForestClassifier()        
 # ValueError: Unknown label type: 'continuous'
 
-# model = RandomForestRegressor()         
-# score:  0.8585668166937119
-# R2:  0.8585668166937119
+model = RandomForestRegressor()         
+# score:  0.8715091698764171
+# R2:  0.8715091698764171
 
 # model = KNeighborsClassifier()          
 # ValueError: Unknown label type: 'continuous'
 
-model = KNeighborsRegressor()           
-# score:  0.7510522283616072
-# R2:  0.7510522283616072
+# model = KNeighborsRegressor()           
+# score:  0.6465320128457521
+# R2:  0.6465320128457521
 
 #3. 컴파일, 훈련
 # model.compile(loss='mse', optimizer='adam', metrics=['mse'])
-hist = model.fit(x_train, y_train)
+model.fit(x_train, y_train)
 y_pred = model.predict(x_test)
 
 #4. 평가, 예측
 # loss, mse = model.evaluate(x_test, y_test, batch_size=1)
+# model.evaluate(딥러닝)==model.score(머신러닝)
 score = model.score(x_test, y_test)
 # acc = accuracy_score(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)

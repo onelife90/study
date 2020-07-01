@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 #1-1. 와인 데이터 읽기
-wine = pd.read_csv('./data/winequality-white.csv', sep=';', header=0, index_col=None)
+wine = pd.read_csv('./data/csv/winequality-white.csv', sep=';', header=0, index_col=None)
 
 y = wine['quality']
 x = wine.drop('quality', axis=1)

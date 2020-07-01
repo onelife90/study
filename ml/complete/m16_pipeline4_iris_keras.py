@@ -8,8 +8,7 @@
 #4) 사이킷런에서 사용할 def 파라미터 구성
 #5) RandomizedSearch 구성 / search=RandomizedSearchCV(pipe(model 대신 들어가는 것), 하이퍼파라미터, cv)
 #6) 훈련 search.fit
-#7) 모델 내부 매개변수 search.best_estimators_
-#8) 현재 모델 최적의 매개변수 search.best_params_
+#8) search 모델 최적의 매개변수 search.best_params_
 #9) search.score
 
 import numpy as np
@@ -55,6 +54,7 @@ model = KerasClassifier(build_fn=build_model, verbose=1)
 
 # 파이프라인 구성
 pipe = Pipeline([("scaler", StandardScaler()), ("model", model)])
+# pipe = make_pipeline(StandardScaler(), model())
 
 #2-2. 파라미터 구성
 def create_hyperparameters():
@@ -68,10 +68,7 @@ hyperparameters = create_hyperparameters()
 search = RandomizedSearchCV(pipe, hyperparameters, cv=3)
 search.fit(x_train, y_train)
 
-print("모델 내부 최적의 매개변수: ")
-print(search.best_estimators_)
-
-print("현재 모델의 매개변수: ")
+print("현재 search 모델의 매개변수: ")
 print(search.best_params_)
 # {'model__optimizer': 'rmsprop', 'model__drop': 0.2, 'model__batch_size': 128}
 acc = search.score(x_test, y_test)

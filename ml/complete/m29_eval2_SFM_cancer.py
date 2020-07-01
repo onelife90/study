@@ -21,14 +21,14 @@ import matplotlib.pyplot as plt
 
 #1. 데이터
 x, y = load_breast_cancer(return_X_y=True)
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.8, random_state=88)
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=88)
 
 #2. 모델 구성
 model = XGBClassifier(n_estimators=500, n_jobs=-1)
 
 #3. 훈련
 model.fit(x_train, y_train, verbose=True, eval_metric=["error", "logloss"], 
-        eval_set=[(x_train, y_train), (x_test, y_test)], early_stopping_rounds=50)
+        eval_set=[(x_train, y_train), (x_test, y_test)], early_stopping_rounds=10)
 
 #3-1. 컬럼수 만큼 돌 thresholds 생성
 thresholds = np.sort(model.feature_importances_)
@@ -45,13 +45,19 @@ for thresh in thresholds:
 
     selection_model = XGBClassifier(n_estimators=500, n_jobs=-1) 
 
-    selection_model.fit(selection_x_train, y_train, verbose=True, eval_metric=["error", "logloss"], 
+    selection_model.fit(selection_x_train, y_train, verbose=False, eval_metric=["error", "logloss"], 
                         eval_set=[(selection_x_train, y_train), (selection_x_test, y_test)], early_stopping_rounds=50)
     
     y_pred = selection_model.predict(selection_x_test)
     
     results = selection_model.evals_result()
-    print("evals_result : \n", results)
+#     print("evals_result : \n", results)
     
     score = accuracy_score(y_test, y_pred)
     print("Thresh=%.3f, n=%d, acc: %.2f%%" %(thresh, selection_x_train.shape[1], score*100.0))
+# (455, 30)
+# Thresh=0.000, n=30, acc: 98.25%
+# (455, 30)
+# Thresh=0.000, n=30, acc: 98.25%
+# (455, 28)
+# Thresh=0.002, n=28, acc: 98.25%

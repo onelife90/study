@@ -50,23 +50,26 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train
 # model = RandomForestRegressor()         
 # error
 
-# model = KNeighborsClassifier()          
+model = KNeighborsClassifier()          
 # score:  0.9666666666666667
 # acc:  0.9666666666666667
 # R2 :  0.9469964664310954
 
-model = KNeighborsRegressor()           
+# model = KNeighborsRegressor()           
 # error
 
 #3. 컴파일, 훈련
 # model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-hist = model.fit(x_train, y_train)
+# 머신러닝에서 model.compile은 필요없음
+model.fit(x_train, y_train)
 y_pred = model.predict(x_test)
 
 #4. 평가, 예측
 # loss, acc = model.evaluate(x_test, y_test, batch_size=1)
+# model.evaluate(딥러닝)==model.score(머신러닝)
 # model.score 분류, 회귀 둘 다 사용 가능
 score = model.score(x_test, y_test)
+
 acc = accuracy_score(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 

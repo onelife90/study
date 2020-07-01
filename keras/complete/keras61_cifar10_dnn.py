@@ -32,9 +32,17 @@ x_test = x_test.reshape(-1,32*32*3).astype('float32')/255
 
 #2. 모델 구성
 input1 = Input(shape=(3072, ))
-dense1 = Dense(100)(input1)
-dense1 = Dense(9000)(dense1)
-dense1 = Dense(300)(dense1)
+dense1 = Conv2D(32, (2,2), padding='same')(input1)
+dense1 = Conv2D(64, (2,2), padding='same')(dense1)
+dense1 = Conv2D(128, (2,2), padding='same')(dense1)
+dense1 = Conv2D(256, (2,2), padding='same')(dense1)
+dense1 = MaxPooling2D(pool_size=3, padding='same')(dense1)
+dense1 = Dropout(0.2)(dense1)
+dense1 = Conv2D(224, (2,1), padding='same')(dense1)
+dense1 = Conv2D(160, (2,1), padding='same')(dense1)
+dense1 = Conv2D(69, (2,1), padding='same')(dense1)
+dense1 = MaxPooling2D(pool_size=2, padding='same')(dense1)
+dense1 = Flatten()(dense1)
 output1 = Dense(10, activation='softmax')(dense1)
 
 model = Model(inputs=input1, outputs=output1)
@@ -44,7 +52,7 @@ model = Model(inputs=input1, outputs=output1)
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 earlystopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
-model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.3, callbacks=[earlystopping])
+model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping])
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)
@@ -56,4 +64,3 @@ print("acc: ", acc)
 #epochs=81, batch_size=100, 노드=100,9000(softmax),70,drop0.1,40,20
 # loss:  1.8786926889419555
 # acc:  0.4575999975204468
-

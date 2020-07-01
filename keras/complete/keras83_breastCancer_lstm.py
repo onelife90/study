@@ -27,22 +27,23 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=77, train
 
 #2. 모델 구성
 model = Sequential()
-model.add(LSTM(50, input_shape=(6,5)))
-model.add(Dense(9000, activation='softmax'))
-model.add(Dense(5000, activation='softmax'))
-model.add(Dropout(0.1))
-model.add(Dense(7000, activation='softmax'))
-model.add(Dense(300, activation='softmax'))
-model.add(Dense(100, activation='softmax'))
+model.add(LSTM(30, input_shape=(6,5)))
+model.add(Dense(60, activation='softmax'))
+model.add(Dense(120, activation='softmax'))
+model.add(Dense(180, activation='softmax'))
+model.add(Dense(240, activation='softmax'))
+model.add(Dense(210, activation='softmax'))
+model.add(Dense(150, activation='softmax'))
+model.add(Dense(90, activation='softmax'))
 model.add(Dense(2, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 early_stop = EarlyStopping(monitor='loss', patience=5, mode='auto')
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'
+modelpath = './model/cancer/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True)
 tb_hist = TensorBoard(log_dir='graph', histogram_freq=0,  write_graph=True, write_images=True)
-hist = model.fit(x_train, y_train, epochs=500, batch_size=5, validation_split=0.2, callbacks=[early_stop, checkpoint, tb_hist])
+hist = model.fit(x_train, y_train, epochs=100, batch_size=5, validation_split=0.2, callbacks=[early_stop, checkpoint, tb_hist])
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=5)

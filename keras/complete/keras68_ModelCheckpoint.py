@@ -57,7 +57,7 @@ model.add(Dense(10))
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])          
 earlystopping = EarlyStopping(monitor='loss', patience=5)
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'       
+modelpath = './model/mnist/{epoch:02d}-{val_loss:.4f}.hdf5'       
 # epoch훈련도 {d=decimal정수} {f=float실수} .hdf5라는 확장자
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
 hist = model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping, checkpoint])

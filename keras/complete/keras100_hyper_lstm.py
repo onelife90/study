@@ -40,8 +40,9 @@ def build_model(drop=0.5, optimizer='adam'):
     model = Model(inputs=inputs, outputs=outputs)
     model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=['acc'])
     return model
-# 모델 만든 함수에서는 compile까지만, fit은 그리드서치에서 실행(cv가 있기 때문에)
-# 사이킷런에 쓸수 있게 KerasClassifier를 wrapping 한 것(모델, 파라미터, cv을 wrap해서 사용하겠다)
+    # 모델 만든 함수에서는 compile까지만, fit은 그리드서치에서 실행(cv가 있기 때문에)
+    # 사이킷런에 쓸수 있게 KerasClassifier를 wrapping 한 것(모델, 파라미터, cv을 wrap해서 사용하겠다)
+
 # 그리드서치에 들어갈 첫번째 모델 구성
 from keras.wrappers.scikit_learn import KerasClassifier
 model = KerasClassifier(build_fn=build_model, verbose=1)
@@ -54,10 +55,10 @@ def create_hyperparameters():
     optimizers = ['rmsprop', 'adam', 'adadelta']
     dropout = np.linspace(0.1,0.5,5)
     return{"batch_size": batches, "optimizer":optimizers, "drop": dropout}
+    # 하이퍼파라미터에 대한 매개변수들이 key, values라 딕셔너리형으로 return
 hyperparameters = create_hyperparameters()
-# 하이퍼파라미터에 대한 매개변수들이 key, values라 딕셔너리형으로 return
 
-#2-3. 그리드서치 만들기
+#2-3. 랜덤서치 만들기
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 search = RandomizedSearchCV(model, hyperparameters, cv=3)
 search.fit(x_train, y_train)

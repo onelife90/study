@@ -23,7 +23,7 @@ y = np_utils.to_categorical(y)
 x = x.reshape(-1,6,5)
 # print(x.shape)      # (596,6,5)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=77, train_size=0.6)
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=77, train_size=0.8)
 
 #2. 모델 구성
 model = Sequential()

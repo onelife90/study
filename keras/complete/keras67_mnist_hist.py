@@ -92,7 +92,6 @@ plt.ylabel('loss')
 plt.xlabel('epoch')
 # plt.legend(['loss', 'val loss'])        # legend==엑셀의 범주(?)와 비슷
 plt.legend(loc='upper right')             # loc=location / 명시 안해주면 빈 자리에 자동으로 표시
-plt.show()
 
 # subplot(2,1,2)==2행 1열의 2번째 그림
 plt.subplot(2, 1, 2)                    

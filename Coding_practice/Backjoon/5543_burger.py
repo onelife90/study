@@ -20,8 +20,10 @@ coke = int(input())
 cider = int(input())
 
 '''
+#1-1. 버거 세 개중 하나 + 콜라 or 사이다 각각의 값을 뽑아서 계산하려니 복잡쓰
+#1-2. 리스트에서 최소값 뽑아낼 수 있을 거 같아서 '리스트 내 정수 최소값' 구글링
+
 burger = [s, j, h]
-# 버거 세 개중 하나 + 콜라 or 사이다
 for i in range(len(burger)):
     if burger[i] + coke < burger[i] + cider:
         set = 

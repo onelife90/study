@@ -47,7 +47,7 @@ model = Model(inputs=input1, outputs=output1)
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 early_stop = EarlyStopping(monitor='loss', patience=5, mode='auto')
-modelpath = './model/cancer/{epoch:02d}-{val_loss:.4f}.hdf5'
+modelpath = './model/diabets/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
 model.fit(x_train, y_train, epochs=5000, batch_size=1, validation_split=0.2, callbacks=[early_stop, checkpoint])
 

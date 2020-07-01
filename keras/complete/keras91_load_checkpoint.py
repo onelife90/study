@@ -17,6 +17,7 @@ y_test = np_utils.to_categorical(y_test)
 # 데이터 전처리 2. 정규화
 x_train = x_train.reshape(60000,28,28,1).astype('float32')/255
 x_test = x_test.reshape(10000,28,28,1).astype('float32')/255
+
 '''
 #2. 모델구성
 model = Sequential()
@@ -52,7 +53,6 @@ model = load_model('./model/10-0.1270.hdf5')
 # loss:  0.10915890090633183
 # acc:  0.9670000076293945
 
-
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)
 print("loss: ", loss)
@@ -62,35 +62,3 @@ y_pred = np.argmax(y_pred, axis=1)
 y_test = np.argmax(y_test, axis=1)
 print(y_test[0:10])
 # print(y_test[])
-
-'''
-### 시각화
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10,6))          # 가로 10인치, 세로 6인치
-# subplot(2,1,1)==2행 1열의 첫번째 그림
-plt.subplot(2, 1, 1)                
-plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
-plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
-# plt.plot(hist.history['acc'])
-# plt.plot(hist.history['val_acc'])
-plt.grid()                                # 모눈종이처럼 보이게
-plt.title('loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-# plt.legend(['loss', 'val loss'])        # legend==엑셀의 범주(?)와 비슷
-plt.legend(loc='upper right')             # loc=location / 명시 안해주면 빈 자리에 자동으로 표시
-plt.show()
-
-# subplot(2,1,2)==2행 1열의 2번째 그림
-plt.subplot(2, 1, 2)                    
-plt.plot(hist.history['acc'])
-plt.plot(hist.history['val_acc'])
-# plt.plot(hist.history['acc'])
-# plt.plot(hist.history['val_acc'])
-plt.grid()                              # 모눈종이처럼 보이게
-plt.title('acc')
-plt.ylabel('acc')
-plt.xlabel('epoch')
-plt.legend(['loss', 'val_acc'])        # legend==엑셀의 범주(?)와 비슷
-plt.show()
-'''

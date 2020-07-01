@@ -24,14 +24,18 @@ scaler = StandardScaler()
 x = scaler.fit_transform(x)
 # print(x[0])      
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train_size=0.6)
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, train_size=0.8)
 
 #2. 모델
 input1 = Input(shape=(10, ))
-dense1 = Dense(9000)(input1)
-dense1 = Dropout(0.2)(dense1)
-dense1 = Dense(2340)(dense1)
-dense1 = Dense(442)(dense1)
+dense1 = Dense(10)(input1)
+dense1 = Dense(20)(dense1)
+dense1 = Dense(40)(dense1)
+dense1 = Dense(60)(dense1)
+dense1 = Dense(80)(dense1)
+dense1 = Dense(70)(dense1)
+dense1 = Dense(50)(dense1)
+dense1 = Dense(30)(dense1)
 output1 = Dense(1)(dense1)
 
 model = Model(inputs=input1, outputs=output1)
@@ -39,15 +43,9 @@ model = Model(inputs=input1, outputs=output1)
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 early_stop = EarlyStopping(monitor='loss', patience=5, mode='auto')
-modelpath = './model/{epoch:02d}-{val_loss:.4f}.hdf5'
+modelpath = './model/cancer/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
-tb_hist = TensorBoard(log_dir='graph', histogram_freq=0, write_graph=True, write_images=True)
-hist = model.fit(x_train, y_train, epochs=1000, batch_size=1, validation_split=0.2, callbacks=[early_stop, checkpoint, tb_hist])
-
-loss = hist.history['loss']
-mse = hist.history['mse']
-val_loss = hist.history['val_loss']
-val_mse = hist.history['val_mse']
+model.fit(x_train, y_train, epochs=100, batch_size=1, validation_split=0.2, callbacks=[early_stop, checkpoint])
 
 #4. 평가, 예측
 loss, mse = model.evaluate(x_test, y_test, batch_size=1)
@@ -61,26 +59,6 @@ print("RMSE: ", RMSE(y_test, y_pred))
 #R2 구하기
 r2 = r2_score(y_test, y_pred)
 print("r2: ", r2)
-
-#5. 시각화
-plt.figure(figsize=(10,6))
-plt.subplot(2,1,1)
-plt.plot(loss, marker='.', c='red', label='loss')
-plt.plot(val_loss, marker='.', c='blue', label='val_loss')
-plt.title('loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend()
-
-plt.subplot(2,1,2)
-plt.plot(mse, marker='.', c='red', label='mse')
-plt.plot(val_mse, marker='.', c='blue', label='val_mse')
-plt.title('mse')
-plt.ylabel('mse')
-plt.xlabel('epoch')
-plt.legend()
-
-plt.show()
 
 # 튜닝
 # epochs=22,batch=1,노드=9000,drop0.2,2340,442

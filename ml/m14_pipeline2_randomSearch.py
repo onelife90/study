@@ -15,18 +15,26 @@ y = iris.target
 x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2,random_state=88)
 
 # 그리드/랜덤 서치에서 사용할 매개 변수
+# parameters = [
+#     {"svm__C":[1,10,100,1000], "svm__kernel":['linear']},
+#     {"svm__C":[1,10,100], "svm__kernel":['rbf'], "svm__gamma":[0.001,0.0001]},
+#     {"svm__C":[1,100,1000], "svm__kernel":['sigmoid'], "svm__gamma":[0.001,0.0001]}
+# ]
+
 parameters = [
-    {"svm__C":[1,10,100,1000], "svm__kernel":['linear']},
-    {"svm__C":[1,10,100], "svm__kernel":['rbf'], "svm__gamma":[0.001,0.0001]},
-    {"svm__C":[1,100,1000], "svm__kernel":['sigmoid'], "svm__gamma":[0.001,0.0001]}
+    {"svc__C":[1,10,100,1000], "svc__kernel":['linear']},
+    {"svc__C":[1,10,100], "svc__kernel":['rbf'], "svc__gamma":[0.001,0.0001]},
+    {"svc__C":[1,100,1000], "svc__kernel":['sigmoid'], "svc__gamma":[0.001,0.0001]}
 ]
 
 #2. 모델 구성
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-pipe = Pipeline([("scaler", MinMaxScaler()), ("svm", SVC())])
+# pipe = Pipeline([("scaler", MinMaxScaler()), ("svm", SVC())])
 # SVC 모델과 MinMaxScaler를 쓰겠다
+pipe = make_pipeline(MinMaxScaler(),SVC())
+# 전처리와 모델을 다 넣어 만든 pipe를 랜덤서치에 넣어서 작동
 model = RandomizedSearchCV(pipe, parameters, cv=5)
 
 #3. 훈련

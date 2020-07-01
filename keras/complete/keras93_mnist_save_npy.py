@@ -8,7 +8,8 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-np.save('./data/mnist_train_x.npy', arr=x_train)        # np.save(파일명, 값)
+# save 할 때는 arr(배열 형태로 저장, 변수명)
+np.save('./data/mnist_train_x.npy', arr=x_train)     
 np.save('./data/mnist_test_x.npy', arr=x_test)
 np.save('./data/mnist_train_y.npy', arr=y_train)
 np.save('./data/mnist_test_y.npy', arr=y_test)

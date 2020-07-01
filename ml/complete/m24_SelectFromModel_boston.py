@@ -16,6 +16,7 @@ model = XGBRegressor()
 model.fit(x_train,y_train)
 
 #4-1. 컬럼수 만큼 돌 thresholds 생성
+# thresholds는 '문턱' ex) 반올림
 thresholds = np.sort(model.feature_importances_)
 # print(thresholds)
 
@@ -28,7 +29,7 @@ parameters = [
 
 #4-2. SelectFromModel 생성
 # 컬럼수 만큼 돈다!
-# 중요하지 않은 컬럼을 삭제
+# 중요하지 않은 컬럼은 제쳐두고 중요도를 비교하여 문턱을 넘는다
 # 그 기준은 위에 thresholds = np.sort(model.feature_importances_)에서 중요도가 낮은 순으로 정렬을 해놓았음
 for thresh in thresholds:
     selection = SelectFromModel(model, threshold=thresh, prefit=True) # 또다른 파라미터 median

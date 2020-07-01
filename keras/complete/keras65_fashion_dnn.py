@@ -47,7 +47,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc']
 earlystopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 model.fit(x_train, y_train, epochs=100, batch_size=100, validation_split=0.2, callbacks=[earlystopping])
 
-model.save_weights('./model/sample/fashion/fsahion_save_weights.h5')
+model.save_weights('./model/fashion/fashion/fsahion_save_weights.h5')
 
 #4. 평가, 예측
 loss, acc = model.evaluate(x_test, y_test, batch_size=100)

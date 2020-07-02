@@ -18,7 +18,7 @@ f = lambda x : x**2 - 4*x + 6
 gradient = lambda x: 2*x -4
 # f를 미분한 gradient
 # f의 기울기가 0이 되는 지점을 찾아보자
-# 즉 gradient를 0을 만드는 지점을 찾는 과정
+# 즉 gradient가 0이 되는 지점을 찾는 과정
 
 x0 = 0.0
 MaxIter = 10

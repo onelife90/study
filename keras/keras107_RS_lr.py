@@ -1,4 +1,6 @@
 # 100번 복붙해서 lr, optimizer를 넣고 튜닝하시오
+# lr 넣기 : 숫자라 np.linspace를 쓰고 리스트로 바꿔줘야 하므로 .tolist()를 붙여줘야함
+# optimizer 넣기 : import 받아서 랜덤서치의 파라미터에 리스트 형태로 넣어줘야함
 # LSTM -> Dense로 바꿀 것
 
 import numpy as np
@@ -67,6 +69,7 @@ search = RandomizedSearchCV(model, hyperparameters, cv=3) #n_jobs=-1)
 
 search.fit(x_train, y_train)
 print(search.best_params_)
-
+# {'optimizer': <class 'keras.optimizers.Adadelta'>, 'learning_rate': 0.9, 'drop': 0.1, 'batch_size': 200}
 acc = search.score(x_test, y_test)
 print("acc: ", acc)
+# acc:  0.9620000123977661

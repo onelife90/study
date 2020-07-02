@@ -26,12 +26,12 @@ model.add(Dense(1))
 # Nadam : 네스테로프(누적된 과거 그래디언트가 지향하고 있는 어떤 방향을 현재 그라디언트에 보정하려는 방식) Adam 옵티마이저
 
 from keras.optimizers import Adam, RMSprop, SGD, Adadelta, Adagrad, Nadam
-# opti = Adam(lr=0.001)
+opti = Adam(lr=0.001)       # 0.11874374002218246, [[3.0943336]]
 # opti = RMSprop(lr=0.001)    # 0.05103191360831261, [[3.3807342]]
 # opti = SGD(lr=0.001)        # 0.06409601867198944, [[3.3715045]]
 # opti = Adadelta(lr=0.001)   # 7.475847244262695, [[0.00545527]]
 # opti = Adagrad(lr=0.001)    # 5.187265872955322, [[0.5691264]]    
-opti = Nadam(lr=0.001)      # 0.7942038774490356, [[2.305936]]
+# opti = Nadam(lr=0.001)      # 0.7942038774490356, [[2.305936]]
 
 model.compile(loss='mse', optimizer=opti, metrics=['mse'])
 model.fit(x,y,epochs=100)

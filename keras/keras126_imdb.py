@@ -99,6 +99,7 @@ history = model.fit(x_train, y_train, batch_size=100, epochs=10, validation_spli
 #4. 평가, 예측
 acc = model.evaluate(x_test, y_test)[1]
 print("acc: ", acc)
+# acc:  0.8663600087165833
 
 #5. 시각화
 y_val_loss = history.history['val_loss']
@@ -111,3 +112,4 @@ plt.grid()
 plt.xlabel('epoch')
 plt.ylabel('loss')
 plt.show()
+# val_loss 난리났네.. 왜지 maxlen을 너무 많이 줬나

@@ -13,7 +13,9 @@ y_train = tf.placeholder(tf.float32, shape=[None])
 # placeholder로 y_train에는 실수형에 텐서의 구조가 어떤지 모르는 값을 세팅
 # 어떤 인풋 값에 따라서 아웃풋 내용이 달라지기 때문에 값을 받아들이는 통로라고 생각하자
 
-# random_normal 정규분포로부터의 난수값 반환 ([1])=shape
+#2. 모델 구성
+# random_normal 정규분포로부터의 난수값 반환. ([1])=shape
+# w, b는 인풋과 아웃풋 값을 기반으로 변경이 되며 인공지능은 바로 w를 예측하는 것이 핵심이기에 변수로 선언하여 구현
 w = tf.Variable(tf.random_normal([1]), name='weight')
 b = tf.Variable(tf.random_normal([1]), name='bias')
 
@@ -24,13 +26,15 @@ b = tf.Variable(tf.random_normal([1]), name='bias')
 
 h = x_train * w + b
 
-# 케라스 컴파일 시 가장 중요한 것 loss=(cost)
+#2-1. cost 손실 함수 정의
+# 케라스 컴파일 시, loss=(cost)를 줄여나가는 과정
 cost = tf.reduce_mean(tf.square(h - y_train))
 # (h-y)**2의 합 / 개수 == mse
 
-# 케라스 컴파일 시 옵티마이저(경사하강법). minimize(cost)=cost가 가장 적을 때 구하라
+#2-2. cost를 최소화하는 옵티마이저 정의. minimize(cost)=cost가 가장 적을 때 구하라
 train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 
+#3. 훈련
 # with 문 안에 sess가 포함
 # with tf.Session() as sess:
 with tf.compat.v1.Session() as sess:

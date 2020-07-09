@@ -1,3 +1,5 @@
+# 다중분류
+
 import tensorflow as tf
 import numpy as np
 
@@ -40,8 +42,10 @@ opt = tf.train.GradientDescentOptimizer(learning_rate=1e-2).minimize(loss)
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
+
     for step in range(2001):
         _, cost_val = sess.run([opt, loss], feed_dict={x:x_data, y:y_data})
+    
         if step%200==0:
             print(step, "cost_val: " , cost_val)
 

@@ -7,11 +7,11 @@ import tensorflow as tf
 diabets = load_diabetes()
 x_data = diabets.data
 y_data = diabets.target
-print(x_data.shape) # (442, 10)
-print(y_data.shape) # (442, )
+# print(x_data.shape) # (442, 10)
+# print(y_data.shape) # (442, )
 
 y_data = y_data.reshape(-1,1)
-print(y_data.shape) # (442, 1)
+# print(y_data.shape) # (442, 1)
 
 #1-1. feed_dict에 feed  될 텐서를 위한 placeholder 설정
 x = tf.placeholder(tf.float32, shape=[None, 10])
@@ -26,7 +26,7 @@ h = tf.matmul(x,w)+b
 cost = tf.reduce_mean(tf.square(h-y))
 
 #2-2. 최적화 함수 정의
-opt = tf.train.GradientDescentOptimizer(learning_rate=4e-2)
+opt = tf.train.GradientDescentOptimizer(learning_rate=3e-3)
 train = opt.minimize(cost)
 
 #3. 훈련

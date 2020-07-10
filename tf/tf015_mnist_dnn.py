@@ -60,13 +60,30 @@ opt = tf.train.GradientDescentOptimizer(learning_rate=0.5).minimize(cost)
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
+
     for step in range(301):
         _, cost_val, h_val = sess.run([opt, cost, h], feed_dict={x:x_train, y:y_train})
-        if step%10==0:
+    
+        if step%30==0:
             print(f"step:{step}, cost_val:{cost_val}")
 
+
+    # tf.argmax(h,1)==예측값의 1(행)을 기준으로 최대값과 tf.argmax(y,1)==실제값의 1(행)을 기준으로 최대값이 같은 것을 pred로 정의
     pred = tf.equal(tf.argmax(h,1),tf.argmax(y,1))
-    print("pred: \n", pred, sess.run(tf.argmax(pred,1)))
+    # print("pred: \n", pred, sess.run(tf.argmax(pred,1)))
+    # step:0, cost_val:2.8716750144958496
+    # step:30, cost_val:2.3704659938812256
+    # step:60, cost_val:2.302070379257202
+    # step:90, cost_val:2.295543909072876
+    # step:120, cost_val:2.293288230895996
+    # step:150, cost_val:2.290435791015625
+    # step:180, cost_val:2.2860264778137207
+    # step:210, cost_val:2.278773784637451
+    # step:240, cost_val:2.2654531002044678
+    # step:270, cost_val:2.2433948516845703
+    # step:300, cost_val:2.213951587677002
     
+    # 예측값을 실수형으로 캐스팅하여 차원을 모두 제거하고 평균을 낸 acc 정의
     acc = tf.reduce_mean(tf.cast(pred, tf.float32))
     print("acc: ", sess.run(acc, feed_dict={x:x_test, y:y_test}))
+    # acc:  0.2102

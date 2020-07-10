@@ -28,7 +28,9 @@ cost = -tf.reduce_mean(y*tf.log(h)+(1-y)*tf.log(1-h))
 opt = tf.train.GradientDescentOptimizer(learning_rate=1e-3).minimize(cost)
 
 #2-3. 예측
+# 예측값이 0.5 이상인 것들만 실수형으로 캐스팅하여 pred로 정의
 pred = tf.cast(h>0.5, dtype=tf.float32)
+# tf.equal(pred, y)=예측값과 실제값이 같은 놈들을 찾아 실수형으로 캐스팅하고 차원을 모두 제거하여 평균을 낸 acc 정의
 acc = tf.reduce_mean(tf.cast(tf.equal(pred, y), dtype=tf.float32))
 
 #3. 훈련

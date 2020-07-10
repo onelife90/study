@@ -34,8 +34,10 @@ acc = tf.reduce_mean(tf.cast(tf.equal(pred, y), dtype=tf.float32))
 #3. 훈련
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
+
     for step in range(5001):
         cost_val, _ = sess.run([cost, opt], feed_dict={x:x_data, y:y_data})
+    
     h,c,a = sess.run([h, pred, acc], feed_dict={x:x_data, y:y_data})
     print("H: \n", h, "\n correct(y): \n", c, "\n acc: ", a)
     # H:

@@ -40,9 +40,20 @@ keep_prob = tf.placeholder('float32')   # dropout
 
 #2. 모델구성
 w = tf.get_variable("w1", shape=[784,512], initializer=tf.contrib.layers.xavier_initializer())
+# print("w: " , w)
+# w <tf.Variable 'w1:0' shape=(784, 512) dtype=float32_ref>
+
 b = tf.Variable(tf.random_normal([512]))
+# print("b: ", b)
+# b:  <tf.Variable 'Variable:0' shape=(512,) dtype=float32_ref>
+
 layer = tf.nn.selu(tf.matmul(x,w)+b)
+# print("selu.layer: ", layer)
+# selu.layer:  Tensor("Selu:0", shape=(?, 512), dtype=float32)
+
 layer = tf.nn.dropout(layer, keep_prob=keep_prob)
+# print("dropout_layer: ", layer)
+# dropout_layer:  Tensor("dropout/mul_1:0", shape=(?, 512), dtype=float32)
 
 w = tf.get_variable("w2", shape=[512,512], initializer=tf.contrib.layers.xavier_initializer())
 b = tf.Variable(tf.random_normal([512]))
@@ -69,21 +80,48 @@ cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(h), axis=1))
 #2-2. cost를 최소화하는 최적화 함수 정의
 opt = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(cost)
 
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-    for step in range(training_epochs):
-        avg_cost = 0
+sess = tf.InteractiveSession()
+sess.run(tf.global_variables_initializer())
 
-        for i in range(total_batch):
-            # 배치사이즈 완성하시오
-            batch_xs, batch_ys = x_train([batch_size])
-            
-            feed_dict = {x:batch_xs, y:batch_ys, keep_prob:0.7}
-            c, _ = sess.run([cost, opt], feed_dict=feed_dict)
-            avg_cost += c /total_batch
-        print('epoch: ', '%04d' %(epoch+1), 'cost: ', {".9f"}.fomat(avg_cost))
+for epoch in range(training_epochs): # 15
+    avg_cost = 0
+
+    for i in range(total_batch):    # 600
+        start = i * batch_size
+        end = start + batch_size
+        # 배치사이즈 완성하시오 0~99/100~199/200~299/.../59900~59999 슬라이싱 사용
+        
+        # batch_xs, batch_ys = x_train[:100], y_train[:100]
+        # batch_xs, batch_ys = x_train[100:200], y_train[100:200]
+        
+        # batch_xs, batch_ys = x_train[i:batch_size], y_train[i:batch_size]
+        # batch_xs, batch_ys = x_train[i*batch_size:batch_size*(i+1)], y_train[i*batch_size:batch_size(i+2)]
+        
+        batch_xs, batch_ys = x_train[start:end], y_train[start:end]
+
+        feed_dict = {x:batch_xs, y:batch_ys, keep_prob:0.7}
+        c, _ = sess.run([cost, opt], feed_dict=feed_dict)
+        avg_cost += c /total_batch
+    print('epoch: ', '%04d' %(epoch+1), "cost: {:.9f}".format(avg_cost))
+    # epoch:  0001 cost: 3.179819596
+    # epoch:  0002 cost: 1.863974968
+    # epoch:  0003 cost: 1.338062303
+    # epoch:  0004 cost: 1.086432286
+    # epoch:  0005 cost: 0.954928038
+    # epoch:  0006 cost: 0.858678305
+    # epoch:  0007 cost: 0.788396372
+    # epoch:  0008 cost: 0.737423236
+    # epoch:  0009 cost: 0.701132693
+    # epoch:  0010 cost: 0.668992661
+    # epoch:  0011 cost: 0.638948249
+    # epoch:  0012 cost: 0.618771437
+    # epoch:  0013 cost: 0.604265884
+    # epoch:  0014 cost: 0.580154929
+    # epoch:  0015 cost: 0.565156868
 print("훈련 끝!")
 
-pred = tf.equal(tf.arg_max(h,1), tf.argmax(y,1))
+pred = tf.equal(tf.math.argmax(h,1), tf.math.argmax(y,1))
 acc = tf.reduce_mean(tf.cast(pred, tf.float32))
-print("acc: ", acc)
+print("acc: ", sess.run(acc, feed_dict={x:x_test, y:y_test, keep_prob:0.7}))
+# acc:  0.8376
+sess.close()

@@ -3,6 +3,7 @@
 import tensorflow as tf
 import numpy as np
 
+# min_max_scaler : x-최소/최대-최소
 def min_max_scaler(dataset):
     # np.min(dataset, 0) axis=0 열에서 최소값을 찾겠다
     numerator = dataset - np.min(dataset, 0)

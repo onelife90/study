@@ -1,5 +1,6 @@
 # 레이어 10개
 # 케라스 dnn 형식으로 작성하기
+# batch_size 줘보자
 
 import tensorflow as tf
 from keras.datasets import mnist
@@ -73,6 +74,8 @@ layer = tf.nn.dropout(layer, keep_prob=keep_prob)
 w = tf.get_variable("w5", shape=[256,10], initializer=tf.contrib.layers.xavier_initializer())
 b = tf.Variable(tf.random_normal([10]))
 h = tf.nn.softmax(tf.matmul(layer,w)+b)
+# print("h: ", h)
+# h:  Tensor("Softmax:0", shape=(?, 10), dtype=float32)     
 
 #2-1. cost 손실함수(categorical_crossentropy)정의
 cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(h), axis=1))
@@ -80,7 +83,8 @@ cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(h), axis=1))
 #2-2. cost를 최소화하는 최적화 함수 정의
 opt = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(cost)
 
-sess = tf.InteractiveSession()
+#3. 훈련
+sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
 for epoch in range(training_epochs): # 15
@@ -102,6 +106,7 @@ for epoch in range(training_epochs): # 15
         feed_dict = {x:batch_xs, y:batch_ys, keep_prob:0.7}
         c, _ = sess.run([cost, opt], feed_dict=feed_dict)
         avg_cost += c /total_batch
+
     print('epoch: ', '%04d' %(epoch+1), "cost: {:.9f}".format(avg_cost))
     # epoch:  0001 cost: 3.179819596
     # epoch:  0002 cost: 1.863974968
@@ -120,8 +125,11 @@ for epoch in range(training_epochs): # 15
     # epoch:  0015 cost: 0.565156868
 print("훈련 끝!")
 
-pred = tf.equal(tf.math.argmax(h,1), tf.math.argmax(y,1))
+# tf.argmax(h,1)==예측값의 1(행)을 기준으로 최대값과 tf.argmax(y,1)==실제값의 1(행)을 기준으로 최대값이 같은 것을 pred로 정의
+pred = tf.equal(tf.argmax(h,1),tf.argmax(y,1))
+
+# 예측값을 실수형으로 캐스팅하여 차원을 모두 제거하고 평균을 낸 acc 정의
 acc = tf.reduce_mean(tf.cast(pred, tf.float32))
-print("acc: ", sess.run(acc, feed_dict={x:x_test, y:y_test, keep_prob:0.7}))
-# acc:  0.8376
-sess.close()
+
+print("acc: ", sess.run(acc, feed_dict={x:x_test, y:y_test, keep_prob:0.9}))
+# acc:  0.8933a

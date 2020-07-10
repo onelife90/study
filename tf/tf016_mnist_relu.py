@@ -42,10 +42,10 @@ layer = tf.nn.relu(tf.matmul(layer,w)+b)
 
 layer = tf.nn.dropout(layer, keep_prob=0.2)
 
-w = tf.Variable(tf.zeros([200,10]))
-b = tf.Variable(tf.zeros([10]))
-h = tf.nn.relu(tf.matmul(layer,w)+b)
-'''
+w = tf.Variable(tf.zeros([200,50]))
+b = tf.Variable(tf.zeros([50]))
+layer = tf.nn.relu(tf.matmul(layer,w)+b)
+
 w = tf.Variable(tf.random_normal([50,50]))
 b = tf.Variable(tf.random_normal([50]))
 layer = tf.nn.relu(tf.matmul(layer,w)+b)
@@ -53,22 +53,38 @@ layer = tf.nn.relu(tf.matmul(layer,w)+b)
 w = tf.Variable(tf.random_normal([50,10]))
 b = tf.Variable(tf.random_normal([10]))
 h = tf.nn.softmax(tf.matmul(layer,w)+b)
-'''
+
 #2-1. cost 손실함수(categorical_crossentropy)정의
 cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(h), axis=1))
 
 #2-2. cost를 최소화하는 최적화 함수 정의
-opt = tf.train.GradientDescentOptimizer(learning_rate=0.35).minimize(cost)
+opt = tf.train.GradientDescentOptimizer(learning_rate=0.035).minimize(cost)
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
+
     for step in range(301):
         _, cost_val, h_val = sess.run([opt, cost, h], feed_dict={x:x_train, y:y_train})
-        if step%10==0:
-            print(f"step:{step}, cost_val:{cost_val}")
 
+        if step%30==0:
+            print(f"step:{step}, cost_val:{cost_val}")
+            # step:0, cost_val:8.272578239440918
+            # step:30, cost_val:3.176189661026001
+            # step:60, cost_val:2.3015921115875244
+            # step:90, cost_val:2.301161050796509
+            # step:120, cost_val:2.30116605758667
+            # step:150, cost_val:2.30116605758667
+            # step:180, cost_val:2.30116605758667
+            # step:210, cost_val:2.30116605758667
+            # step:240, cost_val:2.30116605758667
+            # step:270, cost_val:2.30116605758667
+            # step:300, cost_val:2.30116605758667
+
+    # tf.argmax(h,1)==예측값의 1(행)을 기준으로 최대값과 tf.argmax(y,1)==실제값의 1(행)을 기준으로 최대값이 같은 것을 pred로 정의
     pred = tf.equal(tf.argmax(h,1),tf.argmax(y,1))
-    print("pred: \n", pred, sess.run(tf.argmax(pred,1)))
     
+    # 예측값을 실수형으로 캐스팅하여 차원을 모두 제거하고 평균을 낸 acc 정의
     acc = tf.reduce_mean(tf.cast(pred, tf.float32))
+    
     print("acc: ", sess.run(acc, feed_dict={x:x_test, y:y_test}))
+    # acc:  0.1135

@@ -3,7 +3,7 @@
 import pymssql as ms
 print("잘 접속됐지")
 
-#1. 데이터베이스에 있는 데이터 가져오기
+#1. 데이터베이스에 있는 db 연결하기
 # localhost==자신의 컴퓨터를 의미
 conn = ms.connect(server='localhost', user='bit2', password='1234', database='bitdb')
 

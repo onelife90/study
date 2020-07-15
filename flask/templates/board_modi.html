@@ -1,0 +1,28 @@
+{% for row in rows%}
+
+<!--<form> 태그의 action 속성은 폼 데이터(form data)를 서버로 보낼 때 해당 데이터가 도착할 URL을 명시-->
+<!--데이터가 포함된 addrec에 있는 url로 도착해라-->
+<form action = "{{ url_for('addrec') }}" method = "POST">
+
+
+<table> <!--표를 만들어주는 HTML태그-->
+    <tr> <!--테이블의 행을 만드는 태그. 일반적으로 테이블의 헤더를 생성-->
+        <td> <!--테이블의 열을 만드는 태그-->
+            {{row[1]}}
+        </td>
+        
+        <td>
+            <input type = "text" name ="war" value= {{row[2]}}> <br>
+        </td>
+    
+    <br> <!--개행-->
+    <tr>
+        <td>
+        <input type="hidden" name="id" value={{row[0]}}>
+        <input type = "submit" value = "확인" /> <br>
+    </td>
+    </tr>
+</table>
+</form>
+
+{% endfor %}

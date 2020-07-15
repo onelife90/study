@@ -11,15 +11,19 @@
             {{row[1]}}
         </td>
         
-        <td>
+        <td> 
+            <!--input type="text"==텍스트 입력 위 한 줄의 입력 필드를 정의-->
+            <!--이름과 전투력이 나오고 값으로 전투력을 입력할 수 있게 정의-->
             <input type = "text" name ="war" value= {{row[2]}}> <br>
         </td>
     
     <br> <!--개행-->
     <tr>
         <td>
+        <!--input type="hidden"==사용자에게는 보이지 않는 숨겨진 입력 필드 정의-->
         <input type="hidden" name="id" value={{row[0]}}>
-        <input type = "submit" value = "확인" /> <br>
+        <!--input type="submit"==폼-핸들러에게 폼을 제출하는 버튼 정의-->
+        <input type="submit" value="확인" /> <br>
     </td>
     </tr>
 </table>

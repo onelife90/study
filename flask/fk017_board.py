@@ -1,3 +1,5 @@
+# 웹상으로 수정할 수 있는 게시판을 만들자
+
 from flask import Flask, render_template, request
 import sqlite3
 
@@ -20,10 +22,11 @@ def run():
     return render_template("board_index.html", rows=rows)
 
 
-#3-1. 웹상으로 수정할 수 있는 게시판을 만들자
 # /modi로 보내는 라우트가 필요
 @app.route('/modi')
 def modi():
+    # args는 form 매개변수와 그에 상응하는 값의 쌍을 포함하는 dictionary 객체
+    # POST로 전달한 데이터가 아니므로 args로 접근
     id = request.args.get('id')
     conn = sqlite3.connect('./data/wanggun.db')
     c = conn.cursor()
@@ -46,7 +49,7 @@ def addrec():
             id = request.form['id']
             with sqlite3.connect("./data/wanggun.db") as conn:
                 cur = conn.cursor()
-                # 수정을 실행하는 명령어 UPDATE
+                # 수정을 실행하는 명령어 UPDATE SET
                 cur.execute("UPDATE general SET war="+str(war)+" WHERE id= "+str(id))
                 # 수정을 행하기 때문에 commit 필수
                 conn.commit()

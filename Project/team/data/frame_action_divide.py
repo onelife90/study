@@ -7,6 +7,7 @@ main_file_path = 'D:/project/data/videos'
 # action별로 특징추출한 프레임 저장할 path
 main_save_path = 'D:/project/data/videos/newcapture'
 
+count = 0
 # m은 main_file_path의 하위폴더들
 for m in os.listdir(main_file_path):
     # n은 main_file_path>하위폴더>하위폴더
@@ -87,7 +88,7 @@ for m in os.listdir(main_file_path):
                         # 7프레임당 1개 저장
                         if(now % 7 == 0) :
                             print('Saved frame number :' + str(int(vidcap.get(1))))
-                            cv2.imwrite(main_save_path + '/' + i[:-4] + '/' + action_name +'/' + action_name + '_frame%d.jpg' % now, image) # 새롭게 .jpg 파일로 저장
+                            cv2.imwrite(main_save_path + '/' + i[:-4] + '/' + action_name +'/' + action_name + '_frame%d.jpg' %count, image) # 새롭게 .jpg 파일로 저장
                             print('Saved frame%d.jpg' % count)
                             count += 1
 

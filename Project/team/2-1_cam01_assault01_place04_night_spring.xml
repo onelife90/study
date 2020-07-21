@@ -1,0 +1,267 @@
+<!--actionname 표현된 부분이 중요 행동으로 나눠 놓은 거라
+우린 5프레임당 1개 jpg 파일 추출했으니까,
+ 
+ex)
+start frame = 190/5 == 38
+end frame = 200/5 == 40
+ 
+38.jpg +5 == 43.jpg
+38.jpg -5 == 33.jpg
+ 
+33.jpg ~ 38.jpg 까지 다 확인하고 제일 행동 특징이 잘 나타나는 프레임을 추출해두기
+ 
+모든 영상 데이터 프레임의 추출이 끝났다면,
+이 추출된 프레임을 가지고 라벨링 작업시작
+-->
+
+
+<?xml version='1.0' encoding='utf-8'?>
+<annotation>
+    <folder>assault</folder>
+    <filename>2-1_cam01_assault01_place04_night_spring.mp4</filename>
+    <source>
+        <database>NIA2019 Database v1</database>
+        <annotation>NIA2019</annotation>
+    </source>
+    <size>
+        <width>3840</width>
+        <height>2160</height>
+        <depth>3</depth>
+    </size>
+    <header>
+        <duration>00:05:11.2</duration>
+        <fps>30</fps>
+        <frames>9337</frames>
+        <inout>OUT</inout>
+        <location>PLACE04</location>
+        <season>SPRING</season>
+        <weather>SUNNY</weather>
+        <time>NIGHT</time>
+        <population>2</population>
+        <character>M20,M20</character>
+    </header>
+    <event>
+        <eventname>assault</eventname>
+        <starttime>00:00:23.7</starttime>
+        <duration>00:04:47.3</duration>
+    </event>
+    <object>
+        <objectname>person_1</objectname>
+        <position>
+            <keyframe>711</keyframe>
+            <keypoint>
+                <x>2925</x> 
+                <y>1867</y>
+            </keypoint>
+        </position>
+        <action>
+            <actionname>punching</actionname>
+            <frame>
+                <start>711</start>  142
+                <end>744</end>      148
+            </frame>
+            <frame>
+                <start>1019</start> 203
+                <end>1239</end>     247
+            </frame>
+            <frame>
+                <start>1311</start> 262
+                <end>1556</end>     311
+            </frame>
+            <frame>
+                <start>2030</start> 406
+                <end>2081</end>     416
+            </frame>
+            <frame>
+                <start>2798</start> 559
+                <end>2950</end>     590
+            </frame>
+            <frame>
+                <start>4037</start> 807
+                <end>4213</end>     842
+            </frame>
+            <frame>
+                <start>4341</start> 868
+                <end>4442</end>     888
+            </frame>
+            <frame>
+                <start>4836</start> 967
+                <end>4885</end>     977
+            </frame>
+            <frame>
+                <start>5825</start> 1165
+                <end>5977</end>     1195
+            </frame>
+            <frame>
+                <start>6372</start> 1274
+                <end>6453</end>     1290
+            </frame>
+            <frame>
+                <start>6961</start> 1392
+                <end>7090</end>     1418
+            </frame>
+            <frame>
+                <start>7429</start> 1485
+                <end>7505</end>     1501
+            </frame>
+            <frame>
+                <start>8479</start> 1695
+                <end>8522</end>     1704
+            </frame>
+            <frame>
+                <start>9052</start> 1810
+                <end>9329</end>     1865
+            </frame>
+        </action>
+        <action>
+            <actionname>pulling</actionname>
+            <frame>
+                <start>1559</start> 311
+                <end>1727</end>     345
+            </frame>
+            <frame>
+                <start>2354</start> 470
+                <end>2528</end>     505
+            </frame>
+        </action>
+        <action>
+            <actionname>pushing</actionname>
+            <frame>
+                <start>1845</start> 369
+                <end>1882</end>     376
+            </frame>
+            <frame>
+                <start>2497</start> 499
+                <end>2545</end>     509
+            </frame>
+            <frame>
+                <start>1732</start> 346     
+                <end>1841</end>     368
+            </frame>
+        </action>
+        <action>
+            <actionname>kicking</actionname>
+            <frame>
+                <start>1894</start> 378
+                <end>1938</end>     387
+            </frame>
+            <frame>
+                <start>2176</start> 435
+                <end>2231</end>     446
+            </frame>
+            <frame>
+                <start>2381</start> 476
+                <end>2489</end>     497
+            </frame>
+            <frame>
+                <start>2992</start> 598
+                <end>3036</end>     607
+            </frame>
+            <frame>
+                <start>3231</start> 646
+                <end>3281</end>     656
+            </frame>
+            <frame>
+                <start>3524</start> 704
+                <end>3713</end>     742
+            </frame>
+            <frame>
+                <start>3754</start>
+                <end>3789</end>
+            </frame>
+            <frame>
+                <start>3864</start>
+                <end>3908</end>
+            </frame>
+            <frame>
+                <start>3979</start>
+                <end>4020</end>
+            </frame>
+            <frame>
+                <start>4444</start>
+                <end>4529</end>
+            </frame>
+            <frame>
+                <start>4625</start>
+                <end>4670</end>
+            </frame>
+            <frame>
+                <start>5035</start>
+                <end>5079</end>
+            </frame>
+            <frame>
+                <start>5112</start>
+                <end>5154</end>
+            </frame>
+            <frame>
+                <start>5434</start>
+                <end>5468</end>
+            </frame>
+            <frame>
+                <start>5681</start>
+                <end>5799</end>
+            </frame>
+            <frame>
+                <start>6173</start>
+                <end>6214</end>
+            </frame>
+            <frame>
+                <start>6248</start>
+                <end>6363</end>
+            </frame>
+            <frame>
+                <start>6844</start>
+                <end>6877</end>
+            </frame>
+            <frame>
+                <start>6904</start>
+                <end>6935</end>
+            </frame>
+            <frame>
+                <start>7363</start>
+                <end>7393</end>
+            </frame>
+            <frame>
+                <start>7696</start>
+                <end>7723</end>
+            </frame>
+            <frame>
+                <start>8389</start>
+                <end>8427</end>
+            </frame>
+            <frame>
+                <start>8449</start>
+                <end>8475</end>
+            </frame>
+            <frame>
+                <start>8590</start>
+                <end>8627</end>
+            </frame>
+            <frame>
+                <start>8040</start>
+                <end>8067</end>
+            </frame>
+        </action>
+    </object>
+    <object>
+        <objectname>person_2</objectname>
+        <position>
+            <keyframe>2512</keyframe>
+            <keypoint>
+                <x>1621</x>
+                <y>1122</y>
+            </keypoint>
+        </position>
+        <action>
+            <actionname>falldown</actionname>
+            <frame>
+                <start>2512</start>
+                <end>2595</end>
+            </frame>
+            <frame>
+                <start>4838</start>
+                <end>4916</end>
+            </frame>
+        </action>
+    </object>
+</annotation>

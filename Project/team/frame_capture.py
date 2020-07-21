@@ -14,6 +14,14 @@ for m in os.listdir(main_file_path):
         
         # 동영상 파일이 들어가 있는 폴더 파일 리스트
         print(file_list)
+# ['17-1_cam01_assault03_place03_night_spring.mp4', 
+# '17-1_cam01_assault03_place03_night_spring.xml', 
+# '17-1_cam01_assault03_place03_night_summer.mp4', 
+# '17-1_cam01_assault03_place03_night_summer.xml', 
+# '17-1_cam02_assault03_place03_night_spring.mp4', 
+# '17-1_cam02_assault03_place03_night_spring.xml', 
+# '17-1_cam02_assault03_place03_night_summer.mp4', 
+# '17-1_cam02_assault03_place03_night_summer.xml']
         
         count = 0
         for i in file_list :

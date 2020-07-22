@@ -67,9 +67,9 @@ for m in os.listdir(main_file_path):
                     vidcap = cv2.VideoCapture(path)
                     
                     # 시작은 start frame의 7번째 앞부터
-                    start = int(frame.find("start").text) - 7
+                    start = int(frame.find("start").text)
                     # 끝은 end frame의 7번째 후까지
-                    end = int(frame.find("end").text) + 7
+                    end = int(frame.find("end").text)
 
                     # CAP_PROP_POS_FRAMES==현재 프레임 개수와 start 프레임 개수를 동일하게 설정(초기화)
                     vidcap.set(cv2.CAP_PROP_POS_FRAMES, start)
@@ -80,6 +80,10 @@ for m in os.listdir(main_file_path):
                         ret, image = vidcap.read()
                         # 캡쳐된 전체 프레임 번호
                         now = int(vidcap.get(1))
+                        # return값이 false인 경우가 많았음.
+                        if ret is False:
+                            print("**********************************************")
+                            continue
 
                         # 캡쳐된 전체 프레임 번호가 end 프레임 번호보다 크면 break
                         if(now > end) :

@@ -1,5 +1,4 @@
-'''
-openCV 4.2.0 with CUDA 설치 과정
+'''openCV 4.2.0 with CUDA 설치 과정
 
 [준비사항]
 1. Nvidia 그래픽 카드 드라이버 최신 업데이트

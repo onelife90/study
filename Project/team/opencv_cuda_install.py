@@ -1,4 +1,5 @@
 '''openCV 4.2.0 with CUDA 설치 과정
+OpenCV 4.2.0부터 DNN 실행 시 CUDA 백앤드 사용을 지원
 
 [준비사항]
 1. Nvidia 그래픽 카드 드라이버 최신 업데이트

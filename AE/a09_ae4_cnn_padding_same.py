@@ -58,7 +58,7 @@ fig, ((ax1, ax2, ax3, ax4, ax5), (ax6, ax7, ax8, ax9, ax10)) = plt.subplots(2,5,
 # x_test가 출력된 이미지를 위에 그린다
 # i=인덱스, ax=axes의 자료형을 열거하는 for문 (0,ax1), (1,ax2),...(4,ax5)
 for i, ax in enumerate([ax1, ax2, ax3, ax4, ax5]):
-    # random_img.shape=(784, )이기 때문에 (28,28)로 reshape
+    # random_img.shape=(28,28,1)이기 때문에 (28,28)로 reshape
     ax.imshow(x_test[random_img[i]].reshape(28,28), cmap='gray')
     if i == 0:
         ax.set_ylabel("INPUT", size=40)
@@ -68,7 +68,7 @@ for i, ax in enumerate([ax1, ax2, ax3, ax4, ax5]):
 
 # 오토 인코더가 출력한 이미지를 아래에 그린다.
 for i, ax in enumerate([ax6, ax7, ax8, ax9, ax10]):
-    # random_img.shape=(784, )이기 때문에 (28,28)로 reshape
+    # random_img.shape=(28,28,1)이기 때문에 (28,28)로 reshape
     ax.imshow(output[random_img[i]].reshape(28,28), cmap='gray')
     if i ==0 : 
         ax.set_ylabel("OUTPUT", size=40)

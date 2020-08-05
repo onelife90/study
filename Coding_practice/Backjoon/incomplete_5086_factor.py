@@ -27,17 +27,17 @@ https://www.acmicpc.net/problem/5086
 
 #1. while문으로 마지막 줄에 0 0이 출력되기 전까지 테스트 케이스 입력받기
 #2. 입력받은 a,b,c가 1)if b%a==0: factor출력 2)elif a%b==0: multiple출력 3)else: neither 출력
-#3. 미완성 ㅠㅠ
 
 import sys
 
 a,b = map(int,sys.stdin.readline().split())
 
-while a!=0 & b!=0:
+while (a!=0) & (b!=0):
+
     if b%a==0:
         print("factor")
     elif a%b==0:
         print("multiple")
     else:
         print("neither")
-    
+    a,b = map(int,sys.stdin.readline().split())

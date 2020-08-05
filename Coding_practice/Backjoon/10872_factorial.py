@@ -16,7 +16,7 @@ https://www.acmicpc.net/problem/10872
 첫째 줄에 N!을 출력한다.
 
 '''
-
+# 첫번째 방법
 #1. 정수 입력받기
 #2. 파이썬에서 제공하는 팩토리얼 함수 사용
 #3. math import 후 factorial() 메서드 사용
@@ -28,5 +28,11 @@ n = int(sys.stdin.readline())
 
 print(math.factorial(n))
 
-# for fac in range(n,1,-1):
-#     factorial = n
+# 두번째 방법
+#1. 정수 입력받기
+#2. for문 사용하여 1부터 n까지 곱하기
+
+fac = 1
+for i in range(1,n+1):
+    fac *=  i
+print(fac)

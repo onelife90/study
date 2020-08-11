@@ -26,7 +26,6 @@ https://www.acmicpc.net/problem/2953
 #4. 점수 리스트 중에서 가장 큰 index와 총합 출력
 
 import sys
-import numpy as np
 
 score = []
 

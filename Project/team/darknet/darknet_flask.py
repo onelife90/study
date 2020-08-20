@@ -37,6 +37,7 @@ class WebcamVideoStream:
        def start(self):
            print("start thread")
            t = Thread(target=self.update, args=())
+           # daemon 쓰레드란 백그라운드에서 실행되는 쓰레드. 메인쓰레드가 종료되면 즉시 종료
            t.daemon = True
            t.start()
            return self

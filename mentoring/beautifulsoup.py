@@ -12,13 +12,14 @@ url = base_url + quote_plus(plus_url)
 html = urlopen(url).read()
 soup = bs(html, "html.parser")
 # _img라는 클래스를 가져와라
-img = soup.select("_img")
+img = soup.select("._img")
 
 print(img[0])
 
 n = 1
 for i in img:
     img_url = i['data-source']
+    print(f"img_url:\n{img_url}")
     with urlopen(img_url) as url:
         with open(plus_url+str(n) + '.jpg', 'wb') as load:
             img = url.read()

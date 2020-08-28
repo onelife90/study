@@ -16,6 +16,7 @@ img = soup.select("._img")
 
 print(img[0])
 print(img[9])
+print()
 
 n = 1
 for i in img:

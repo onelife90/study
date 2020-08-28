@@ -15,6 +15,7 @@ soup = bs(html, "html.parser")
 img = soup.select("._img")
 
 print(img[0])
+print(img[9])
 
 n = 1
 for i in img:

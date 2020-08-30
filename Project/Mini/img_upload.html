@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="file-upload-content">
-                <img class="file-upload-image" src="#" alt="your image" />
+                <img class="file-upload-image" id="face-image" src="#" alt="your image" />
                 <div class="image-title-wrap">
                     <button type="button" onclick="removeUpload()" class="remove-image">
                         Remove <span class="image-title">Uploaded Image</span>
@@ -96,12 +96,6 @@
                 model = await tmImage.load(modelURL, metadataURL);
                 maxPredictions = model.getTotalClasses();
 
-                // Convenience function to setup a webcam
-                const flip = true; // whether to flip the webcam
-                webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
-                await webcam.setup(); // request access to the webcam
-                await webcam.play();
-                window.requestAnimationFrame(loop);
 
                 // append elements to the DOM
                 document.getElementById('webcam-container').appendChild(webcam.canvas);
@@ -112,16 +106,11 @@
                 }
             }
 
-            async function loop() {
-                webcam.update(); // update the webcam frame
-                await predict();
-                window.requestAnimationFrame(loop);
-            }
-
             // run the webcam image through the image model
             async function predict() {
                 // predict can take in an image, video or canvas html element
-                const prediction = await model.predict(webcam.canvas);
+                var image = document.getElementById('face-image')
+                const prediction = await model.predict(이미지);
                 for (let i = 0; i < maxPredictions; i++) {
                     const classPrediction =
                         prediction[i].className + ': ' + prediction[i].probability.toFixed(2);

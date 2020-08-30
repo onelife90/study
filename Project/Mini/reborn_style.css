@@ -1,6 +1,6 @@
 body {
     font-family: sans-serif;
-    background-color: #eeeeee;
+    background-color: #ffffff;
 }
 .file-upload {
     background-color: #ffffff;
@@ -101,5 +101,16 @@ body {
 }
 
 .nav-distance {
-    padding: 2.1% 7.7%
+    padding: 2.1% 7.7%;
+}
+
+.navbar-light .navbar-brand {
+    font-family: NanumSquareR;
+    line-height: 1.68;
+    text-align: left;
+    color: #35465d;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: #ffffff;
 }

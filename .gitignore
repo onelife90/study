@@ -1,5 +1,7 @@
 data/*
+Mini/img
 *.jpg
+*.png
 *.csv
 *.npy
 graph/*

@@ -6,6 +6,7 @@
     <body>
         <div>Teachable Machine Image Model</div>
         <button type="button" onclick="init()">Start</button>
+        <button type="button" onclick="predict()">예측</button>
         <script
             class="jsbin"
             src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
@@ -98,7 +99,6 @@
 
 
                 // append elements to the DOM
-                document.getElementById('webcam-container').appendChild(webcam.canvas);
                 labelContainer = document.getElementById('label-container');
                 for (let i = 0; i < maxPredictions; i++) {
                     // and class labels
@@ -110,7 +110,7 @@
             async function predict() {
                 // predict can take in an image, video or canvas html element
                 var image = document.getElementById('face-image')
-                const prediction = await model.predict(이미지);
+                const prediction = await model.predict(image, false);
                 for (let i = 0; i < maxPredictions; i++) {
                     const classPrediction =
                         prediction[i].className + ': ' + prediction[i].probability.toFixed(2);

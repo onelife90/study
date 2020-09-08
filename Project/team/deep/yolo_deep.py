@@ -1,9 +1,21 @@
-from keras.callbacks import ReduceLROnPlateau, ModelCheckpoint, EarlyStopping
-from keras.applications.resnet_v2 import ResNet50V2, preprocess_input
-from keras.models import Model
-from keras.optimizers import Adam
-from keras.layers import Flatten, Dropout, Dense, Input
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint, EarlyStopping
+from tensorflow.keras.applications import ResNet50V2, ResNet152V2
+from tensorflow.keras.applications.resnet_v2 import preprocess_input 
+from efficientnet.tfkeras import EfficientNetB0, EfficientNetB1, EfficientNetB2, EfficientNetB3, EfficientNetB4, EfficientNetB5
+from efficientnet.tfkeras import EfficientNetB6, EfficientNetB7, EfficientNetL2, preprocess_input as preprocess_eff
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.layers import Flatten, Dropout, Dense, Input
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import os, shutil
+import time
+import datetime
+import matplotlib.pyplot as plt
+from tensorflow.keras.backend import clear_session
+from tensorflow.keras.utils import multi_gpu_model
+import tensorflow as tf
+import cv2
+tf.compat.v1.disable_eager_execution()
 
  #1-1. callback 함수 정의
 def callbacks(model_path, patience):

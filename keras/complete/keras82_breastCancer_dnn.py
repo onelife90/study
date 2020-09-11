@@ -15,7 +15,7 @@ x = breast_cancer.data
 y = breast_cancer.target
 
 # print(x[0])         # 30개 컬럼
-# print(y)            # 0,1로 여러개
+# print(y)            # 0,1
 # print(x.shape)      # (569,30)
 # print(y.shape)      # (569, )
 
@@ -31,17 +31,17 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=77, train
 #2. 모델 구성
 model = Sequential()
 model.add(Dense(30, input_shape=(30, )))
-model.add(Dense(60, activation='softmax'))
-model.add(Dense(120, activation='softmax'))
-model.add(Dense(180, activation='softmax'))
-model.add(Dense(240, activation='softmax'))
-model.add(Dense(210, activation='softmax'))
-model.add(Dense(150, activation='softmax'))
-model.add(Dense(90, activation='softmax'))
-model.add(Dense(2, activation='softmax'))
+model.add(Dense(60))
+model.add(Dense(120))
+model.add(Dense(180))
+model.add(Dense(240))
+model.add(Dense(210))
+model.add(Dense(150))
+model.add(Dense(90))
+model.add(Dense(2, activation='binary_crossetropy'))
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
+model.compile(loss='binary_crossetropy', optimizer='adam', metrics=['acc'])
 early_stop = EarlyStopping(monitor='loss', patience=5, mode='auto')
 modelpath = './model/cancer/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True)

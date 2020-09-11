@@ -60,32 +60,4 @@ for normal_img in normal:
 for i, new in enumerate(resized_normal):
     new.save(f"{'D:/project/data/binary/normal'},{i},{'.jpg'}") 
 
-#3. image dataset
-groups_folder_path = "D:/project/data/binary"
-categories = ["fight", "normal"]  
-
-x = []
-y = []
-
-for index, categorie in enumerate(categories):
-    label = [0 for i in range(2)]
-    # label[index] = 1
-
-    # image file path
-    image_dir = groups_folder_path + categorie + '/'
-    files = glob.glob(image_dir +  "*.jpg")
-
-    for img, filename in enumerate(files):
-        img = Image.open(filename)
-        img = img.convert("RGB")
-        data = np.asarray(img)
-        x.append(data)
-        y.append(label)
-
-x = np.array(x)
-y = np.array(y)
-
-print(f"x.shape:{x.shape}")
-print(f"y.shape:{y.shape}")
-
 # memory error

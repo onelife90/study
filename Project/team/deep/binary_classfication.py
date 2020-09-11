@@ -1,25 +1,27 @@
-'''
-from matplotlib import pyplot
-from matplotlib.image import imread
+import os
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 # define location of dataset
-folder = 'D:/project/data/flow_from/fighting'
+main_folder = 'D:/project/data/flow_from'
+directory = os.listdir(main_folder)
 
-# plot first few images
-for i in range(9):
-	# define subplot
-	pyplot.subplot(330 + 1 + i)
-	# define filename
-	filename = folder + 'dog.' + str(i) + '.jpg'
-	# load image pixels
-	image = imread(filename)
-	# plot raw pixel data
-	pyplot.imshow(image)
-# show the figure
-pyplot.show()
+# plot for each folder
+for each in directory:
+    fig = plt.figure()
+    cur_folder = main_folder + "/" + each
+    print(f"cur_folder:{cur_folder}")
+    # read 3 images for each folder 
+    for i, file in enumerate(os.listdir(cur_folder)[0:3]):
+        fullpath = main_folder + "/" + each + "/" + file
+        print(fullpath)
+        img = mpimg.imread(fullpath)
+        fig.add_subplot(1, 3, i+1)
+        plt.imshow(img)
+    plt.show()
 
 
-
+'''
 import os, random
 import shutil
 
@@ -54,7 +56,7 @@ print(f"img.shape: {img_tensor.shape}")
 
 # scaling into [0, 1]
 img_tensor /= 255.
-'''
+
 
 
 from PIL import Image
@@ -99,3 +101,4 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=99, \
 
 binary_data = (x_train, x_test, y_train, y_test)
 np.save("D:/project/data/flow_from/binary_data.npy", binary_data)
+'''

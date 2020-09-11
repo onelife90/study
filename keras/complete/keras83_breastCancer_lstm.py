@@ -38,7 +38,7 @@ model.add(Dense(90))
 model.add(Dense(2, activation='sigmoid'))
 
 #3. 컴파일, 훈련
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc'])
+model.compile(loss='binary_crossetropy', optimizer='adam', metrics=['acc'])
 early_stop = EarlyStopping(monitor='loss', patience=5, mode='auto')
 modelpath = './model/cancer/{epoch:02d}-{val_loss:.4f}.hdf5'
 checkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True)

@@ -38,7 +38,7 @@ model.add(Dense(240))
 model.add(Dense(210))
 model.add(Dense(150))
 model.add(Dense(90))
-model.add(Dense(2, activation='binary_crossetropy'))
+model.add(Dense(2, activation='sigmoid'))
 
 #3. 컴파일, 훈련
 model.compile(loss='binary_crossetropy', optimizer='adam', metrics=['acc'])

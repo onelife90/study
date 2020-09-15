@@ -34,7 +34,7 @@ datagen = ImageDataGenerator(
     validation_split=0.2
 )
 
-dataset_path = 'D:/deepstudy/0910/data'
+dataset_path = 'D:project/data/flow_from'
 
 train_gen = datagen.flow_from_directory(
     directory=dataset_path,

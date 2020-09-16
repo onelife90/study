@@ -50,9 +50,9 @@ model = KerasClassifier(build_fn=build_model, verbose=1)
 # 랜덤서치의 두번째 매개변수인 parameter도 함수로 정의
 def create_hyperparameters():
 
-    batches = [100,200,300,400,500]
+    batches = [100,200,300]
     optimizers = [RMSprop, Adam, Adadelta, SGD, Adagrad, Nadam]
-    learning_rate = np.linspace(0.1,1.0,100).tolist()
+    learning_rate = np.linspace(0.1,1.0,10).tolist()
     dropout = np.linspace(0.1,0.5,5).tolist()
     activation = ['tanh', 'relu', 'elu', "selu", "softmax", "sigmoid", LeakyReLU()]
 
@@ -63,7 +63,9 @@ hyperparameters = create_hyperparameters()
 #2-3. 랜덤서치 만들기
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 
-search = RandomizedSearchCV(model, hyperparameters, cv=3) #n_jobs=-1)
+search = RandomizedSearchCV(model, hyperparameters, cv=3, n_jobs=-1)
+# params = search.get_params().keys()
+# print(f"params: {params}")
 
 search.fit(x_train, y_train)
 print(search.best_params_)

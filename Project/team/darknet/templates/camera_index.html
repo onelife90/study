@@ -1,0 +1,12 @@
+<h1> video list </h1>
+
+{%for row in rows%}
+
+<!--video = [(1,video1), (2,video2)]-->
+
+<!-- <a>태그 anchor 정박지, 닻의 의미로 혼자만 사용하지 않고 다른 속성과 함께 사용 -->
+<!-- href==연결할 주소를 지정하는 속성, 딕셔너리 형태 -->
+<a href = '/index?id={{row[0]}}'>{{row[1]}} </a>
+ 
+<br>
+{% endfor %}

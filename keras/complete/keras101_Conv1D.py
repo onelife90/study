@@ -41,6 +41,12 @@ x_predict = dataset[len(dataset)-6:, 0:4]
 
 x = x.reshape(x.shape[0],x.shape[1],1)
 # print(x.shape)
+
+
+
+
+
+
 x_predict = x_predict.reshape(6,4,1)
 
 #실습 1. train, test 분리할 것 (8:2)

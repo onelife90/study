@@ -122,11 +122,12 @@ def create_hyperparameters():
     dropout = [0.1, 0.15, 0.2, 0.25, 0.3]
     activation = ['tanh', 'relu', 'elu', "selu", "softmax", "sigmoid", LeakyReLU()]
     kernel_size = [2, 3, 4]
+    epochs = [10,50,100]
 
     # return: {key, value}
     return{"batch_size": batches, "optimizer":optimizers,
            "learning_rate": learning_rate, "drop": dropout, 
-           "activation": activation, "kernel_size": kernel_size}
+           "activation": activation, "kernel_size": kernel_size, "epochs": epochs}
 
 hyperparams = create_hyperparameters()
 
@@ -139,10 +140,10 @@ search.fit(x_train, y_train)
 #4. best_params_
 print(f"best_params of cnn network:\n {search.best_params_}")
 # best_params of cnn network:
-#  {'optimizer': <class 'keras.optimizers.RMSprop'>, 'learning_rate': 0.01, 
-#   'kernel_size': 4, 'drop': 0.1, 'batch_size': 24, 'activation': 'relu'}
+# {'optimizer': <class 'keras.optimizers.Nadam'>, 'learning_rate': 0.0001, 
+#  'kernel_size': 2, 'epochs': 10, 'drop': 0.2, 'batch_size': 32, 'activation': 'relu'}
 
 #5. acc
 acc = search.score(x_test, y_test)
 print(f"acc: {acc}")
-# acc: 0.7137500047683716
+# acc: 0.8274999856948853

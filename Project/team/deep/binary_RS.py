@@ -121,7 +121,7 @@ def create_hyperparameters():
     learning_rate = [1e-5, 1e-4, 1e-3, 1e-2]
     dropout = [0.1, 0.15, 0.2, 0.25, 0.3]
     activation = ['tanh', 'relu', 'elu', "selu", "softmax", "sigmoid", LeakyReLU()]
-    kernel_size = [(2,2), (3,3)]
+    kernel_size = [2, 3, 4]
 
     # return: {key, value}
     return{"batch_size": batches, "optimizer":optimizers,
@@ -139,10 +139,10 @@ search.fit(x_train, y_train)
 #4. best_params_
 print(f"best_params of cnn network:\n {search.best_params_}")
 # best_params of cnn network:
-# {'optimizer': <class 'keras.optimizers.Adadelta'>, 'learning_rate': 0.0001, 
-# 'kernel_size': (2, 2), 'drop': 0.30000000000000004, 'batch_size': 8, 'activation': 'relu'}
+#  {'optimizer': <class 'keras.optimizers.RMSprop'>, 'learning_rate': 0.01, 
+#   'kernel_size': 4, 'drop': 0.1, 'batch_size': 24, 'activation': 'relu'}
 
 #5. acc
 acc = search.score(x_test, y_test)
 print(f"acc: {acc}")
-# acc: 0.7237499952316284
+# acc: 0.7137500047683716

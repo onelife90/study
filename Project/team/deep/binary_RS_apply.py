@@ -92,12 +92,12 @@ opt = tf.keras.optimizers.Nadam(learning_rate=1e-05)
 
 #3. compile & fit
 model.compile(optimizer=opt, loss='binary_crossentropy', metrics=['acc'])
-hist = model.fit(x_train, y_train, batch_size=32, epochs=300, validation_split=0.2)
+hist = model.fit(x_train, y_train, batch_size=32, epochs=200, validation_split=0.2)
 
 #4. evaluate
 loss, acc = model.evaluate(x_test, y_test, batch_size=32)
-print(f"loss: {loss}")
-print(f"acc: {acc}")
+print(f"loss: {loss}")  # loss: 0.49001174688339233
+print(f"acc: {acc}")    # acc: 0.8237500190734863
 
 
 #4. visualization

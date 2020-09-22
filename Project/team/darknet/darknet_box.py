@@ -18,16 +18,16 @@ meta = darknet.load_meta(bytes(meta_path, "ascii"))
 # 비디오의 프레임을 추출하는 VideoCapture 함수
 cap = cv2.VideoCapture(video_path) 
 
-#3. opencv로 darknet 실행
+#3. opencv(darknet)
 i = 0
-# 비디오 캡쳐 객체가 정상으로 open 되는 동안 반복
+# video capture object open
 while(cap.isOpened()):
     i += 1
-    # 비디오의 한 프레임씩 읽기
-    # 제대로 읽으면 ret=True, 읽은 프레임은 image 변수
+    # read per video 1 frame
+    # ret = True, image = read frame
     ret, image = cap.read()
     print(f'순번: {i}')
-    # resize하기 위해서는 픽셀 사이의 값을 결정. INTER_AREA=사이즈를 줄이기 위한 보간법
+    # resize to between pixel values. INTER_AREA = pixel interpolation
     image = cv2.resize(image, dsize=(640, 480), interpolation=cv2.INTER_AREA)
 
     if not ret: 
@@ -61,14 +61,12 @@ while(cap.isOpened()):
         cv2.circle(image, (top + int(w / 2), left + int(h / 2)), 2, tuple((0,0,255)), 5)
  
     cv2.imshow('frame', image) 
-    # cv2.waitKey()=키보드 입력을 대기하는 함수. 1이면 key 입력이 있을 때까지 무한대기
-    # & 0xFF == 바이트 양수표현
-    # ord()= 문자의 아스키 코드 값을 돌려주는 함수
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     
-    # free_image=C++ 이미지 처리 라이브러리
-    # multi-thread 32 bit 지원
+    # free_image=C++ image processing library
+    # multi-thread 32 bit support
     darknet.free_image(frame)
 
 cap.release()

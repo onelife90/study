@@ -139,6 +139,7 @@ def gen(camera):
             elif texts.decode('utf-8') == 'fighting':
                 cv2.rectangle(image, (top, left),
                               (right, bottom), (0, 0, 255), 2)
+                # mark probablity
                 cv2.putText(image, texts.decode('utf-8') + '(' + str(threshs*100)
                             [:5] + '%)', (top, left-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
 

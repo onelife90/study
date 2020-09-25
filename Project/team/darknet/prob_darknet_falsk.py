@@ -104,9 +104,11 @@ def gen(camera):
         # if not ret:
         # break
         frame = darknet.nparray_to_image(image)
-        r = darknet.detect_image(
-            net, meta, frame, thresh=.5, hier_thresh=.5, nms=.45, debug=False)
-        print(r)
+        r = darknet.detect_image(net, meta, frame, thresh=.5, hier_thresh=.5, nms=.45, debug=False)
+        print(f"r:\n{r}")
+        # [(b'normal', 0.9838562607765198, (337.76190185546875, 226.85903930664062, 41.72311782836914, 109.13109588623047)), 
+        # (b'normal', 0.907978355884552, (302.71875, 253.96533203125, 41.06242752075195, 113.02967834472656)), 
+        # (b'normal', 0.8925231695175171, (377.8631286621094, 233.21629333496094, 32.55954360961914, 110.92288970947266))]
         boxes = []
 
         for k in range(len(r)):

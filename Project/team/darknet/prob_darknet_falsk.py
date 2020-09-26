@@ -145,9 +145,6 @@ def gen(camera):
                 cv2.putText(image, texts.decode('utf-8') + '(' + str(threshs*100)
                             [:5] + '%)', (top, left-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
 
-            # cv2.line(image, (top + int(w / 2), left), (top + int(w / 2), left + int(h)), (0,255,0), 3)
-            # cv2.line(image, (top, left + int(h / 2)), (top + int(w), left + int(h / 2)), (0,255,0), 3)
-            # cv2.circle(image, (top + int(w / 2), left + int(h / 2)), 2, tuple((0,0,255)), 5)
 
         # cv2.imshow('frame', image)
         # out.write(image)

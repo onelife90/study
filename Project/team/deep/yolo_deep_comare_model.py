@@ -19,19 +19,18 @@ tf.compat.v1.disable_eager_execution()
 
 ## callback
 def callbacks(model_path, patience):
-    callbacks = [
-        ReduceLROnPlateau(patience=patience),  # TODO Change to cyclic LR
-        ModelCheckpoint(model_path, monitor='val_loss', verbose=1, save_best_only=True)
-        # EarlyStopping(patience=patience)  # EarlyStopping needs to be placed last, due to a bug fixed in tf2.2
-    ]
+    callbacks = [ReduceLROnPlateau(patience=patience),  # TODO Change to cyclic LR
+                 ModelCheckpoint(model_path, monitor='val_loss', verbose=1, save_best_only=True)]
+                 # EarlyStopping(patience=patience)  # EarlyStopping needs to be placed last, due to a bug fixed in tf2.2
     return callbacks
 
 # resnet부분이 얼려져있는 모델 리턴
 def frozen_models(input_size, n_classes):
-    models = [ResNet50V2, ResNet152V2]#, EfficientNetB0, EfficientNetB1, EfficientNetB2,\
-            #   EfficientNetB3, EfficientNetB4, EfficientNetB5, EfficientNetB6, EfficientNetB7]
-    models_name = ['ResNet50V2', 'ResNet152V2']#,'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', \
-                #    'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7']
+    models = [ResNet50V2, ResNet152V2, EfficientNetB0, EfficientNetB1, EfficientNetB2,\
+              EfficientNetB3, EfficientNetB4, EfficientNetB5, EfficientNetB6, EfficientNetB7]
+    models_name = ['ResNet50V2', 'ResNet152V2','EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', \
+                   'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7']
+
     for model_name, model in zip(models_name, models):
         model_ = model(include_top=False, input_shape=input_size)
         for layer in model_.layers:

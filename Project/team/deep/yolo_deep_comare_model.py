@@ -69,7 +69,6 @@ for model_name, model in frozen_models(input_size, n_classes):
             image = preprocess_eff(image)
         return image
 
-    ## 이미지 제네레이터
     ## preprocess_input : resnet에서 제공해주는 전처리함수
     datagen = ImageDataGenerator(preprocessing_function=preprocessing,
                                  zoom_range=0.1,
@@ -90,7 +89,7 @@ for model_name, model in frozen_models(input_size, n_classes):
                                           classes=classes,
                                           shuffle=True,
                                           subset='validation')
-
+    # time check
     start = time.time()
 
     ## 얼려져있는 모델 fit

@@ -8,7 +8,7 @@ from keras.layers import LeakyReLU
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import RandomizedSearchCV
-import time
+import time, datetime
 
 
 #1-1. define images to figure (openCV resize, MinmaxScaler)
@@ -99,7 +99,7 @@ def build_model(drop=0.1, optimizer='adam', learning_rate=0.1, activation='relu'
     x = tf.keras.layers.MaxPooling2D(pool_size=(2,2), strides=2)(x)
     x = tf.keras.layers.Conv2D(64, kernel_size=kernel_size, padding="same", activation=activation)(x)
     x = tf.keras.layers.Dropout(drop)(x)
-    x = tf.keras.layers.MaxPooling2D(pool_size=kernel_size, strides=2)(x)
+    x = tf.keras.layers.MaxPooling2D(pool_size=(2,2), strides=2)(x)
     x = tf.keras.layers.Conv2D(128, kernel_size=kernel_size, padding="same", activation=activation)(x)
     x = tf.keras.layers.Conv2D(256, kernel_size=kernel_size, padding="same", activation=activation)(x)
     x = tf.keras.layers.Dropout(drop)(x)
@@ -124,6 +124,7 @@ def create_hyperparameters():
     activation = ['tanh', 'relu', 'elu', "selu", "softmax", "sigmoid", LeakyReLU()]
     kernel_size = [2, 3, 4]
     epochs = [100, 300, 500]
+    pool_size = [(2,2),(3,3)]
 
     # return: {key, value}
     return{"batch_size": batches, "optimizer":optimizers,
@@ -158,6 +159,6 @@ sec = time.time() - start
 times = str(datetime.timedelta(seconds=sec)).split(".")
 times = times[0]
 
-print(times)
+print(f"times: {times}")
 times_list.append(times)
 

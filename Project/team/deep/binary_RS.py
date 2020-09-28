@@ -8,6 +8,7 @@ from keras.layers import LeakyReLU
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import RandomizedSearchCV
+import time
 
 
 #1-1. define images to figure (openCV resize, MinmaxScaler)
@@ -134,6 +135,9 @@ hyperparams = create_hyperparameters()
 #2-4. set RandomizedSearchCV
 search = RandomizedSearchCV(model, hyperparams, cv=3)
 
+# time check
+start = time.time()
+
 #3. fit
 search.fit(x_train, y_train)
 
@@ -149,5 +153,11 @@ print(f"acc: {acc}")
 # acc: 0.8262500166893005
 
 
+# time check
+sec = time.time() - start
+times = str(datetime.timedelta(seconds=sec)).split(".")
+times = times[0]
 
+print(times)
+times_list.append(times)
 

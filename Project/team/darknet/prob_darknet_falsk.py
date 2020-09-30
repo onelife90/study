@@ -147,7 +147,7 @@ def gen(camera):
 
 
         # cv2.imshow('frame', image)
-        # out.write(image)
+        
         ret, jpeg = cv2.imencode('.jpg', image)
 
         # darknet dynamic allocation

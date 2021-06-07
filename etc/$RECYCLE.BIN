@@ -1,0 +1,10 @@
+date: 210607 AM10
+issue: D:/$RECYCLE.BIN allocated 40GB 
+
+what is $RECYCLE.BIN?
+
+The $RECYCLE.BIN folder is a folder that contains information about the trash. 
+The reason why this folder occurs for each partition is that each partition is logically a different space, 
+so when you remove files and folders from that partition, the file information moves to the trash space of each partition. 
+
+However, the Trash displayed within Windows displays information stored in the Trash space of all partitions for ease of administration.
